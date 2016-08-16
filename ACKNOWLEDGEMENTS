@@ -1,0 +1,25 @@
+
+Thanks, acknowledgements and references for
+CamelHarness.js
+==============================
+
+Amata mea Argeia - gratiam magnam tibi ago!
+Patientia tua in studiis meis computatoriis auxilium meum maximum!
+
+https://github.com/nwjs/nw.js/wiki/Changes-related-to-node
+
+https://gist.github.com/leommoore/4484379 (Node - Processes)
+
+http://stackoverflow.com/questions/13230370/nodejs-child-process-write-to-stdin-from-an-already-initialised-process
+http://stackoverflow.com/questions/31529772/setting-app-icon-for-electron-atom-shell-app
+http://stackoverflow.com/questions/30681639/how-to-access-browserwindow-javascript-global-from-main-process-in-electron
+http://stackoverflow.com/questions/950087/include-a-javascript-file-in-another-javascript-file
+http://stackoverflow.com/questions/14989081/node-js-to-get-determine-os-version
+http://stackoverflow.com/questions/359788/how-to-execute-a-javascript-function-when-i-have-its-name-as-a-string
+http://stackoverflow.com/questions/1070760/javascript-function-in-href-vs-onclick
+
+http://www.tutorialspoint.com/jquery/ajax-serialize.htm
+http://www.tutorialspoint.com/nodejs/nodejs_path_module.htm
+
+http://latower.com/blog/2008/11/12/splitting-a-long-javascript-string-across-multiple-lines/
+https://www.gregjs.com/javascript/2016/checking-whether-a-file-directory-exists-without-using-fs-exists/

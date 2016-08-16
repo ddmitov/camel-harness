@@ -1,0 +1,26 @@
+{
+  "name": "CamelHarness.js-Demo-Electron",
+  "version": "0.0.1",
+  "description": "CamelHarness.js-Demo",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ddmitov/camel-harness.git"
+  },
+  "keywords": [
+    "Electron",
+    "Perl"
+  ],
+  "author": "GitHub",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/ddmitov/camel-harness/issues"
+  },
+  "homepage": "https://github.com/ddmitov/camel-harness#readme",
+  "devDependencies": {
+    "electron-prebuilt": "^0.37.0"
+  }
+}

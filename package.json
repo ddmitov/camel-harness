@@ -1,0 +1,10 @@
+{
+  "name": "CamelHarness.js-Demo-NW.js",
+  "main": "resources/app/index.html",
+  "window": {
+    "title": "CamelHarness.js-Demo",
+    "icon": "resources/app.png",
+    "min_width": 800,
+    "min_height": 600
+  }
+}
