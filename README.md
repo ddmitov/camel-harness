@@ -18,7 +18,7 @@ All dependencies of CamelHarness.js are available inside [Electron] (http://elec
 * **stdoutFunction:**  
   This is the name of the function that will be executed every time when output is available on STDOUT.  
   This parameter is mandatory.  
-  The only argument passed to this function is the ```stdout``` string. Example:  
+  The only argument passed to the ```stdoutFunction```` function is the ```stdout``` string. Example:  
 
 ```javascript
   function camelHarnessStdout(stdout) {
@@ -62,15 +62,14 @@ All dependencies of CamelHarness.js are available inside [Electron] (http://elec
   ```GET``` or ```POST```
 * **formData:**  
   Form data could be easily acquired using ```jQuery``` like that: ```var formData = $("#form-id").serialize();```  
-  Note that CamelHarness.js itself does not depend on ```jQuery```.  
+  Note that ```CamelHarness.js``` itself does not depend on ```jQuery```.  
   ```formData``` is mandatory parameter if ```method``` is not ```null```.  
   
 ## Perl Interpreter
-CamelHarness.js tries to find either a portable Perl distributed together with the Electron or NW.js binary or a Perl on PATH.  
-A portable Perl interpreter has to be placed inside ```{Electron_or_NW.js_binary_directory}/perl/bin``` folder.  
+```CamelHarness.js``` tries to find either a portable Perl like [Strawberry Perl] (http://strawberryperl.com/) PortableZIP edition distributed together with the ```Electron``` or ```NW.js``` binary or a Perl on PATH. A portable Perl interpreter has to be placed inside ```{Electron_or_NW.js_binary_directory}/perl/bin``` folder.  
   
 ## Security
-CamelHarness.js executes all Perl scripts with some potentially unsafe core functions banned using the command line switches ```-M-ops=:dangerous``` and ```-M-ops=fork```. All core functions from the ```:dangerous``` group - ```syscall```, ```dump``` and ```chroot```, as well as ```fork``` are banned. ``fork``` is banned to avoid any orphan processes, which may be created if this function is carelessly used.  
+```CamelHarness.js``` executes all Perl scripts with some potentially unsafe core functions banned using the command line switches ```-M-ops=:dangerous``` and ```-M-ops=fork```. All core functions from the ```:dangerous``` group - ```syscall```, ```dump``` and ```chroot```, as well as ```fork``` are banned. ```fork``` is banned to avoid any orphan processes, which may be created if this function is carelessly used.  
 
 ## License
   
