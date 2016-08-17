@@ -12,12 +12,12 @@ All dependencies of CamelHarness.js are available inside [Electron] (http://elec
 * ```path```
   
 ## API
-  Example: ```camelHarness(scriptFullPath, stdoutFunction, stderrFunction, errorFunction, exitFunction, method, formData);```  
+  ```camelHarness(scriptFullPath, stdoutFunction, stderrFunction, errorFunction, exitFunction, method, formData);```  
 * **scriptFullPath:**  
   This is the full path of the Perl script that is going to be executed. This parameter is mandatory.  
   
 * **stdoutFunction:**  
-  This is the name of the function that will be executed every time there is output on STDOUT.  
+  This is the name of the function that will be executed when output is available on STDOUT.  
   This parameter is mandatory.  
   The only argument passed to this function is the ```stdout``` string. Example:  
 
@@ -28,7 +28,7 @@ All dependencies of CamelHarness.js are available inside [Electron] (http://elec
 ```
 
 * **stderrFunction:**  
-  This is the name of the function that will be executed every time there is output on STDERR.  
+  This is the name of the function that will be executed when output is available on STDERR.  
   The only argument passed to this function is the ```stderr``` string. Example:  
 
 ```javascript
@@ -38,14 +38,14 @@ All dependencies of CamelHarness.js are available inside [Electron] (http://elec
 ```
 
 * **errorFunction:**  
-  This is the name of the function that will be executed every time there is an error code from a Perl script.  
+  This is the name of the function that will be executed to read the error code from a Perl script.  
   The only argument passed to this function is the ```error``` object. Example:  
 
 ```javascript
   function camelHarnessError(error) {
       console.log(error.stack); 
-      console.log('Perl script error code: '+ error.code); 
-      console.log('Perl script signal received: '+ error.signal);
+      console.log('Perl script error code: ' + error.code); 
+      console.log('Perl script signal received: ' + error.signal);
   }
 ```
 
@@ -64,6 +64,16 @@ All dependencies of CamelHarness.js are available inside [Electron] (http://elec
 * **formData:**  
   Form data could be easily acquired using ```jQuery``` like that: ```var formData = $("#form-id").serialize();```  
   Note that CamelHarness.js itself does not depend on ```jQuery```.  
+  ```formData``` is mandatory parameter if ```method``` is not ```null```.  
+  
+## Perl Interpreter
+  CamelHarness.js tries to find either a portable Perl distributed together with the Electron or NW.js binary or a Perl on PATH. A portable Perl interpreter has to be placed inside ```{Electron_or_NW.js_binary_directory}/perl/bin``` folder.  
+  
+## Limitations
+  
+* CamelHarness.js uses ```child_process.exec``` and displays all output only after the script has finished.  
+  It is not suitable for long running Perl scripts.  
+* Script output must not exceed 200 KB.  
   
 ## License
   

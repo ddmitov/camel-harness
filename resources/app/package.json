@@ -1,7 +1,7 @@
 {
   "name": "CamelHarness.js-Demo-Electron",
   "version": "0.0.1",
-  "description": "CamelHarness.js-Demo",
+  "description": "CamelHarness.js",
   "main": "main.js",
   "scripts": {
     "start": "electron main.js"

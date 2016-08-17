@@ -57,7 +57,8 @@ if (navigator.userAgent.match(/Electron/) || typeof(nw) !== 'undefined') {
 	var binaryDir = pathObject.dirname(binaryPath);
 
 	// Compose the full path to the portable Perl interpreter (if any):
-	var portablePerlInterpreterFullPath = pathObject.join(binaryDir, perlInterpreterRelativePath, perlInterpreterFileName);
+	var portablePerlInterpreterFullPath = pathObject.join(
+		binaryDir, perlInterpreterRelativePath, perlInterpreterFileName);
 
 	// Determine where is the Perl interpreter:
 	fsObject.access(portablePerlInterpreterFullPath, function(error) {
@@ -70,34 +71,46 @@ if (navigator.userAgent.match(/Electron/) || typeof(nw) !== 'undefined') {
 			exec(perlFullPathTester, function (error, stdout, stderr) {
 				if (stdout) {
 					perlInterpreterFullPath = stdout;
-					console.log('CamelHarness.js: Perl interpreter found on PATH: ' + perlInterpreterFullPath);
+					console.log(
+						'CamelHarness.js: Perl interpreter found on PATH: ' +
+						perlInterpreterFullPath);
 				} else {
 					console.log('CamelHarness.js: No Perl interpreter found.');
 				}
 			});
 		} else {
 			perlInterpreterFullPath = portablePerlInterpreterFullPath;
-			console.log('CamelHarness.js: Portable Perl interpreter found: ' + perlInterpreterFullPath);
+			console.log(
+				'CamelHarness.js: Portable Perl interpreter found: ' +
+				perlInterpreterFullPath);
 		}
 	});
 } else {
-	console.log('CamelHarness.js: This library is not usefull outside of Electron or NW.js.');
+	console.log(
+		'CamelHarness.js: ' +
+		'This library is not usefull outside of Electron or NW.js.');
 }
 
 
-function camelHarness(scriptFullPath, stdoutFunction, stderrFunction, errorFunction, exitFunction, method, formData) {
+function camelHarness(scriptFullPath, stdoutFunction,
+	stderrFunction, errorFunction, exitFunction,method, formData) {
 	if (navigator.userAgent.match(/Electron/) || typeof(nw) !== 'undefined') {
 		if (perlInterpreterFullPath !== null) {
-			// The full path of the script and the name of the STDOUT handling function are mandatory camelHarness function parameters.
+			// The full path of the script and
+			// the name of the STDOUT handling function
+			// are mandatory camelHarness function parameters.
 			if (scriptFullPath !== null || stdoutFunction  !== null) {
 				// Check if the supplied Perl script exists:
 				fsObject.access(scriptFullPath, function(error) {
 					if (error && error.code === 'ENOENT') {
-						console.log('CamelHarness.js: Supplied Perl script not found: ' + scriptFullPath);
+						console.log('CamelHarness.js: ' +
+							'Supplied Perl script not found: ' +
+							scriptFullPath);
 					} else {
 						// Compose the command line that has to be executed:
 						var safetyArguments = " -M-ops=:dangerous -M-ops=fork ";
-						var commandLine = perlInterpreterFullPath + safetyArguments + scriptFullPath;
+						var commandLine = perlInterpreterFullPath +
+							safetyArguments + scriptFullPath;
 
 						// Set a clean environment for the supplied Perl script:
 						var cleanEnvironment = {};
@@ -107,7 +120,8 @@ function camelHarness(scriptFullPath, stdoutFunction, stderrFunction, errorFunct
 								// Handle POST requests:
 								if (method === "POST") {
 									cleanEnvironment['REQUEST_METHOD'] = 'POST';
-									cleanEnvironment['CONTENT_LENGTH'] = formData.length;
+									cleanEnvironment['CONTENT_LENGTH'] =
+										formData.length;
 								}
 
 								// Handle GET requests:
@@ -116,18 +130,23 @@ function camelHarness(scriptFullPath, stdoutFunction, stderrFunction, errorFunct
 									cleanEnvironment['QUERY_STRING'] = formData;
 								}
 							} else {
-								console.log('CamelHarness.js: Form data was not supplied.');
+								console.log('CamelHarness.js: ' +
+									'Form data was not supplied.');
 							}
 						}
 
 						// Run the supplied Perl script:
 						var exec = require('child_process').exec;
-						var scriptHandler = exec(commandLine, {env: cleanEnvironment}, function (errorCode, stdout, stderr) {
+						var scriptHandler =
+							exec(commandLine, {env: cleanEnvironment},
+							function (errorCode, stdout, stderr) {
 							if (stdout) {
 								if (typeof window[stdoutFunction] === 'function') {
 									window[stdoutFunction](stdout);
 								} else {
-									console.log('CamelHarness.js: The STDOUT handling function was not found.');
+									console.log('CamelHarness.js: ' +
+										'The STDOUT handling function ' +
+										'was not found.');
 								}
 							}
 
@@ -135,7 +154,9 @@ function camelHarness(scriptFullPath, stdoutFunction, stderrFunction, errorFunct
 								if (typeof window[stderrFunction] === 'function') {
 									window[stderrFunction](stderr);
 								} else {
-									console.log('CamelHarness.js: The STDERR handling function was not found.');
+									console.log('CamelHarness.js: ' +
+										'The STDERR handling function ' +
+										'was not found.');
 								}
 							}
 
@@ -143,13 +164,16 @@ function camelHarness(scriptFullPath, stdoutFunction, stderrFunction, errorFunct
 								if (typeof window[errorFunction] === 'function') {
 									window[errorFunction](errorCode);
 								} else {
-									console.log('CamelHarness.js: The error code handling function was not found.');
+									console.log('CamelHarness.js: ' +
+										'The error code handling function ' +
+										'was not found.');
 								}
 							}
 						});
 
 						// Send POST data to the Perl script:
-						if (method !== null && method === "POST" && formData.length > 0) {
+						if (method !== null && method === "POST" &&
+							formData.length > 0) {
 							scriptHandler.stdin.write(formData);
 						}
 
@@ -158,20 +182,29 @@ function camelHarness(scriptFullPath, stdoutFunction, stderrFunction, errorFunct
 								if (typeof window[exitFunction] === 'function') {
 									window[exitFunction](code);
 								} else {
-									console.log('CamelHarness.js is: The script exit handling function was not found.');
+									console.log('CamelHarness.js is: ' +
+										'The script exit handling function ' +
+										'was not found.');
 								}
 							}
 						});
 					}
 				});
 			} else {
-				console.log('CamelHarness.js: Full path of a Perl script and STDOUT handling function name are not supplied.');
-				console.log('CamelHarness.js: Minimal invocation: camelHarness(scriptFullPath, stdoutFunction, null, null, null, null, null)');
+				console.log('CamelHarness.js: ' +
+					'Full path of a Perl script and ' +
+					'STDOUT handling function name are not supplied.');
+				console.log('CamelHarness.js: ' +
+					'Minimal invocation: ' +
+					'camelHarness(scriptFullPath, stdoutFunction, ' +
+					'null, null, null, null, null)');
 			}
 		}else {
-			console.log('CamelHarness.js: This library is not usefull without a Perl interpreter.');
+			console.log('CamelHarness.js: ' +
+				'This library is not usefull without a Perl interpreter.');
 		}
 	} else {
-		console.log('CamelHarness.js: This library is not usefull outside of Electron or NW.js.');
+		console.log('CamelHarness.js: ' +
+			'This library is not usefull outside of Electron or NW.js.');
 	}
 }
