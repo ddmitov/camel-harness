@@ -18,7 +18,7 @@ All dependencies of CamelHarness.js are available inside [Electron] (http://elec
 * **stdoutFunction:**  
   This is the name of the function that will be executed every time when output is available on STDOUT.  
   This parameter is mandatory.  
-  The only argument passed to the ```stdoutFunction```` function is the ```stdout``` string. Example:  
+  The only argument passed to the ```stdoutFunction``` function is the ```stdout``` string. Example:  
 
 ```javascript
   function camelHarnessStdout(stdout) {
