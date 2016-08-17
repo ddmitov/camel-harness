@@ -1,6 +1,5 @@
-
 CamelHarness.js
-==================================
+--------------------------------------------------------------------------------
   
 CamelHarness.js is a small JavaScript library that can start [Perl 5] (https://www.perl.org/) scripts from an application based on [Electron] (http://electron.atom.io/) or [NW.js] (http://nwjs.io/).
   
@@ -17,7 +16,7 @@ All dependencies of CamelHarness.js are available inside [Electron] (http://elec
   This is the full path of the Perl script that is going to be executed. This parameter is mandatory.  
   
 * **stdoutFunction:**  
-  This is the name of the function that will be executed when output is available on STDOUT.  
+  This is the name of the function that will be executed every time when output is available on STDOUT.  
   This parameter is mandatory.  
   The only argument passed to this function is the ```stdout``` string. Example:  
 
@@ -28,17 +27,17 @@ All dependencies of CamelHarness.js are available inside [Electron] (http://elec
 ```
 
 * **stderrFunction:**  
-  This is the name of the function that will be executed when output is available on STDERR.  
+  This is the name of the function that will be executed every time when output is available on STDERR.  
   The only argument passed to this function is the ```stderr``` string. Example:  
 
 ```javascript
   function camelHarnessStderr(stderr) {
-      console.log('Perl script STDERR:\n'+ stderr);
+      console.log('Perl script STDERR:\n' + stderr);
   }
 ```
 
 * **errorFunction:**  
-  This is the name of the function that will be executed to read the error code from a Perl script.  
+  This is the name of the function that will be executed to read error codes from a Perl script.  
   The only argument passed to this function is the ```error``` object. Example:  
 
 ```javascript
@@ -67,14 +66,12 @@ All dependencies of CamelHarness.js are available inside [Electron] (http://elec
   ```formData``` is mandatory parameter if ```method``` is not ```null```.  
   
 ## Perl Interpreter
-  CamelHarness.js tries to find either a portable Perl distributed together with the Electron or NW.js binary or a Perl on PATH. A portable Perl interpreter has to be placed inside ```{Electron_or_NW.js_binary_directory}/perl/bin``` folder.  
+CamelHarness.js tries to find either a portable Perl distributed together with the Electron or NW.js binary or a Perl on PATH.  
+A portable Perl interpreter has to be placed inside ```{Electron_or_NW.js_binary_directory}/perl/bin``` folder.  
   
-## Limitations
-  
-* CamelHarness.js uses ```child_process.exec``` and displays all output only after the script has finished.  
-  It is not suitable for long running Perl scripts.  
-* Script output must not exceed 200 KB.  
-  
+## Security
+CamelHarness.js executes all Perl scripts with some potentially unsafe core functions banned using the command line switches ```-M-ops=:dangerous``` and ```-M-ops=fork```. All core functions from the ```:dangerous``` group - ```syscall```, ```dump``` and ```chroot```, as well as ```fork``` are banned. ``fork``` is banned to avoid any orphan processes, which may be created if this function is carelessly used.  
+
 ## License
   
 This program is free software;  

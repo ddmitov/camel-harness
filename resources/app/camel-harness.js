@@ -1,5 +1,5 @@
 
-// CamelHarness.js version 0.1.0
+// CamelHarness.js version 0.2.0
 // Electron and NW.js adapter for Perl 5 scripts
 // CamelHarness.js is licensed under the terms of GNU GPL version 3.
 // Dimitar D. Mitov, 2016.
@@ -107,11 +107,6 @@ function camelHarness(scriptFullPath, stdoutFunction,
 							'Supplied Perl script not found: ' +
 							scriptFullPath);
 					} else {
-						// Compose the command line that has to be executed:
-						var safetyArguments = " -M-ops=:dangerous -M-ops=fork ";
-						var commandLine = perlInterpreterFullPath +
-							safetyArguments + scriptFullPath;
-
 						// Set a clean environment for the supplied Perl script:
 						var cleanEnvironment = {};
 
@@ -136,40 +131,12 @@ function camelHarness(scriptFullPath, stdoutFunction,
 						}
 
 						// Run the supplied Perl script:
-						var exec = require('child_process').exec;
-						var scriptHandler =
-							exec(commandLine, {env: cleanEnvironment},
-							function (errorCode, stdout, stderr) {
-							if (stdout) {
-								if (typeof window[stdoutFunction] === 'function') {
-									window[stdoutFunction](stdout);
-								} else {
-									console.log('CamelHarness.js: ' +
-										'The STDOUT handling function ' +
-										'was not found.');
-								}
-							}
-
-							if (stderr && stderrFunction !== null) {
-								if (typeof window[stderrFunction] === 'function') {
-									window[stderrFunction](stderr);
-								} else {
-									console.log('CamelHarness.js: ' +
-										'The STDERR handling function ' +
-										'was not found.');
-								}
-							}
-
-							if (errorCode && errorFunction !== null) {
-								if (typeof window[errorFunction] === 'function') {
-									window[errorFunction](errorCode);
-								} else {
-									console.log('CamelHarness.js: ' +
-										'The error code handling function ' +
-										'was not found.');
-								}
-							}
-						});
+						const spawn = require('child_process').spawn;
+						const scriptHandler = spawn(perlInterpreterFullPath,
+											['-M-ops=:dangerous',
+											'-M-ops=fork',
+											scriptFullPath],
+											{env: cleanEnvironment});
 
 						// Send POST data to the Perl script:
 						if (method !== null && method === "POST" &&
@@ -177,7 +144,49 @@ function camelHarness(scriptFullPath, stdoutFunction,
 							scriptHandler.stdin.write(formData);
 						}
 
-						scriptHandler.on('exit', function (code) {
+						scriptHandler.stdout.on('data', function(data) {
+							if (typeof window[stdoutFunction] === 'function') {
+								window[stdoutFunction](data.toString('utf8'));
+							} else {
+								console.log('CamelHarness.js: ' +
+									'The STDOUT handling function ' +
+									'was not found.');
+							}
+						});
+
+						scriptHandler.stderr.on('data', function(data) {
+							if (typeof window[stderrFunction] === 'function') {
+								window[stderrFunction](data.toString('utf8'));
+							} else {
+								console.log('CamelHarness.js: ' +
+									'The STDERR handling function ' +
+									'was not found.');
+								console.log('CamelHarness.js: ' +
+									'Perl STDERR:\n' + data.toString('utf8'));
+							}
+						});
+
+						scriptHandler.on('error', function(errorCode) {
+							if (errorFunction !== null) {
+								if (typeof window[errorFunction] === 'function') {
+									window[errorFunction](errorCode);
+								} else {
+									console.log('CamelHarness.js: ' +
+										'The error code handling function ' +
+										'was not found.');
+									console.log('CamelHarness.js: ' +
+										'Error stack: ' + error.stack);
+									console.log('CamelHarness.js: ' +
+										'Perl script error code: ' +
+										error.code);
+									console.log('CamelHarness.js: ' +
+										'Perl script received signal: ' +
+										error.signal);
+								}
+							}
+						});
+
+						scriptHandler.on('exit', function(code) {
 							if (exitFunction !== null) {
 								if (typeof window[exitFunction] === 'function') {
 									window[exitFunction](code);
