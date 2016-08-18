@@ -69,7 +69,7 @@ All dependencies of CamelHarness.js are available inside [Electron] (http://elec
 ```CamelHarness.js``` tries to find either a portable Perl like [Strawberry Perl] (http://strawberryperl.com/) PortableZIP edition distributed together with the ```Electron``` or ```NW.js``` binary or a Perl on PATH. A portable Perl interpreter has to be placed inside ```{Electron_or_NW.js_binary_directory}/perl/bin``` folder.  
   
 ## Security
-```CamelHarness.js``` executes all Perl scripts with some potentially unsafe core functions banned using the command line switches ```-M-ops=:dangerous``` and ```-M-ops=fork```. All core functions from the ```:dangerous``` group - ```syscall```, ```dump``` and ```chroot```, as well as ```fork``` are banned. ```fork``` is banned to avoid any orphan processes, which may be created if this function is carelessly used.  
+```CamelHarness.js``` executes all Perl scripts with the ```fork``` core function banned using the command line switch ```-M-ops=fork```. ```fork``` is banned to avoid orphan processes, which may be created if this function is carelessly used.  
 
 ## License
   

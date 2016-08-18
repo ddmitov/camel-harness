@@ -133,9 +133,7 @@ function camelHarness(scriptFullPath, stdoutFunction,
 						// Run the supplied Perl script:
 						const spawn = require('child_process').spawn;
 						const scriptHandler = spawn(perlInterpreterFullPath,
-											['-M-ops=:dangerous',
-											'-M-ops=fork',
-											scriptFullPath],
+											['-M-ops=fork', scriptFullPath],
 											{env: cleanEnvironment});
 
 						// Send POST data to the Perl script:
