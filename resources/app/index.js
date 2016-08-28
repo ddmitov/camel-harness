@@ -17,12 +17,13 @@ var binaryPath = process.execPath;
 var binaryDirectory = pathObject.dirname(binaryPath);
 
 // Get the full path of the application root directory:
-var applicationDirectory = pathObject.join(binaryDirectory, "resources/app");
+var applicationDirectory = pathObject.join(binaryDirectory, "resources", "app");
 
 
 // Perl scripts handling function:
 function startPerlVersionScript() {
-    var scriptFullPath = pathObject.join(applicationDirectory, "version.pl");
+    var scriptFullPath = pathObject
+        .join(applicationDirectory, "perl", "version.pl");
     camelHarness(scriptFullPath, "versionScriptStdout",
         null, null, null, null, null);
 }
@@ -34,7 +35,8 @@ function versionScriptStdout(stdout) {
 
 
 function startLongRunningPerlScriptOne() {
-    var scriptFullPath = pathObject.join(applicationDirectory, "counter.pl");
+    var scriptFullPath = pathObject
+        .join(applicationDirectory, "perl", "counter.pl");
     camelHarness(scriptFullPath, "longRunningPerlScriptOneStdout",
         null, null, null, null, null);
 }
@@ -46,7 +48,8 @@ function longRunningPerlScriptOneStdout(stdout) {
 
 
 function startLongRunningPerlScriptTwo() {
-    var scriptFullPath = pathObject.join(applicationDirectory, "counter.pl");
+    var scriptFullPath = pathObject
+        .join(applicationDirectory, "perl", "counter.pl");
     camelHarness(scriptFullPath, "longRunningPerlScriptTwoStdout",
         null, null, null, null, null);
 }

@@ -57,8 +57,8 @@ if (navigator.userAgent.match(/Electron/) || typeof(nw) !== 'undefined') {
     var binaryDir = camelHarnessPathObject.dirname(binaryPath);
 
     // Compose the full path to the portable Perl interpreter (if any):
-    var portablePerlInterpreterFullPath = camelHarnessPathObject.join(
-        binaryDir, perlInterpreterRelativePath, perlInterpreterFileName);
+    var portablePerlInterpreterFullPath = camelHarnessPathObject
+        .join(binaryDir, perlInterpreterRelativePath, perlInterpreterFileName);
 
     // Determine where is the Perl interpreter:
     camelHarnessFilesystemObject
