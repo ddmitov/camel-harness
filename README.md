@@ -1,7 +1,7 @@
 CamelHarness.js
 --------------------------------------------------------------------------------
   
-CamelHarness.js is a small JavaScript library that can start [Perl 5] (https://www.perl.org/) scripts from an application based on [Electron] (http://electron.atom.io/) or [NW.js] (http://nwjs.io/).
+```CamelHarness.js``` is a small JavaScript library that can start [Perl 5] (https://www.perl.org/) scripts from an application based on [Electron] (http://electron.atom.io/) or [NW.js] (http://nwjs.io/).
   
 ## Node.js Module Dependencies
 All dependencies of CamelHarness.js are available inside [Electron] (http://electron.atom.io/) and [NW.js] (http://nwjs.io/).
@@ -37,7 +37,7 @@ All dependencies of CamelHarness.js are available inside [Electron] (http://elec
 ```
 
 * **errorFunction:**  
-  This is the name of the function that will be executed to read error codes from a Perl script.  
+  This is the name of the function that will be executed to read errors from a Perl script.  
   The only argument passed to this function is the ```error``` object. Example:  
 
 ```javascript
@@ -61,9 +61,9 @@ All dependencies of CamelHarness.js are available inside [Electron] (http://elec
 * **method:**  
   ```GET``` or ```POST```
 * **formData:**  
-  Form data could be easily acquired using ```jQuery``` like that: ```var formData = $("#form-id").serialize();```  
+  Form data can be easily acquired using ```jQuery``` like that: ```var formData = $("#form-id").serialize();```  
   Note that ```CamelHarness.js``` itself does not depend on ```jQuery```.  
-  ```formData``` is mandatory parameter if ```method``` is not ```null```.  
+  ```formData``` is mandatory parameter if ```method``` is set.  
   
 ## Perl Interpreter
 ```CamelHarness.js``` tries to find either a portable Perl like [Strawberry Perl] (http://strawberryperl.com/) PortableZIP edition distributed together with the ```Electron``` or ```NW.js``` binary or a Perl on PATH. A portable Perl interpreter has to be placed inside ```{Electron_or_NW.js_binary_directory}/perl/bin``` folder.  
