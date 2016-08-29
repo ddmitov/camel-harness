@@ -20,7 +20,7 @@ var binaryDirectory = pathObject.dirname(binaryPath);
 var applicationDirectory = pathObject.join(binaryDirectory, "resources", "app");
 
 
-// Perl scripts handling function:
+// Perl scripts handling functions:
 function startPerlVersionScript() {
     var scriptFullPath = pathObject
         .join(applicationDirectory, "perl", "version.pl");

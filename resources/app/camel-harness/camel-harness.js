@@ -27,11 +27,8 @@
 
 
 // Global variables for CamelHarness.js:
-var camelHarnessPlatform;
 var camelHarnessFilesystemObject = require('fs');
-var camelHarnessPathObject;
-var perlInterpreterFileName;
-var perlInterpreterRelativePath = "perl/bin";
+var portablePerlInterpreterSubdirectory = "perl/bin";
 var perlInterpreterFullPath;
 
 
@@ -43,6 +40,8 @@ if (navigator.userAgent.match(/Electron/) || typeof(nw) !== 'undefined') {
     var osObject = require('os');
     var camelHarnessPlatform = osObject.platform();
 
+    var camelHarnessPathObject;
+    var perlInterpreterFileName;
     if (camelHarnessPlatform !== "win32") {
         perlInterpreterFileName = "perl";
         camelHarnessPathObject = require('path').posix;
@@ -57,8 +56,11 @@ if (navigator.userAgent.match(/Electron/) || typeof(nw) !== 'undefined') {
     var binaryDir = camelHarnessPathObject.dirname(binaryPath);
 
     // Compose the full path to the portable Perl interpreter (if any):
-    var portablePerlInterpreterFullPath = camelHarnessPathObject
-        .join(binaryDir, perlInterpreterRelativePath, perlInterpreterFileName);
+    var portablePerlInterpreterFullPath =
+        camelHarnessPathObject.join(
+                binaryDir,
+                portablePerlInterpreterSubdirectory,
+                perlInterpreterFileName);
 
     // Determine where is the Perl interpreter:
     camelHarnessFilesystemObject
@@ -68,7 +70,6 @@ if (navigator.userAgent.match(/Electron/) || typeof(nw) !== 'undefined') {
         if (error && error.code === 'ENOENT') {
             var perlFullPathTester = "perl -e 'print $^X;'";
             var exec = require('child_process').exec;
-
             exec(perlFullPathTester, function (error, stdout, stderr) {
                 if (stdout) {
                     perlInterpreterFullPath = stdout;

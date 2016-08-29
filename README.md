@@ -1,7 +1,7 @@
 CamelHarness.js
 --------------------------------------------------------------------------------
   
-```CamelHarness.js``` is a small JavaScript library that can start [Perl 5] (https://www.perl.org/) scripts from an application based on [Electron] (http://electron.atom.io/) or [NW.js] (http://nwjs.io/).
+```CamelHarness.js``` is a small JavaScript library that can start asynchronously and with no timeout [Perl 5] (https://www.perl.org/) scripts from applications based on [Electron] (http://electron.atom.io/) or [NW.js] (http://nwjs.io/).
   
 ## Node.js Module Dependencies
 All dependencies of CamelHarness.js are available inside [Electron] (http://electron.atom.io/) and [NW.js] (http://nwjs.io/).
