@@ -4,7 +4,7 @@
   "description": "CamelHarness.js",
   "main": "main.js",
   "scripts": {
-    "start": "electron main.js"
+    "start": "electron ."
   },
   "repository": {
     "type": "git",
@@ -14,7 +14,7 @@
     "Electron",
     "Perl"
   ],
-  "author": "GitHub",
+  "author": "Dimitar D. Mitov",
   "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/ddmitov/camel-harness/issues"
