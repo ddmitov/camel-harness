@@ -6,21 +6,21 @@ CamelHarness.js
 ## Quick Start
 ```CamelHarness.js``` is developed for and tested with stand-alone versions of ```Electron``` and ```NW.js``` with no use of ```npm```.
   
-* To use it with a stand-alone ```Electron```:  
-1. Create a new folder and name it, for example, ```camel-harness```,  
-2. Download the ```Electron``` binary package for your operating system from [https://github.com/electron/electron/releases] (https://github.com/electron/electron/releases),  
-3. Extract the downloaded ```Electron``` binary package inside your previously created ```camel-harness``` folder,  
-4. Download the ```CamelHarness.js``` source package from GitHub,  
-5. Extract the downloaded ```CamelHarness.js``` source package and copy its ```resources``` subfolder inside the ```camel-harness``` folder merging with the ```resources``` subfolder of ```Electron```,  
-6. start the ```Electron``` binary inside the ```camel-harness``` folder.  
+* To use it with a stand-alone ```Electron```:
+  1. Create a new folder and name it, for example, ```camel-harness```,  
+  2. Download the ```Electron``` binary package for your operating system from [https://github.com/electron/electron/releases] (https://github.com/electron/electron/releases),  
+  3. Extract the downloaded ```Electron``` binary package inside your previously created ```camel-harness``` folder,  
+  4. Download the ```CamelHarness.js``` source package from GitHub,  
+  5. Extract the downloaded ```CamelHarness.js``` source package and copy its ```resources``` subfolder inside the ```camel-harness``` folder merging with the ```resources``` subfolder of ```Electron```,  
+  6. start the ```Electron``` binary inside the ```camel-harness``` folder.  
   
-* To use it with a stand-alone ```NW.js```:  
-1. Create a new folder and name it, for example, ```camel-harness```,  
-2. Download the ```NW.js``` binary package for your operating system from [http://nwjs.io/downloads/] (http://nwjs.io/downloads/),  
-3. Extract the downloaded ```NW.js``` binary package inside your previously created ```camel-harness``` folder,  
-4. Download the ```CamelHarness.js``` source package from GitHub,  
-5. Extract the downloaded ```CamelHarness.js``` source package and copy its ```resources``` subfolder and ```package.json``` file in the ```camel-harness``` folder,  
-6. start the ```NW.js``` binary inside the ```camel-harness``` folder.  
+* To use it with a stand-alone ```NW.js```:
+  1. Create a new folder and name it, for example, ```camel-harness```,  
+  2. Download the ```NW.js``` binary package for your operating system from [http://nwjs.io/downloads/] (http://nwjs.io/downloads/),  
+  3. Extract the downloaded ```NW.js``` binary package inside your previously created ```camel-harness``` folder,  
+  4. Download the ```CamelHarness.js``` source package from GitHub,  
+  5. Extract the downloaded ```CamelHarness.js``` source package and copy its ```resources``` subfolder and ```package.json``` file in the ```camel-harness``` folder,  
+  6. start the ```NW.js``` binary inside the ```camel-harness``` folder.  
   
 ## Node.js Module Dependencies
 All dependencies of CamelHarness.js are available inside [Electron] (http://electron.atom.io/) and [NW.js] (http://nwjs.io/).
