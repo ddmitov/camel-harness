@@ -1,4 +1,4 @@
-Thanks, acknowledgements and references for CamelHarness.js
+Thanks, Acknowledgements and References for CamelHarness.js
 --------------------------------------------------------------------------------
   
 Amata mea Argeia - gratiam magnam tibi ago!  
@@ -8,7 +8,7 @@ Thanks to Jennifer Maher-Bontrager, author of the Camel icon.
 http://www.iconarchive.com/show/animal-icons-by-jen/Camel-icon.html  
 http://www.totoro.org/jen/  
   
-JavaScript & Node.js References
+JavaScript & Node.js
 --------------------------------------------------------------------------------
 https://gist.github.com/leommoore/4484379 (Node - Processes)  
   
