@@ -1,6 +1,6 @@
 Thanks, Acknowledgements and References for CamelHarness.js
 --------------------------------------------------------------------------------
-  
+
 Amata mea Argeia - gratiam magnam tibi ago!  
 Patientia tua in studiis meis computatoriis auxilium meum maximum!  
   
@@ -10,6 +10,7 @@ http://www.totoro.org/jen/
   
 JavaScript & Node.js
 --------------------------------------------------------------------------------
+
 https://gist.github.com/leommoore/4484379 (Node - Processes)  
   
 https://nodejs.org/api/child_process.html  
@@ -24,6 +25,7 @@ http://stackoverflow.com/questions/1070760/javascript-function-in-href-vs-onclic
 http://stackoverflow.com/questions/15515549/node-js-writing-a-function-to-return-spawn-stdout-as-a-string  
 http://stackoverflow.com/questions/9781214/parse-output-of-spawned-node-js-child-process-line-by-line  
   
+http://www.tutorialspoint.com/jquery/ajax-serialize.htm
 http://www.tutorialspoint.com/nodejs/nodejs_path_module.htm  
   
 http://latower.com/blog/2008/11/12/splitting-a-long-javascript-string-across-multiple-lines/  

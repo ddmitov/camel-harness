@@ -14,14 +14,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
 // THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 // Node.js Module Dependencies
 // (available in both Electron and NW.js):
 // child_process
 // fs
 // os
 // path
-
 
 // Global variables for CamelHarness.js:
 var camelHarnessFilesystemObject = require('fs');

@@ -92,5 +92,4 @@ All dependencies of CamelHarness.js are available inside [Electron] (http://elec
 
 ## License
   
-MIT © 2016 Dimitar D. Mitov  
-
+  MIT © 2016 Dimitar D. Mitov  
