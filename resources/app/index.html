@@ -1,54 +1,55 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <title>CamelHarness.js</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta charset="utf-8">
+  <head>
+    <title>CamelHarness.js</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
 
-        <script type="text/javascript" src="camel-harness/camel-harness.js"></script>
-        <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="camel-harness/camel-harness.js"></script>
+    <script type="text/javascript" src="index.js"></script>
 
-        <style type="text/css">
-            body {
-                text-align: center;
-                font-family: sans-serif;
-                font-size: 20px;
-                color: #ffffff;
-                background-color: #222222;
-                -webkit-text-size-adjust: 100%;
-            }
-            a {
-                color: #ffffff;
-                text-decoration: none;
-            }
-            a:hover {
-                color: #ffffff;
-                text-decoration: none;
-            }
-        </style>
-    </head>
+    <style type="text/css">
+      body {
+        text-align: center;
+        font-family: sans-serif;
+        font-size: 20px;
+        color: #ffffff;
+        background-color: #222222;
+        -webkit-text-size-adjust: 100%;
+      }
+      a {
+        color: #ffffff;
+        text-decoration: none;
+      }
+      a:hover {
+        color: #ffffff;
+        text-decoration: none;
+      }
+    </style>
+  </head>
 
-    <body>
-        <p>
-            <div id="version-script">
-                <a href="#" onclick="startPerlVersionScript(); return false;">
-                    Perl Version</a>
-            </div>
-        </p>
+  <body>
+    <p>
+      <div id="version-script">
+          <a href="#" onclick="startPerlVersionScript(); return false;">
+              Perl Version</a>
+      </div>
+    </p>
 
-        <p>
-            <div id="long-running-script-one">
-                <a href="#" onclick="startLongRunningPerlScriptOne(); return false;">
-                    Long Running Perl Script - First Instance</a>
-            </div>
-        </p>
+    <p>
+      <div id="long-running-script-one">
+        <a href="#" onclick="startLongRunningPerlScriptOne(); return false;">
+            Long Running Perl Script - First Instance</a>
+      </div>
+    </p>
 
-        <p>
-            <div id="long-running-script-two">
-                <a href="#" onclick="startLongRunningPerlScriptTwo(); return false;">
-                    Long Running Perl Script - Second Instance</a>
-            </div>
-        </p>
-    </body>
+    <p>
+      <div id="long-running-script-two">
+        <a href="#" onclick="startLongRunningPerlScriptTwo(); return false;">
+            Long Running Perl Script - Second Instance</a>
+      </div>
+    </p>
+  </body>
+
 </html>
