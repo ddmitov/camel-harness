@@ -1,6 +1,7 @@
 CamelHarness.js
 --------------------------------------------------------------------------------
-[![GitHub version](https://img.shields.io/github/release/ddmitov/camel-harness.svg)](https://github.com/ddmitov/camel-harness/releases)  
+[![GitHub Version](https://img.shields.io/github/release/ddmitov/camel-harness.svg)](https://github.com/ddmitov/camel-harness/releases)
+[![GitHub License](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE.md)  
 ```CamelHarness.js``` is a small JavaScript library that can start asynchronously and with no timeout [Perl 5] (https://www.perl.org/) scripts from applications based on [Electron] (http://electron.atom.io/) or [NW.js] (http://nwjs.io/).
 
 ## Quick Start
@@ -51,7 +52,7 @@ All dependencies of CamelHarness.js are available inside [Electron] (http://elec
 
 ```javascript
   function camelHarnessStderr(stderr) {
-      console.log('Perl script STDERR:\n' + stderr);
+    console.log('Perl script STDERR:\n' + stderr);
   }
 ```
 
@@ -61,9 +62,9 @@ All dependencies of CamelHarness.js are available inside [Electron] (http://elec
 
 ```javascript
   function camelHarnessError(error) {
-      console.log(error.stack);
-      console.log('Perl script error code: ' + error.code);
-      console.log('Perl script signal received: ' + error.signal);
+    console.log(error.stack);
+    console.log('Perl script error code: ' + error.code);
+    console.log('Perl script signal received: ' + error.signal);
   }
 ```
 
@@ -73,7 +74,7 @@ All dependencies of CamelHarness.js are available inside [Electron] (http://elec
 
 ```javascript
   function camelHarnessExit(exitCode) {
-      console.log('Perl script exited with exit code ' + exitCode);
+    console.log('Perl script exited with exit code ' + exitCode);
   }
 ```
 
