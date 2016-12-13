@@ -42,7 +42,7 @@ All dependencies of CamelHarness.js are available inside [Electron] (http://elec
 
 ```javascript
   function camelHarnessStdout(stdout) {
-      document.getElementById("DOM-element-id").innerHTML = stdout;
+    document.getElementById("DOM-element-id").innerHTML = stdout;
   }
 ```
 
@@ -81,7 +81,12 @@ All dependencies of CamelHarness.js are available inside [Electron] (http://elec
 * **method:**  
   ```GET``` or ```POST```
 * **formData:**  
-  Form data can be easily acquired using ```jQuery``` like that: ```var formData = $("#form-id").serialize();```  
+  Form data can be easily acquired using ```jQuery``` like that:  
+
+  ```javascript
+    var formData = $("#form-id").serialize();
+  ```
+
   Note that ```CamelHarness.js``` itself does not depend on ```jQuery```.  
   ```formData``` is mandatory parameter if ```method``` is set.  
 
