@@ -84,7 +84,7 @@ All dependencies of CamelHarness.js are available inside [Electron] (http://elec
   Form data can be easily acquired using ```jQuery``` like that:  
 
   ```javascript
-    var formData = $("#form-id").serialize();
+  var formData = $("#form-id").serialize();
   ```
 
   Note that ```CamelHarness.js``` itself does not depend on ```jQuery```.  
