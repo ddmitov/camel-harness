@@ -23,15 +23,16 @@ CamelHarness.js
   5. Extract the downloaded ```CamelHarness.js``` source package and copy its ```resources``` subfolder and ```package.json``` file in the ```camel-harness``` folder,  
   6. start the ```NW.js``` binary inside the ```camel-harness``` folder.  
 
-## Node.js Module Dependencies
-All dependencies of CamelHarness.js are available inside [Electron] (http://electron.atom.io/) and [NW.js] (http://nwjs.io/).
-* ```child_process```
-* ```fs```
-* ```os```
-* ```path```
+## Dependencies
+* ```child_process``` Node.js module - available in both [Electron] (http://electron.atom.io/) and [NW.js] (http://nwjs.io/)
+* Perl interpreter on PATH or any other Perl interpreter identified by its full pathname
 
 ## API
-  ```camelHarness(scriptFullPath, stdoutFunction, stderrFunction, errorFunction, exitFunction, method, formData);```  
+  ```camelHarness(perlInterpreter, scriptFullPath, stdoutFunction, stderrFunction, errorFunction, exitFunction, method, formData);```  
+
+  * **perlInterpreter:**  
+  This is the full pathname of a Perl interpreter or just the filename of a Perl interpreter on PATH. This parameter is mandatory.  
+
 * **scriptFullPath:**  
   This is the full path of the Perl script that is going to be executed. This parameter is mandatory.  
 
@@ -91,7 +92,7 @@ All dependencies of CamelHarness.js are available inside [Electron] (http://elec
   ```formData``` is mandatory parameter if ```method``` is set.  
 
 ## Perl Interpreter
-```CamelHarness.js``` tries to find either a portable Perl like [Strawberry Perl] (http://strawberryperl.com/) PortableZIP edition distributed together with the ```Electron``` or ```NW.js``` binary or any other Perl on PATH. A portable Perl interpreter has to be placed inside ```{Electron_or_NW.js_binary_directory}/perl/bin``` folder.  
+```CamelHarness.js``` is able to use any Perl interpreter - either a Perl interpreter on PATH or a Perl interpreter identified by its full pathname. [Strawberry Perl] (http://strawberryperl.com/) PortableZIP edition distributed together with ```Electron``` or ```NW.js``` could also be used on a Windows machine.  
 
 ## Security
 ```CamelHarness.js``` executes all Perl scripts with the ```fork``` core function banned using the command line switch ```-M-ops=fork```. ```fork``` is banned to avoid orphan processes, which may be created if this function is carelessly used.  
