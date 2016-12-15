@@ -28,8 +28,11 @@ CamelHarness.js
 * Perl interpreter on PATH or any other Perl interpreter identified by its full pathname
 
 ## API
-  ```camelHarness(perlInterpreter, scriptFullPath, stdoutFunction,  
-    stderrFunction, errorFunction, exitFunction, method, formData);```  
+
+```javascript
+  camelHarness(perlInterpreter, scriptFullPath, stdoutFunction,
+    stderrFunction, errorFunction, exitFunction, method, formData);
+```
 
   * **perlInterpreter:**  
   This is the full pathname of a Perl interpreter or just the filename of a Perl interpreter on PATH.  
