@@ -1,7 +1,8 @@
-// Node.js dependencies (available in both Electron and NW.js):
+// Module dependencies:
 // fs
 // os
 // path
+// CamelHarness.js
 
 // Determine the operating system:
 var osObject = require('os');
@@ -44,12 +45,15 @@ if (platform !== "win32") {
   });
 }
 
+// Load the CamelHarness.js module:
+var harness = require('./camel-harness/camel-harness.js');
+
 
 // Perl scripts handling functions:
 function startPerlVersionScript() {
   var scriptFullPath = pathObject
     .join(applicationDirectory, "perl", "version.pl");
-  camelHarness(perlInterpreter, scriptFullPath,
+  harness.camelHarness(perlInterpreter, scriptFullPath,
     "versionScriptStdout", null, null, null, null, null);
 }
 
@@ -62,7 +66,7 @@ function versionScriptStdout(stdout) {
 function startLongRunningPerlScriptOne() {
   var scriptFullPath = pathObject
     .join(applicationDirectory, "perl", "counter.pl");
-  camelHarness(perlInterpreter, scriptFullPath,
+  harness.camelHarness(perlInterpreter, scriptFullPath,
     "longRunningPerlScriptOneStdout", null, null, null, null, null);
 }
 
@@ -75,7 +79,7 @@ function longRunningPerlScriptOneStdout(stdout) {
 function startLongRunningPerlScriptTwo() {
   var scriptFullPath = pathObject
     .join(applicationDirectory, "perl", "counter.pl");
-  camelHarness(perlInterpreter, scriptFullPath,
+  harness.camelHarness(perlInterpreter, scriptFullPath,
     "longRunningPerlScriptTwoStdout", null, null, null, null, null);
 }
 

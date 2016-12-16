@@ -2,10 +2,10 @@ CamelHarness.js
 --------------------------------------------------------------------------------
 [![GitHub Version](https://img.shields.io/github/release/ddmitov/camel-harness.svg)](https://github.com/ddmitov/camel-harness/releases)
 [![GitHub License](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE.md)  
-```CamelHarness.js``` is a small JavaScript library that can start asynchronously and with no timeout [Perl 5] (https://www.perl.org/) scripts from applications based on [Electron] (http://electron.atom.io/) or [NW.js] (http://nwjs.io/).
+```CamelHarness.js``` is a small JavaScript library that can start asynchronously and with no timeout [Perl 5] (https://www.perl.org/) scripts from [Node.js] (http://nodejs.org/), [Electron] (http://electron.atom.io/) or [NW.js] (http://nwjs.io/) applications.
 
 ## Quick Start
-```CamelHarness.js``` is developed and tested for direct use with ```Electron``` or ```NW.js``` binaries without issuing ```npm``` commands.
+```CamelHarness.js``` is tested with ```Electron``` or ```NW.js``` binaries without issuing ```npm``` commands.
 
 **To use it with ```Electron```:**
   1. Create a new folder and name it, for example, ```camel-harness```,  
@@ -86,12 +86,13 @@ camelHarness(perlInterpreter, scriptFullPath, stdoutFunction,
 
 * **method:**  
   ```GET``` or ```POST```
+
 * **formData:**  
   Form data can be easily acquired using ```jQuery``` like that:  
 
-  ```javascript
+```javascript
   var formData = $("#form-id").serialize();
-  ```
+```
 
   Note that ```CamelHarness.js``` itself does not depend on ```jQuery```.  
   ```formData``` is mandatory parameter if ```method``` is set.  
