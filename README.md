@@ -30,7 +30,9 @@ CamelHarness.js
 ## API
 
 ```javascript
-camelHarness(perlInterpreter, scriptFullPath, stdoutFunction,
+var harness = require('./camel-harness/camel-harness.js');
+
+harness.camelHarness(perlInterpreter, scriptFullPath, stdoutFunction,
   stderrFunction, errorFunction, exitFunction, method, formData);
 ```
 
