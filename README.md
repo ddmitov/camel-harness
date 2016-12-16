@@ -2,7 +2,7 @@ CamelHarness.js
 --------------------------------------------------------------------------------
 [![GitHub Version](https://img.shields.io/github/release/ddmitov/camel-harness.svg)](https://github.com/ddmitov/camel-harness/releases)
 [![GitHub License](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE.md)  
-```CamelHarness.js``` is a small JavaScript library that can start asynchronously and with no timeout [Perl 5] (https://www.perl.org/) scripts from [Node.js] (http://nodejs.org/), [Electron] (http://electron.atom.io/) or [NW.js] (http://nwjs.io/) applications.
+```CamelHarness.js``` is a small Node.js library that can start asynchronously and with no timeout [Perl 5] (https://www.perl.org/) scripts from [Node.js] (http://nodejs.org/), [Electron] (http://electron.atom.io/) or [NW.js] (http://nwjs.io/) applications.
 
 ## Quick Start
 ```CamelHarness.js``` is tested with ```Electron``` or ```NW.js``` binaries without issuing ```npm``` commands.
