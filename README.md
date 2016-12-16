@@ -102,7 +102,7 @@ camelHarness(perlInterpreter, scriptFullPath, stdoutFunction,
 ## Security
 ```CamelHarness.js``` executes all Perl scripts with the ```fork``` core function banned using the command line switch ```-M-ops=fork```. ```fork``` is banned to avoid orphan processes, which may be created if this function is carelessly used.  
 
-## [Credits] (./CREDITS.md)
+## [Thanks and Credits] (./CREDITS.md)
 
 ## License
 
