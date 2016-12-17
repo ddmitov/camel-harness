@@ -1,0 +1,15 @@
+{
+  "name": "camel-harness-test",
+  "version": "0.3.0",
+  "description": "CamelHarness.js Test",
+  "main": "camel-harness-test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ddmitov/camel-harness.git"
+  },
+  "author": "Dimitar D. Mitov",
+  "license": "MIT"
+}

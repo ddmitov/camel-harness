@@ -2,20 +2,20 @@ CamelHarness.js
 --------------------------------------------------------------------------------
 [![GitHub Version](https://img.shields.io/github/release/ddmitov/camel-harness.svg)](https://github.com/ddmitov/camel-harness/releases)
 [![GitHub License](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE.md)  
-```CamelHarness.js``` is a small Node.js library that can start asynchronously and with no timeout [Perl 5] (https://www.perl.org/) scripts from [Node.js] (http://nodejs.org/), [Electron] (http://electron.atom.io/) or [NW.js] (http://nwjs.io/) applications.
+```CamelHarness.js``` is a small [Node.js] (http://nodejs.org/) - [Electron] (http://electron.atom.io/) - [NW.js] (http://nwjs.io/) library that can start asynchronously and with no timeout [Perl 5] (https://www.perl.org/) scripts.
 
 ## Quick Start
-**To use with ```Node.js```:**  
+* **To use with ```Node.js```:**  
 ```npm install git+https://github.com/ddmitov/camel-harness.git```  
 
-**To use with ```Electron```:**
+* **To use with ```Electron```:**
   1. Download the ```CamelHarness.js``` package from GitHub.  
   2. Download the ```Electron``` binary package for your operating system from [https://github.com/electron/electron/releases] (https://github.com/electron/electron/releases).  
   3. Extract the downloaded ```CamelHarness.js``` package.  
   4. Extract the downloaded ```Electron``` binary package inside the previously extracted ```camel-harness-master/tests/electron-nwjs``` folder. Confirm the merging of the ```resources``` subfolder of ```Electron``` with the ```resources``` subfolder of the ```CamelHarness.js``` example.  
   5. start the ```Electron``` binary inside the ```camel-harness``` folder.  
 
-**To use with ```NW.js```:**
+* **To use with ```NW.js```:**
   1. Download the ```CamelHarness.js``` package from GitHub.  
   2. Download the ```NW.js``` binary package for your operating system from [http://nwjs.io/downloads/] (http://nwjs.io/downloads/).  
   3. Extract the downloaded ```NW.js``` binary package. It will create its own folder.  

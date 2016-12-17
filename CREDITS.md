@@ -34,3 +34,4 @@ https://www.hacksparrow.com/how-to-write-node-js-modules.html
 https://gist.github.com/leommoore/4484379 (Node - Processes)  
 http://latower.com/blog/2008/11/12/splitting-a-long-javascript-string-across-multiple-lines/  
 https://www.gregjs.com/javascript/2016/checking-whether-a-file-directory-exists-without-using-fs-exists/  
+http://thisdavej.com/node-newbie-error-npm-refusing-to-install-package-as-a-dependency-of-itself/  
