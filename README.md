@@ -5,23 +5,22 @@ CamelHarness.js
 ```CamelHarness.js``` is a small Node.js library that can start asynchronously and with no timeout [Perl 5] (https://www.perl.org/) scripts from [Node.js] (http://nodejs.org/), [Electron] (http://electron.atom.io/) or [NW.js] (http://nwjs.io/) applications.
 
 ## Quick Start
-```CamelHarness.js``` is tested with ```Electron``` or ```NW.js``` binaries without issuing ```npm``` commands.
+**To use with ```Node.js```:**  
+```npm install git+https://github.com/ddmitov/camel-harness.git```  
 
-**To use it with ```Electron```:**
-  1. Create a new folder and name it, for example, ```camel-harness```,  
-  2. Download the ```Electron``` binary package for your operating system from [https://github.com/electron/electron/releases] (https://github.com/electron/electron/releases),  
-  3. Extract the downloaded ```Electron``` binary package inside your previously created ```camel-harness``` folder,  
-  4. Download the ```CamelHarness.js``` source package from GitHub,  
-  5. Extract the downloaded ```CamelHarness.js``` source package and copy its ```resources``` subfolder inside the ```camel-harness``` folder merging it with the ```resources``` subfolder of ```Electron```,  
-  6. start the ```Electron``` binary inside the ```camel-harness``` folder.  
+**To use with ```Electron```:**
+  1. Download the ```CamelHarness.js``` package from GitHub.  
+  2. Download the ```Electron``` binary package for your operating system from [https://github.com/electron/electron/releases] (https://github.com/electron/electron/releases).  
+  3. Extract the downloaded ```CamelHarness.js``` package.  
+  4. Extract the downloaded ```Electron``` binary package inside the previously extracted ```camel-harness-master/tests/electron-nwjs``` folder. Confirm the merging of the ```resources``` subfolder of ```Electron``` with the ```resources``` subfolder of the ```CamelHarness.js``` example.  
+  5. start the ```Electron``` binary inside the ```camel-harness``` folder.  
 
-**To use it with ```NW.js```:**
-  1. Create a new folder and name it, for example, ```camel-harness```,  
-  2. Download the ```NW.js``` binary package for your operating system from [http://nwjs.io/downloads/] (http://nwjs.io/downloads/),  
-  3. Extract the downloaded ```NW.js``` binary package inside your previously created ```camel-harness``` folder,  
-  4. Download the ```CamelHarness.js``` source package from GitHub,  
-  5. Extract the downloaded ```CamelHarness.js``` source package and copy its ```resources``` subfolder and ```package.json``` file in the ```camel-harness``` folder,  
-  6. start the ```NW.js``` binary inside the ```camel-harness``` folder.  
+**To use with ```NW.js```:**
+  1. Download the ```CamelHarness.js``` package from GitHub.  
+  2. Download the ```NW.js``` binary package for your operating system from [http://nwjs.io/downloads/] (http://nwjs.io/downloads/).  
+  3. Extract the downloaded ```NW.js``` binary package. It will create its own folder.  
+  4. Extract the downloaded ```CamelHarness.js``` source package and copy everything inside its ```camel-harness-master/tests/electron-nwjs``` subfolder in the folder of the ```NW.js``` binary.  
+  5. start the ```NW.js``` binary inside the ```camel-harness``` folder.  
 
 ## Dependencies
 * ```child_process``` Node.js module - available in both [Electron] (http://electron.atom.io/) and [NW.js] (http://nwjs.io/)
@@ -30,7 +29,7 @@ CamelHarness.js
 ## API
 
 ```javascript
-var harness = require('./camel-harness/camel-harness.js');
+var harness = require('camel-harness');
 
 harness.camelHarness(perlInterpreter, scriptFullPath, stdoutFunction,
   stderrFunction, errorFunction, exitFunction, method, formData);
