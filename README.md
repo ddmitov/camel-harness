@@ -96,14 +96,12 @@ harness.camelHarness(perlInterpreter, scriptFullPath, stdoutFunction,
   ```GET``` or ```POST```
 
 * **formData:**  
-  Form data can be easily acquired using ```jQuery``` like that:  
+  ```formData``` is mandatory parameter if ```method``` is set.  
+  ```CamelHarness.js``` does not depend on ```jQuery```, but it can be used to easily acquire form data:  
 
 ```javascript
   var formData = $("#form-id").serialize();
 ```
-
-  Note that ```CamelHarness.js``` itself does not depend on ```jQuery```.  
-  ```formData``` is mandatory parameter if ```method``` is set.  
 
 ## Perl Interpreter
 ```CamelHarness.js``` is able to use any Perl interpreter - either a Perl interpreter on PATH or a Perl interpreter identified by its full pathname. [Strawberry Perl] (http://strawberryperl.com/) PortableZIP edition distributed together with ```Electron``` or ```NW.js``` could also be used on a Windows machine.  
