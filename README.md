@@ -6,7 +6,7 @@ CamelHarness.js
 
 ## Node.js Quick Start
 ```npm install camel-harness```  
-or  
+  or  
 ```npm install git+https://github.com/ddmitov/camel-harness.git```  
 
 ```javascript
