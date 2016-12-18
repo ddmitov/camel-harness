@@ -2,8 +2,8 @@
   "name": "camel-harness",
   "version": "0.3.1",
   "dependencies": {
-    "child_process": "^1.0.0",
-    "fs": "^1.0.0"
+    "child_process": "^0.0.1",
+    "fs": "^0.0.1"
   },
   "description": "Node.js - Electron - NW.js controller for Perl 5 scripts",
   "main": "camel-harness.js",

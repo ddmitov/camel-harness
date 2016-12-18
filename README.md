@@ -6,7 +6,7 @@ CamelHarness.js
 
 ## Node.js Quick Start
 Type one of the following two install commands:  
-  
+
 ```npm install camel-harness```  
 ```npm install git+https://github.com/ddmitov/camel-harness.git```  
 
@@ -102,7 +102,7 @@ harness.camelHarness(perlInterpreter, scriptFullPath, stdoutFunction,
 
 * **formData:**  
   ```formData``` is mandatory parameter if ```method``` is set.  
-  ```CamelHarness.js``` does not depend on [jQuery](https://jquery.com/), but can use it to easily acquire form data:  
+  ```CamelHarness.js``` does not depend on [jQuery](https://jquery.com/), but it can be used for easy acquisition of form data:  
 
 ```javascript
   var formData = $("#form-id").serialize();
