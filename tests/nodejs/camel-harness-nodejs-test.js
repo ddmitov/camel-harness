@@ -29,5 +29,5 @@ harness.camelHarness("perl", perlTestScript, "testScriptStdout",
 
 // Handle the output from the Perl test script:
 global.testScriptStdout = function(stdout) {
-  console.log('CamelHarness.js Test: ' + stdout);
+  console.log('camel-harness test: ' + stdout);
 };
