@@ -1,6 +1,6 @@
 
-// CamelHarness.js version 0.2.0
-// Node.js, Electron and NW.js adapter for Perl 5 scripts
+// CamelHarness.js version 0.3.0
+// Node.js - Electron - NW.js controller for Perl 5 scripts
 // CamelHarness.js is licensed under the terms of the MIT license.
 // Copyright (c) 2016 Dimitar D. Mitov
 

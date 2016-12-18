@@ -1,8 +1,13 @@
 {
-  "name": "camel-harness-test",
+  "name": "camel-harness-nodejs-test",
   "version": "0.3.0",
-  "description": "CamelHarness.js Test",
-  "main": "camel-harness-test.js",
+  "dependencies": {
+    "os": "^1.0.0",
+    "path": "^1.0.0",
+    "camel-harness": "^0.3.0"
+  },
+  "description": "CamelHarness.js Test for Node.js",
+  "main": "camel-harness-nodejs-test.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

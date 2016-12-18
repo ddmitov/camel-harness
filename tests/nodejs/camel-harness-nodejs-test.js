@@ -20,7 +20,8 @@ var harness = require('camel-harness');
 
 // Locate the Perl test script:
 var thisScriptPath = process.cwd();
-var perlTestScript = pathObject.join(thisScriptPath, "camel-harness-test.pl");
+var perlTestScript =
+    pathObject.join(thisScriptPath, "camel-harness-nodejs-test.pl");
 
 // Start the Perl test script:
 harness.camelHarness("perl", perlTestScript, "testScriptStdout",

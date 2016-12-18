@@ -1,7 +1,11 @@
 {
   "name": "camel-harness",
   "version": "0.3.0",
-  "description": "Node.js - Electron - NW.js adapter for Perl 5 scripts",
+  "dependencies": {
+    "child_process": "^1.0.0",
+    "fs": "^1.0.0",
+  },
+  "description": "Node.js - Electron - NW.js controller for Perl 5 scripts",
   "main": "camel-harness.js",
   "directories": {
     "test": "tests"
