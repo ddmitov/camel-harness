@@ -1,6 +1,6 @@
 {
   "name": "camel-harness",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "dependencies": {
     "child_process": "^0.0.1",
     "fs": "^0.0.1"

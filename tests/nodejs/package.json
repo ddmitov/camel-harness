@@ -1,6 +1,6 @@
 {
   "name": "camel-harness-nodejs-test",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "dependencies": {
     "os": "^0.0.1",
     "path": "^0.0.1",
