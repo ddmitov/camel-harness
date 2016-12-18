@@ -5,9 +5,11 @@ CamelHarness.js
 ```CamelHarness.js``` is a small [Node.js](http://nodejs.org/) - [Electron](http://electron.atom.io/) - [NW.js](http://nwjs.io/) library that manages asynchronous [Perl 5](https://www.perl.org/) scripts.
 
 ## Node.js Quick Start
+Type one of the following two install commands:  
 ```npm install camel-harness```  
-  or  
 ```npm install git+https://github.com/ddmitov/camel-harness.git```  
+
+Use ```CamelHarness.js``` from your code:
 
 ```javascript
 var harness = require('camel-harness');
@@ -114,5 +116,4 @@ harness.camelHarness(perlInterpreter, scriptFullPath, stdoutFunction,
 ## [Thanks and Credits](./CREDITS.md)
 
 ## License
-
-  MIT © 2016 Dimitar D. Mitov  
+MIT © 2016 Dimitar D. Mitov  
