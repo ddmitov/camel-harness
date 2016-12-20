@@ -51,7 +51,7 @@ function startPerlVersionScript() {
     null, null, null, null, null);
 }
 
-function versionScriptStdout(stdout) {
+global.versionScriptStdout = function(stdout) {
   document.getElementById("version-script").innerHTML = stdout;
 }
 
@@ -62,7 +62,7 @@ function startLongRunningPerlScriptOne() {
     "longRunningPerlScriptOneStdout", null, null, null, null, null);
 }
 
-function longRunningPerlScriptOneStdout(stdout) {
+global.longRunningPerlScriptOneStdout = function(stdout) {
   document.getElementById("long-running-script-one").innerHTML = stdout;
 }
 
@@ -73,6 +73,6 @@ function startLongRunningPerlScriptTwo() {
     "longRunningPerlScriptTwoStdout", null, null, null, null, null);
 }
 
-function longRunningPerlScriptTwoStdout(stdout) {
+global.longRunningPerlScriptTwoStdout = function(stdout) {
   document.getElementById("long-running-script-two").innerHTML = stdout;
 }

@@ -1,28 +1,10 @@
 {
   "name": "camel-harness-demo-nw.js",
-  "version": "0.3.5",
-  "description": "camel-harness nw.js demo",
   "main": "resources/app/index.html",
   "window": {
     "title": "camel-harness",
     "icon": "resources/app.png",
     "min_width": 800,
     "min_height": 600
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ddmitov/camel-harness.git"
-  },
-  "keywords": [
-    "perl5",
-    "asynchronous",
-    "child_process",
-    "nw.js"
-  ],
-  "author": "Dimitar D. Mitov",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ddmitov/camel-harness/issues"
-  },
-  "homepage": "https://github.com/ddmitov/camel-harness#readme"
+  }
 }

@@ -3,6 +3,12 @@ Thanks and Credits
 Amata mea Argeia - gratiam magnam tibi ago!  
 Patientia tua in studiis meis computatoriis auxilium meum maximum!  
 
+## Camel Icon
+Thanks to Jennifer Maher-Bontrager, author of the Camel icon.  
+http://www.iconarchive.com/show/animal-icons-by-jen/Camel-icon.html  
+http://www.totoro.org/jen/
+
+## JavaScript & Node.js
 https://nodejs.org/api/child_process.html  
 
 https://docs.npmjs.com/getting-started/installing-npm-packages-locally  

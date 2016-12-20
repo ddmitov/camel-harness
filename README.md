@@ -10,7 +10,7 @@ Install using one of the following commands:
 ```npm install camel-harness```  
 ```npm install git+https://github.com/ddmitov/camel-harness.git```  
 
-Use from your code:
+Use from code:
 
 ```javascript
 var harness = require('camel-harness');
@@ -23,7 +23,7 @@ harness.camelHarness(perlInterpreter, scriptFullPath, stdoutFunction,
 * Download the [camel-harness package](https://github.com/ddmitov/camel-harness).  
 * Download the [Electron binary package for your operating system](https://github.com/electron/electron/releases).  
 * Extract the downloaded ```camel-harness``` package.  
-* Extract the downloaded [Electron](http://electron.atom.io/) binary package inside the previously extracted ```camel-harness-master/electron-nwjs-demo``` folder. Confirm the merging of the ```resources``` subfolder of [Electron](http://electron.atom.io/) with the ```resources``` subfolder of the demo.  
+* Extract the downloaded [Electron](http://electron.atom.io/) binary package inside the previously extracted ```camel-harness-master/electron-nwjs-demo``` folder. Confirm merging the ```resources``` subfolder of [Electron](http://electron.atom.io/) with the ```resources``` subfolder of the demo.  
 * Start the [Electron](http://electron.atom.io/) binary.  
 
 ## NW.js Demo
