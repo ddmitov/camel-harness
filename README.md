@@ -4,13 +4,13 @@ camel-harness
 [![GitHub License](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE.md) [![NPM Version](https://img.shields.io/npm/v/camel-harness.svg)](https://www.npmjs.com/package/camel-harness)  
 ```camel-harness``` is a small [Node.js](http://nodejs.org/) - [Electron](http://electron.atom.io/) - [NW.js](http://nwjs.io/) library for handling of asynchronous [Perl 5](https://www.perl.org/) scripts.
 
-## Node.js Quick Start
-Type one of the following two install commands:  
+## Quick Start
+Install using one of the following commands:  
 
 ```npm install camel-harness```  
 ```npm install git+https://github.com/ddmitov/camel-harness.git```  
 
-Use ```camel-harness``` from your code:
+Use from your code:
 
 ```javascript
 var harness = require('camel-harness');
@@ -111,7 +111,7 @@ harness.camelHarness(perlInterpreter, scriptFullPath, stdoutFunction,
 ```
 
 ## Perl Interpreter
-```camel-harness``` is able to use any Perl interpreter - either a Perl interpreter on PATH or a Perl interpreter identified by its full pathname. [Strawberry Perl](http://strawberryperl.com/) PortableZIP edition distributed together with [Electron](http://electron.atom.io/) or [NW.js](http://nwjs.io/) binaries could also be used on a Windows machine.  
+```camel-harness``` is able to use any Perl interpreter - either a Perl interpreter on PATH or a Perl interpreter identified by its full pathname. [Strawberry Perl](http://strawberryperl.com/) PortableZIP edition distributed together with an [Electron](http://electron.atom.io/) or [NW.js](http://nwjs.io/) binary could also be used on a Windows machine.  
 
 ## Security
 ```camel-harness``` executes all Perl scripts with the ```fork``` core function banned using the command line switch ```-M-ops=fork```. ```fork``` is banned to avoid orphan processes, which may be created if this function is carelessly used.  
