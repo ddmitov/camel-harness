@@ -1,7 +1,7 @@
-// Module dependencies:
-// os
-// path
-// CamelHarness.js
+// camel-harness test
+
+// Load the camel-harness module:
+var harness = require('camel-harness');
 
 // Determine the operating system:
 var osObject = require('os');
@@ -15,13 +15,10 @@ if (platform !== "win32") {
   pathObject = require('path').win32;
 }
 
-// Load the CamelHarness.js module:
-var harness = require('camel-harness');
-
 // Locate the Perl test script:
 var thisScriptPath = process.cwd();
 var perlTestScript =
-    pathObject.join(thisScriptPath, "camel-harness-nodejs-test.pl");
+    pathObject.join(thisScriptPath, "camel-harness-test.pl");
 
 // Start the Perl test script:
 harness.camelHarness("perl", perlTestScript, "testScriptStdout",

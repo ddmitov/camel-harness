@@ -1,8 +1,7 @@
-// Module dependencies:
-// fs
-// os
-// path
-// CamelHarness.js
+// camel-harness demo for Electron and NW.js
+
+// Load the camel-harness module:
+var harness = require('./camel-harness/camel-harness.js');
 
 // Determine the operating system:
 var osObject = require('os');
@@ -29,9 +28,8 @@ if (platform !== "win32") {
   perlInterpreter = "perl";
 } else {
   // Find a portable Windows Perl interpreter (if any):
-  var portablePerlRelativePath = "perl/bin/perl.exe";
   var portablePerl =
-      pathObject.join(binaryDirectory, portablePerlRelativePath);
+      pathObject.join(binaryDirectory, "perl", "bin", "perl.exe");
 
   // If portable Perl interpreter is not found,
   // use the first Perl interpreter on PATH:
@@ -45,44 +43,35 @@ if (platform !== "win32") {
   });
 }
 
-// Load the CamelHarness.js module:
-var harness = require('./camel-harness/camel-harness.js');
-
-
-// Perl scripts handling functions:
+// Perl script handling functions:
 function startPerlVersionScript() {
-  var scriptFullPath = pathObject
-    .join(applicationDirectory, "perl", "version.pl");
-  harness.camelHarness(perlInterpreter, scriptFullPath,
-    "versionScriptStdout", null, null, null, null, null);
+  var scriptFullPath =
+      pathObject.join(applicationDirectory, "perl", "version.pl");
+  harness.camelHarness(perlInterpreter, scriptFullPath, "versionScriptStdout",
+    null, null, null, null, null);
 }
-
 
 function versionScriptStdout(stdout) {
   document.getElementById("version-script").innerHTML = stdout;
 }
 
-
 function startLongRunningPerlScriptOne() {
-  var scriptFullPath = pathObject
-    .join(applicationDirectory, "perl", "counter.pl");
+  var scriptFullPath =
+      pathObject.join(applicationDirectory, "perl", "counter.pl");
   harness.camelHarness(perlInterpreter, scriptFullPath,
     "longRunningPerlScriptOneStdout", null, null, null, null, null);
 }
-
 
 function longRunningPerlScriptOneStdout(stdout) {
   document.getElementById("long-running-script-one").innerHTML = stdout;
 }
 
-
 function startLongRunningPerlScriptTwo() {
-  var scriptFullPath = pathObject
-    .join(applicationDirectory, "perl", "counter.pl");
+  var scriptFullPath =
+      pathObject.join(applicationDirectory, "perl", "counter.pl");
   harness.camelHarness(perlInterpreter, scriptFullPath,
     "longRunningPerlScriptTwoStdout", null, null, null, null, null);
 }
-
 
 function longRunningPerlScriptTwoStdout(stdout) {
   document.getElementById("long-running-script-two").innerHTML = stdout;

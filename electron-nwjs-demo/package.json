@@ -1,13 +1,13 @@
 {
-  "name": "camel-harness",
+  "name": "camel-harness-demo-nw.js",
   "version": "0.3.5",
-  "description": "Node.js - Electron - NW.js controller for Perl 5 scripts",
-  "main": "camel-harness.js",
-  "directories": {
-    "test": "tests"
-  },
-  "scripts": {
-    "test": "test/camel-harness-test.js"
+  "description": "camel-harness nw.js demo",
+  "main": "resources/app/index.html",
+  "window": {
+    "title": "camel-harness",
+    "icon": "resources/app.png",
+    "min_width": 800,
+    "min_height": 600
   },
   "repository": {
     "type": "git",
@@ -17,7 +17,6 @@
     "perl5",
     "asynchronous",
     "child_process",
-    "electron",
     "nw.js"
   ],
   "author": "Dimitar D. Mitov",

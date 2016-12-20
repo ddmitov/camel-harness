@@ -2,7 +2,7 @@ camel-harness
 --------------------------------------------------------------------------------
 [![GitHub Version](https://img.shields.io/github/release/ddmitov/camel-harness.svg)](https://github.com/ddmitov/camel-harness/releases)
 [![GitHub License](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE.md) [![NPM Version](https://img.shields.io/npm/v/camel-harness.svg)](https://www.npmjs.com/package/camel-harness)  
-```camel-harness``` is a small [Node.js](http://nodejs.org/) - [Electron](http://electron.atom.io/) - [NW.js](http://nwjs.io/) library that manages asynchronous [Perl 5](https://www.perl.org/) scripts.
+```camel-harness``` is a small [Node.js](http://nodejs.org/) - [Electron](http://electron.atom.io/) - [NW.js](http://nwjs.io/) library for managing of asynchronous [Perl 5](https://www.perl.org/) scripts.
 
 ## Node.js Quick Start
 Type one of the following two install commands:  
@@ -19,24 +19,27 @@ harness.camelHarness(perlInterpreter, scriptFullPath, stdoutFunction,
   stderrFunction, errorFunction, exitFunction, method, formData);
 ```
 
-## Electron Quick Start
+## Electron Demo
 * Download the ```camel-harness``` package from GitHub.  
 * Download the [Electron](http://electron.atom.io/) binary package for your operating system from  
   https://github.com/electron/electron/releases.  
 * Extract the downloaded ```camel-harness``` package.  
-* Extract the downloaded [Electron](http://electron.atom.io/) binary package inside the previously extracted ```camel-harness-master/tests/electron-nwjs``` folder. Confirm the merging of the ```resources``` subfolder of [Electron](http://electron.atom.io/) with the ```resources``` subfolder of the ```camel-harness``` example.  
-* Start the [Electron](http://electron.atom.io/) binary inside the ```camel-harness``` folder.  
+* Extract the downloaded [Electron](http://electron.atom.io/) binary package inside the previously extracted ```camel-harness-master/electron-nwjs-demo``` folder. Confirm the merging of the ```resources``` subfolder of [Electron](http://electron.atom.io/) with the ```resources``` subfolder of the demo.  
+* Start the [Electron](http://electron.atom.io/) binary.  
 
-## NW.js Quick Start
+## NW.js Demo
 * Download the ```camel-harness``` package from GitHub.  
 * Download the [NW.js](http://nwjs.io/) binary package for your operating system from http://nwjs.io/downloads/.  
 * Extract the downloaded [NW.js](http://nwjs.io/) binary package. It will create its own folder.  
-* Extract the downloaded ```camel-harness``` source package and copy everything inside its ```camel-harness-master/tests/electron-nwjs``` subfolder in the folder of the [NW.js](http://nwjs.io/) binary.  
-* Start the [NW.js](http://nwjs.io/) binary inside the ```camel-harness``` folder.  
+* Extract the downloaded ```camel-harness``` source package and copy everything inside its ```camel-harness-master/electron-nwjs-demo``` subfolder in the folder of the [NW.js](http://nwjs.io/) binary.  
+* Start the [NW.js](http://nwjs.io/) binary.  
 
-## Dependencies
-* ```child_process``` Node.js module - available in both [Electron](http://electron.atom.io/) and [NW.js](http://nwjs.io/)
-* Perl interpreter on PATH or any other Perl interpreter identified by its full pathname
+## Node.js - Electron - NW.js Core Module Dependencies
+* ```child_process```
+* ```fs```
+
+## External Dependency
+The only external dependency of ```camel-harness``` is a Perl interpreter on PATH or any other Perl interpreter identified by its full pathname. ```camel-harness``` package test will fail if no Perl interpreter is available on PATH.
 
 ## API
 
@@ -109,7 +112,7 @@ harness.camelHarness(perlInterpreter, scriptFullPath, stdoutFunction,
 ```
 
 ## Perl Interpreter
-```camel-harness``` is able to use any Perl interpreter - either a Perl interpreter on PATH or a Perl interpreter identified by its full pathname. [Strawberry Perl](http://strawberryperl.com/) PortableZIP edition distributed together with [Electron](http://electron.atom.io/) or [NW.js](http://nwjs.io/) could also be used on a Windows machine.  
+```camel-harness``` is able to use any Perl interpreter - either a Perl interpreter on PATH or a Perl interpreter identified by its full pathname. [Strawberry Perl](http://strawberryperl.com/) PortableZIP edition distributed together with [Electron](http://electron.atom.io/) or [NW.js](http://nwjs.io/) binaries could also be used on a Windows machine.  
 
 ## Security
 ```camel-harness``` executes all Perl scripts with the ```fork``` core function banned using the command line switch ```-M-ops=fork```. ```fork``` is banned to avoid orphan processes, which may be created if this function is carelessly used.  

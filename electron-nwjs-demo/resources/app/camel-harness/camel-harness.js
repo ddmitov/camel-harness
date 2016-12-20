@@ -1,5 +1,5 @@
 
-// CamelHarness.js version 0.3.4
+// CamelHarness.js version 0.3.5
 // Node.js - Electron - NW.js controller for Perl 5 scripts
 // CamelHarness.js is licensed under the terms of the MIT license.
 // Copyright (c) 2016 Dimitar D. Mitov
@@ -14,7 +14,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
 // THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// Node.js module dependencies (available in both Electron and NW.js):
+// Node.js - Electron - NW.js core module dependencies:
 // child_process
 // fs
 
@@ -30,7 +30,7 @@ exports.camelHarness = function(interpreter, scriptFullPath, stdoutFunction,
     var camelHarnessFilesystemObject = require('fs');
     camelHarnessFilesystemObject.access(scriptFullPath, function(error) {
       if (error && error.code === 'ENOENT') {
-        console.log('CamelHarness.js: ' +
+        console.log('camel-harness: ' +
           'Perl script not found:\n' + scriptFullPath);
       } else {
         // Set a clean environment for the supplied Perl script:
@@ -50,7 +50,7 @@ exports.camelHarness = function(interpreter, scriptFullPath, stdoutFunction,
               cleanEnvironment['CONTENT_LENGTH'] = formData.length;
             }
           } else {
-            console.log('CamelHarness.js: ' +
+            console.log('camel-harness: ' +
               'Request method is ' + method +
               ', but form data is not supplied.');
           }
@@ -71,7 +71,7 @@ exports.camelHarness = function(interpreter, scriptFullPath, stdoutFunction,
           if (typeof global[stdoutFunction] === 'function') {
             global[stdoutFunction](data.toString('utf8'));
           } else {
-            console.log('CamelHarness.js: ' +
+            console.log('camel-harness: ' +
               'STDOUT handling function for\n' +
               scriptFullPath + '\n' + 'is not found.');
             console.log('STDOUT:\n' + data.toString('utf8'));
@@ -82,7 +82,7 @@ exports.camelHarness = function(interpreter, scriptFullPath, stdoutFunction,
           if (typeof global[stderrFunction] === 'function') {
             global[stderrFunction](data.toString('utf8'));
           } else {
-            console.log('CamelHarness.js: ' +
+            console.log('camel-harness: ' +
               'STDERR handling function for\n' +
               scriptFullPath + '\n' + 'is not found.');
             console.log('STDERR:\n' + data.toString('utf8'));
@@ -94,7 +94,7 @@ exports.camelHarness = function(interpreter, scriptFullPath, stdoutFunction,
             if (typeof global[errorFunction] === 'function') {
               global[errorFunction](errorCode);
             } else {
-              console.log('CamelHarness.js: ' +
+              console.log('camel-harness: ' +
                 'Error handling function for\n' +
                 scriptFullPath + '\n' + 'is not found.');
               console.log('Error stack:\n' + error.stack);
@@ -109,7 +109,7 @@ exports.camelHarness = function(interpreter, scriptFullPath, stdoutFunction,
             if (typeof global[exitFunction] === 'function') {
               global[exitFunction](code);
             } else {
-              console.log('CamelHarness.js: ' +
+              console.log('camel-harness: ' +
                 'Exit handling function for\n' +
                 scriptFullPath + '\n' + 'is not found.');
               console.log('Exit code: ' + exitCode);
@@ -119,10 +119,10 @@ exports.camelHarness = function(interpreter, scriptFullPath, stdoutFunction,
       }
     });
   } else {
-    console.log('CamelHarness.js: ' +
+    console.log('camel-harness: ' +
       'Interpreter, script full path or ' +
       'STDOUT handling function name are not supplied.');
-    console.log('CamelHarness.js minimal invocation:\n' +
+    console.log('camel-harness minimal invocation:\n' +
       'camelHarness(interpreter, scriptFullPath, stdoutFunction, ' +
       'null, null, null, null, null)');
   }
