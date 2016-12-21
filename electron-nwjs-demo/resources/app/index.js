@@ -1,6 +1,6 @@
 // camel-harness demo for Electron and NW.js
 
-// Load the camel-harness module:
+// Load the camel-harness package:
 var harness = require('./camel-harness/camel-harness.js');
 
 // Determine the operating system:

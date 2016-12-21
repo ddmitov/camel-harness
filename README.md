@@ -23,7 +23,7 @@ harness.camelHarness(perlInterpreter, scriptFullPath, stdoutFunction,
 * Download the [camel-harness package](https://github.com/ddmitov/camel-harness).  
 * Download the [Electron binary package for your operating system](https://github.com/electron/electron/releases).  
 * Extract the downloaded ```camel-harness``` package.  
-* Extract the downloaded [Electron](http://electron.atom.io/) binary package inside the previously extracted ```camel-harness-master/electron-nwjs-demo``` folder. Confirm merging the ```resources``` subfolder of [Electron](http://electron.atom.io/) with the ```resources``` subfolder of the demo.  
+* Extract the downloaded [Electron](http://electron.atom.io/) binary package inside the previously extracted ```camel-harness-master/electron-nwjs-demo``` folder. Confirm merging of the ```resources``` subfolder of [Electron](http://electron.atom.io/) with the ```resources``` subfolder of the demo.  
 * Start the [Electron](http://electron.atom.io/) binary.  
 
 ## NW.js Demo
@@ -33,7 +33,7 @@ harness.camelHarness(perlInterpreter, scriptFullPath, stdoutFunction,
 * Extract the downloaded ```camel-harness``` package and copy everything inside its ```camel-harness-master/electron-nwjs-demo``` subfolder in the folder of the [NW.js](http://nwjs.io/) binary.  
 * Start the [NW.js](http://nwjs.io/) binary.  
 
-## Node.js - Electron - NW.js Core Module Dependencies
+## Core Dependencies
 * ```child_process```
 * ```fs```
 

@@ -1,7 +1,7 @@
 
-// CamelHarness.js version 0.3.5
+// camel-harness version 0.3.6
 // Node.js - Electron - NW.js controller for Perl 5 scripts
-// CamelHarness.js is licensed under the terms of the MIT license.
+// camel-harness is licensed under the terms of the MIT license.
 // Copyright (c) 2016 Dimitar D. Mitov
 
 // THE SOFTWARE IS PROVIDED "AS IS",
@@ -14,7 +14,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
 // THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// Node.js - Electron - NW.js core module dependencies:
+// Core dependencies:
 // child_process
 // fs
 

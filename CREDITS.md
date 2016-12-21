@@ -6,7 +6,7 @@ Patientia tua in studiis meis computatoriis auxilium meum maximum!
 ## Camel Icon
 Thanks to Jennifer Maher-Bontrager, author of the Camel icon.  
 http://www.iconarchive.com/show/animal-icons-by-jen/Camel-icon.html  
-http://www.totoro.org/jen/
+http://www.totoro.org/jen/  
 
 ## JavaScript & Node.js
 https://nodejs.org/api/child_process.html  
@@ -21,7 +21,8 @@ http://stackoverflow.com/questions/1070760/javascript-function-in-href-vs-onclic
 http://stackoverflow.com/questions/15515549/node-js-writing-a-function-to-return-spawn-stdout-as-a-string  
 http://stackoverflow.com/questions/9781214/parse-output-of-spawned-node-js-child-process-line-by-line  
 http://stackoverflow.com/questions/3133243/how-do-i-get-the-path-to-the-current-script-with-node-js  
-http://stackoverflow.com/questions/16788807/global-function-in-express-js    
+http://stackoverflow.com/questions/16788807/global-function-in-express-js  
+http://stackoverflow.com/questions/7083045/fs-how-do-i-locate-a-parent-folder  
 
 http://www.tutorialspoint.com/jquery/ajax-serialize.htm
 http://www.tutorialspoint.com/nodejs/nodejs_path_module.htm  
