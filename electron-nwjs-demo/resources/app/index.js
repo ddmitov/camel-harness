@@ -1,78 +1,68 @@
 // camel-harness demo for Electron and NW.js
 
 // Load the camel-harness package:
-var harness = require('./camel-harness/camel-harness.js');
+var camelHarness = require('./camel-harness/camel-harness.js');
 
-// Determine the operating system:
-var osObject = require('os');
-var platform = osObject.platform();
+// Determine the operating system and initialize 'path' object:
+var os = require('os');
+var platform = os.platform();
 
-// Initialize 'path' object:
-var pathObject;
+var path;
 if (platform !== "win32") {
-  pathObject = require('path').posix;
+  path = require('path').posix;
 } else {
-  pathObject = require('path').win32;
+  path = require('path').win32;
 }
 
 // Get the full path of the directory where Electron or NW.js binary is located:
 var binaryPath = process.execPath;
-var binaryDirectory = pathObject.dirname(binaryPath);
+var binaryDirectory = path.dirname(binaryPath);
 
 // Get the full path of the application root directory:
-var applicationDirectory = pathObject.join(binaryDirectory, "resources", "app");
+var applicationDirectory = path.join(binaryDirectory, "resources", "app");
 
 // Determine Perl interpreter:
-var perlInterpreter;
-if (platform !== "win32") {
-  perlInterpreter = "perl";
-} else {
-  // Find a portable Windows Perl interpreter (if any):
+var perlInterpreter = "perl";
+if (platform === "win32") {
+  // Check for a portable Perl interpreter:
   var portablePerl =
-      pathObject.join(binaryDirectory, "perl", "bin", "perl.exe");
-
-  // If portable Perl interpreter is not found,
-  // use the first Perl interpreter on PATH:
-  var filesystemObject = require('fs');
-  filesystemObject.access(portablePerl, function(error) {
-    if (error && error.code === 'ENOENT') {
-      perlInterpreter = "perl";
-    } else {
-      perlInterpreter = portablePerl;
-    }
-  });
+      path.join(binaryDirectory, "perl", "bin", "perl.exe");
+  var filesystem = require('fs');
+  if (filesystem.existsSync(portablePerl)) {
+    perlInterpreter = portablePerl;
+  }
 }
 
-// Perl script handling functions:
-function startPerlVersionScript() {
-  var scriptFullPath =
-      pathObject.join(applicationDirectory, "perl", "version.pl");
-  harness.camelHarness(perlInterpreter, scriptFullPath, "versionScriptStdout",
-    null, null, null, null, null);
-}
+// version.pl:
+var versionScriptFullPath =
+    path.join(applicationDirectory, "perl", "version.pl");
 
-global.versionScriptStdout = function(stdout) {
+var versionScript = new Object();
+versionScript.interpreter = "perl";
+versionScript.scriptFullPath = versionScriptFullPath;
+
+versionScript.stdoutFunction = function(stdout) {
   document.getElementById("version-script").innerHTML = stdout;
-}
+};
 
-function startLongRunningPerlScriptOne() {
-  var scriptFullPath =
-      pathObject.join(applicationDirectory, "perl", "counter.pl");
-  harness.camelHarness(perlInterpreter, scriptFullPath,
-    "longRunningPerlScriptOneStdout", null, null, null, null, null);
-}
+// counter.pl full path:
+var counterScriptFullPath =
+    path.join(applicationDirectory, "perl", "counter.pl");
 
-global.longRunningPerlScriptOneStdout = function(stdout) {
+// counter.pl - first instance:
+var counterScriptOne = new Object();
+counterScriptOne.interpreter = "perl";
+counterScriptOne.scriptFullPath = counterScriptFullPath;
+
+counterScriptOne.stdoutFunction = function(stdout) {
   document.getElementById("long-running-script-one").innerHTML = stdout;
-}
+};
 
-function startLongRunningPerlScriptTwo() {
-  var scriptFullPath =
-      pathObject.join(applicationDirectory, "perl", "counter.pl");
-  harness.camelHarness(perlInterpreter, scriptFullPath,
-    "longRunningPerlScriptTwoStdout", null, null, null, null, null);
-}
+// counter.pl - second instance:
+var counterScriptTwo = new Object();
+counterScriptTwo.interpreter = "perl";
+counterScriptTwo.scriptFullPath = counterScriptFullPath;
 
-global.longRunningPerlScriptTwoStdout = function(stdout) {
+counterScriptTwo.stdoutFunction = function(stdout) {
   document.getElementById("long-running-script-two").innerHTML = stdout;
-}
+};

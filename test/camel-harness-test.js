@@ -1,32 +1,32 @@
 // camel-harness test
 
-// Determine the operating system:
-var osObject = require('os');
-var platform = osObject.platform();
+// Determine the operating system and initialize 'path' object:
+var os = require('os');
+var platform = os.platform();
 
-// Initialize 'path' object:
-var pathObject;
+var path;
 if (platform !== "win32") {
-  pathObject = require('path').posix;
+  path = require('path').posix;
 } else {
-  pathObject = require('path').win32;
+  path = require('path').win32;
 }
 
 // Locate and load the camel-harness package:
-var camelHarnessDirectory = pathObject.resolve(__dirname, '..');
-var camelHarnessPackage =
-    pathObject.join(camelHarnessDirectory, "camel-harness.js");
-var harness = require(camelHarnessPackage);
+var camelHarnessDirectory = path.resolve(__dirname, '..');
+var camelHarnessFullPath = path.join(camelHarnessDirectory, "camel-harness.js");
+var camelHarness = require(camelHarnessFullPath);
 
 // Locate the Perl test script:
-var perlTestScript =
-    pathObject.join(__dirname, "camel-harness-test.pl");
+var perlTestScriptFullPath = path.join(__dirname, "camel-harness-test.pl");
 
-// Start the Perl test script:
-harness.camelHarness("perl", perlTestScript, "testScriptStdout",
-  null, null, null, null, null);
+// Initialize Perl script object:
+var perlTestScript = new Object();
+perlTestScript.interpreter = "perl";
+perlTestScript.scriptFullPath = perlTestScriptFullPath;
 
-// Handle the output from the Perl test script:
-global.testScriptStdout = function(stdout) {
+perlTestScript.stdoutFunction = function(stdout) {
   console.log('camel-harness test: ' + stdout);
 };
+
+// Start the Perl test script:
+camelHarness.startScript(perlTestScript);

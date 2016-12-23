@@ -23,6 +23,7 @@ http://stackoverflow.com/questions/9781214/parse-output-of-spawned-node-js-child
 http://stackoverflow.com/questions/3133243/how-do-i-get-the-path-to-the-current-script-with-node-js  
 http://stackoverflow.com/questions/16788807/global-function-in-express-js  
 http://stackoverflow.com/questions/7083045/fs-how-do-i-locate-a-parent-folder  
+http://stackoverflow.com/questions/4482686/check-synchronously-if-file-directory-exists-in-node-js  
 
 http://www.tutorialspoint.com/jquery/ajax-serialize.htm
 http://www.tutorialspoint.com/nodejs/nodejs_path_module.htm  

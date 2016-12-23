@@ -3,8 +3,8 @@
 use strict;
 use warnings;
 
-# Disable built-in Perl buffering.
-# This is important on Windows for all long running scripts!
+# Built-in Perl buffering should be disabled on Windows to prevent
+# seeing all STDOUT output after the script has ended.
 $|=1;
 
 my $maximal_time = 10; # seconds

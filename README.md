@@ -5,18 +5,25 @@ camel-harness
 ```camel-harness``` is a small [Node.js](http://nodejs.org/) - [Electron](http://electron.atom.io/) - [NW.js](http://nwjs.io/) library for handling of asynchronous [Perl 5](https://www.perl.org/) scripts.
 
 ## Quick Start
-Install using one of the following commands:  
+* Install using one of the following commands:  
 
 ```npm install camel-harness```  
 ```npm install git+https://github.com/ddmitov/camel-harness.git```  
 
-Use from code:
+* Use from code:
 
 ```javascript
-var harness = require('camel-harness');
+var camelHarness = require('camel-harness');
 
-harness.camelHarness(perlInterpreter, scriptFullPath, stdoutFunction,
-  stderrFunction, errorFunction, exitFunction, method, formData);
+var perlScript = new Object();
+perlScript.interpreter = "perl";
+perlScript.scriptFullPath = "/test/test.pl";
+
+perlScript.stdoutFunction = function(stdout) {
+  document.getElementById("DOM-element-id").innerHTML = stdout;
+};
+
+camelHarness.startScript(perlScript);
 ```
 
 ## Electron Demo
@@ -43,10 +50,35 @@ The only external dependency of ```camel-harness``` is a Perl interpreter on PAT
 ## API
 
 ```javascript
-var harness = require('camel-harness');
+var camelHarness = require('camel-harness');
 
-harness.camelHarness(perlInterpreter, scriptFullPath, stdoutFunction,
-  stderrFunction, errorFunction, exitFunction, method, formData);
+var perlScript = new Object();
+perlScript.interpreter = "perl"; // mandatory object property
+perlScript.scriptFullPath = "/test/test.pl"; // mandatory object property
+
+// mandatory object property:
+perlScript.stdoutFunction = function(stdout) {
+  document.getElementById("DOM-element-id").innerHTML = stdout;
+};
+
+perlScript.stderrFunction = function(stderr) {
+  console.log('Perl script STDERR:\n' + stderr);
+}
+
+perlScript.errorFunction = function(error) {
+  console.log(error.stack);
+  console.log('Perl script error code: ' + error.code);
+  console.log('Perl script received signal: ' + error.signal);
+}
+
+perlScript.exitFunction = function(exitCode) {
+  console.log('Perl script exited with exit code ' + exitCode);
+}
+
+perlScript.method = "POST";
+perlScript.formData = formData;
+
+camelHarness.startScript(perlScript);
 ```
 
   * **perlInterpreter:**  
@@ -54,50 +86,25 @@ harness.camelHarness(perlInterpreter, scriptFullPath, stdoutFunction,
   This parameter is mandatory.  
 
 * **scriptFullPath:**  
-  This is the full path of the Perl script that is going to be executed. This parameter is mandatory.  
+  This is the full path of the Perl script that is going to be executed.  
+  This parameter is mandatory.  
 
 * **stdoutFunction:**  
   This is the name of the function that will be executed every time when output is available on STDOUT.  
+  The only argument passed to the ```stdoutFunction``` function is the ```stdout``` string.  
   This parameter is mandatory.  
-  The only argument passed to the ```stdoutFunction``` function is the ```stdout``` string. Example:  
-
-```javascript
-  function camelHarnessStdout(stdout) {
-    document.getElementById("DOM-element-id").innerHTML = stdout;
-  }
-```
 
 * **stderrFunction:**  
   This is the name of the function that will be executed every time when output is available on STDERR.  
-  The only argument passed to this function is the ```stderr``` string. Example:  
-
-```javascript
-  function camelHarnessStderr(stderr) {
-    console.log('Perl script STDERR:\n' + stderr);
-  }
-```
+  The only argument passed to this function is the ```stderr``` string.  
 
 * **errorFunction:**  
   This is the name of the function that will be executed to read errors from a Perl script.  
-  The only argument passed to this function is the ```error``` object. Example:  
-
-```javascript
-  function camelHarnessError(error) {
-    console.log(error.stack);
-    console.log('Perl script error code: ' + error.code);
-    console.log('Perl script signal received: ' + error.signal);
-  }
-```
+  The only argument passed to this function is the ```error``` object.  
 
 * **exitFunction:**  
   This is the name of the function that will be executed when a Perl script is finished.  
-  The only argument passed to this function is the ```exitCode``` string. Example:  
-
-```javascript
-  function camelHarnessExit(exitCode) {
-    console.log('Perl script exited with exit code ' + exitCode);
-  }
-```
+  The only argument passed to this function is the ```exitCode``` string.  
 
 * **method:**  
   ```GET``` or ```POST```

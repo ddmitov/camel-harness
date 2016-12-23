@@ -1,6 +1,6 @@
 {
   "name": "camel-harness",
-  "version": "0.3.6",
+  "version": "0.4.0",
   "description": "Node.js - Electron - NW.js controller for Perl 5 scripts",
   "main": "camel-harness.js",
   "directories": {
@@ -14,7 +14,7 @@
     "url": "git+https://github.com/ddmitov/camel-harness.git"
   },
   "keywords": [
-    "perl5",
+    "perl",
     "asynchronous",
     "child_process",
     "electron",

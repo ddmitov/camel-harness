@@ -2,5 +2,6 @@
 
 use strict;
 use warnings;
+use English;
 
-print "using Perl $^V";
+print "Perl $VERSION";

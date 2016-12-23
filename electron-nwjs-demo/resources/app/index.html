@@ -31,22 +31,28 @@
   <body>
     <p>
       <div id="version-script">
-          <a href="#" onclick="startPerlVersionScript(); return false;">
-              Perl Version</a>
+        <a href="#"
+          onclick="camelHarness.startScript(versionScript); return false;">
+          Perl Version
+        </a>
       </div>
     </p>
 
     <p>
       <div id="long-running-script-one">
-        <a href="#" onclick="startLongRunningPerlScriptOne(); return false;">
-            Long Running Perl Script - First Instance</a>
+        <a href="#"
+          onclick="camelHarness.startScript(counterScriptOne); return false;">
+          Long Running Perl Script - First Instance
+        </a>
       </div>
     </p>
 
     <p>
       <div id="long-running-script-two">
-        <a href="#" onclick="startLongRunningPerlScriptTwo(); return false;">
-            Long Running Perl Script - Second Instance</a>
+        <a href="#"
+          onclick="camelHarness.startScript(counterScriptTwo); return false;">
+          Long Running Perl Script - Second Instance
+        </a>
       </div>
     </p>
   </body>
