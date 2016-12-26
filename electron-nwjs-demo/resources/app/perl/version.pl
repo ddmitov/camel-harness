@@ -4,4 +4,4 @@ use strict;
 use warnings;
 use English;
 
-print "Perl $VERSION";
+print "Perl $PERL_VERSION";
