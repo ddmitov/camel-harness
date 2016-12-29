@@ -1,5 +1,5 @@
 
-// camel-harness version 0.4.1
+// camel-harness version 0.4.2
 // Node.js - Electron - NW.js controller for Perl 5 scripts
 // camel-harness is licensed under the terms of the MIT license.
 // Copyright (c) 2016 Dimitar D. Mitov
@@ -28,17 +28,17 @@ exports.startScript = function(scriptObject) {
     typeof scriptObject.stdoutFunction === 'function')) {
     // Check if the supplied Perl script exists:
     const filesystemObject = require('fs');
-    filesystemObject.access(  scriptObject.scriptFullPath, function(error) {
+    filesystemObject.access(scriptObject.scriptFullPath, function(error) {
       if (error && error.code === 'ENOENT') {
-        console.log('camel-harness: ' +
-          scriptObject.scriptFullPath + ' was not found.');
+        console.log(scriptObject.scriptFullPath + ' was not found.');
       } else {
         // Set a clean environment for the supplied Perl script:
         var cleanEnvironment = {};
 
         if (scriptObject.method !== null &&
           (scriptObject.method === "GET" || scriptObject.method === "POST")) {
-          if (scriptObject.formData  !== null && formData.length > 0) {
+          if (scriptObject.formData  !== undefined &&
+            scriptObject.formData.length > 0) {
             // Handle GET requests:
             if (scriptObject.method === "GET") {
               cleanEnvironment['REQUEST_METHOD'] = 'GET';
@@ -51,9 +51,8 @@ exports.startScript = function(scriptObject) {
               cleanEnvironment['CONTENT_LENGTH'] = scriptObject.formData.length;
             }
           } else {
-            console.log('camel-harness: ' +
-              'Request method is ' + method + ', ' +
-              'but form data is not supplied.');
+            console.log('Request method is ' + method + ', ' +
+                        'but form data is not supplied.');
           }
         }
 
@@ -65,10 +64,10 @@ exports.startScript = function(scriptObject) {
         );
 
         // Send POST data to the Perl script:
-        if (scriptObject.method !== null &&
+        if (scriptObject.method !== undefined &&
           scriptObject.method === "POST" &&
           scriptObject.formData.length > 0) {
-          scriptHandler.stdin.write(formData);
+          scriptHandler.stdin.write(scriptObject.formData);
         }
 
         // Handle STDOUT:
@@ -78,8 +77,6 @@ exports.startScript = function(scriptObject) {
 
         // Handle STDERR:
         scriptHandler.stderr.on('data', function(data) {
-          console.log('camel-harness: ' + scriptObject.scriptFullPath +
-            ' STDERR:\n' + data.toString('utf8'));
           if (typeof scriptObject.stderrFunction === 'function') {
             scriptObject.stderrFunction(data.toString('utf8'));
           }
@@ -87,12 +84,6 @@ exports.startScript = function(scriptObject) {
 
         // Handle script errors:
         scriptHandler.on('error', function(errorCode) {
-          console.log('camel-harness: ' + scriptObject.scriptFullPath +
-            ' error stack:\n' + error.stack);
-          console.log('camel-harness: ' + scriptObject.scriptFullPath +
-            ' error code: ' + error.code);
-          console.log('camel-harness: ' + scriptObject.scriptFullPath +
-            ' signal: ' + error.signal);
           if (typeof scriptObject.errorFunction === 'function') {
             scriptObject.errorFunction(errorCode);
           }
@@ -107,8 +98,7 @@ exports.startScript = function(scriptObject) {
       }
     });
   } else {
-    console.log('camel-harness: ' +
-      'Interpreter, script full path or STDOUT handling function name ' +
-      'are not supplied.');
+    console.log('Perl interpreter, script full path or ' +
+                'STDOUT handling function name are not supplied.');
   }
 };
