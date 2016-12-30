@@ -4,10 +4,8 @@
 var os = require('os');
 var platform = os.platform();
 
-var path;
-if (platform !== "win32") {
-  path = require('path').posix;
-} else {
+var path = require('path').posix;
+if (platform === "win32") {
   path = require('path').win32;
 }
 
