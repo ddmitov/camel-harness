@@ -1,24 +1,14 @@
-language: node_js
-
-node_js:
-  - stable
-
 os:
   - linux
-
-env:
-  - PATH=/usr/bin
 
 sudo: required
 
 dist: trusty
 
 install:
+  - sudo apt-get -y install npm
   - sudo apt-get -y install perl
   - npm install
 
 script:
   - npm test
-
-notifications:
-  email: false
