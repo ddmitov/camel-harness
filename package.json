@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "nodejs test/camel-harness-test.js"
+    "test": "nodejs test/camel-harness-test.js",
+    "travis-test": "/usr/bin/nodejs test/camel-harness-test.js"
   },
   "repository": {
     "type": "git",
