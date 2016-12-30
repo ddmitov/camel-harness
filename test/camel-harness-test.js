@@ -1,4 +1,3 @@
-#!/usr/bin/env nodejs
 // camel-harness test
 
 // Load the camel-harness package:
