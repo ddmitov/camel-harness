@@ -12,7 +12,6 @@ dist: trusty
 
 install:
   - sudo apt-get -y install perl
-  - sudo apt-get -y install npm
   - npm install
 
 script:
