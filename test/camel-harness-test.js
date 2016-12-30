@@ -12,9 +12,9 @@ if (platform !== "win32") {
 }
 
 // Locate and load the camel-harness package:
-var camelHarnessDirectory = path.resolve(__dirname, '..');
-var camelHarnessFullPath = path.join(camelHarnessDirectory, "camel-harness.js");
-var camelHarness = require(camelHarnessFullPath);
+// var camelHarnessDirectory = path.resolve(__dirname, '..');
+// var camelHarnessFullPath = path.join(camelHarnessDirectory, "camel-harness.js");
+var camelHarness = require("../camel-harness.js");
 
 // Locate the Perl test script:
 var perlTestScriptFullPath = path.join(__dirname, "camel-harness-test.pl");

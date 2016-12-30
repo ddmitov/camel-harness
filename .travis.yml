@@ -19,4 +19,4 @@ script:
   - npm test
 
 notifications:
-  email: true
+  email: false
