@@ -7,16 +7,13 @@ sudo: required
 
 dist: trusty
 
-node_js:
-  - "6"
-  - "node"
-
 install:
   - sudo apt-get -y install perl
+  - sudo apt-get -y install npm
   - npm install
 
 script:
-- npm test
+  - npm test
 
 notifications:
   email: true
