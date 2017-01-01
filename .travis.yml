@@ -6,6 +6,9 @@ node_js:
 os:
   - linux
 
+env:
+  - PATH=$PATH:/home/travis/.nvm/versions/node/v7.3.0/bin/
+
 sudo: required
 
 dist: wheezy

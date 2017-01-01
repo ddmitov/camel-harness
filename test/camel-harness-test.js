@@ -14,10 +14,10 @@ if (platform !== "win32") {
   path = require('path').win32;
 }
 
-// Locate the Perl test script:
+// Compose the full path of the Perl test script:
 var perlTestScriptFullPath = path.join(__dirname, "camel-harness-test.pl");
 
-// Initialize Perl script object:
+// Initialize the Perl test script object:
 var perlTestScript = new Object();
 perlTestScript.interpreter = "perl";
 perlTestScript.scriptFullPath = perlTestScriptFullPath;

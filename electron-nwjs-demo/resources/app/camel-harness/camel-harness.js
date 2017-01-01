@@ -18,14 +18,13 @@
 // child_process
 // fs
 
-exports.startScript = function(scriptObject) {
+module.exports.startScript = function(scriptObject) {
   // Interpreter, full path of the script and
   // name of the STDOUT handling function
   // are mandatory function parameter object properties.
-  if (scriptObject.interpreter !== null ||
-    scriptObject.scriptFullPath !== null ||
-    (scriptObject.stdoutFunction !== null &&
-    typeof scriptObject.stdoutFunction === 'function')) {
+  if (scriptObject.interpreter !== undefined ||
+    scriptObject.scriptFullPath !== undefined ||
+    typeof scriptObject.stdoutFunction === 'function') {
     // Check if the supplied Perl script exists:
     const filesystemObject = require('fs');
     filesystemObject.access(scriptObject.scriptFullPath, function(error) {
@@ -35,7 +34,7 @@ exports.startScript = function(scriptObject) {
         // Set a clean environment for the supplied Perl script:
         var cleanEnvironment = {};
 
-        if (scriptObject.method !== null &&
+        if (scriptObject.method !== undefined &&
           (scriptObject.method === "GET" || scriptObject.method === "POST")) {
           if (scriptObject.formData  !== undefined &&
             scriptObject.formData.length > 0) {
