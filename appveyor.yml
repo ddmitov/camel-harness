@@ -10,6 +10,6 @@ install:
 test_script:
   - node --version
   - npm --version
-  - npm test
+  - npm ci-test
 
 build: off
