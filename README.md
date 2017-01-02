@@ -1,9 +1,12 @@
 camel-harness
 --------------------------------------------------------------------------------
+
 [![GitHub Version](https://img.shields.io/github/release/ddmitov/camel-harness.svg)](https://github.com/ddmitov/camel-harness/releases)
-[![GitHub License](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE.md) [![NPM Version](https://img.shields.io/npm/v/camel-harness.svg)](https://www.npmjs.com/package/camel-harness)
-[![Build Status](https://travis-ci.org/ddmitov/camel-harness.svg?branch=master)](https://travis-ci.org/ddmitov/camel-harness)
-[![Build Status](https://ci.appveyor.com/api/projects/status/github/ddmitov/camel-harness?branch=master&svg=true)](https://ci.appveyor.com/project/ddmitov/camel-harness)  
+[![GitHub License](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE.md)
+[![NPM Version](https://img.shields.io/npm/v/camel-harness.svg)](https://www.npmjs.com/package/camel-harness)
+[![Travis CI Build Status](https://travis-ci.org/ddmitov/camel-harness.svg?branch=master)](https://travis-ci.org/ddmitov/camel-harness)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ddmitov/camel-harness?branch=master&svg=true)](https://ci.appveyor.com/project/ddmitov/camel-harness)  
+
 ```camel-harness``` is a small [Node.js](http://nodejs.org/) - [Electron](http://electron.atom.io/) - [NW.js](http://nwjs.io/) library for asynchronous handling of [Perl 5](https://www.perl.org/) scripts.
 
 ## Quick Start
@@ -121,4 +124,4 @@ camelHarness.startScript(perlScript);
 ## [Thanks and Credits](./CREDITS.md)
 
 ## License
-MIT © 2016 Dimitar D. Mitov  
+MIT © 2016 - 2017 Dimitar D. Mitov  
