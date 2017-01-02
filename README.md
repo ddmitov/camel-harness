@@ -22,7 +22,7 @@ perlScript.interpreter = "perl";
 perlScript.scriptFullPath = "/test/test.pl";
 
 perlScript.stdoutFunction = function(stdout) {
-  document.getElementById("DOM-element-id").innerHTML = stdout;
+  console.log(stdout);
 };
 
 camelHarness.startScript(perlScript);
@@ -72,6 +72,8 @@ perlScript.exitFunction = function(exitCode) {
 }
 
 perlScript.method = "POST";
+
+var formData = $("#form-id").serialize();
 perlScript.formData = formData;
 
 camelHarness.startScript(perlScript);

@@ -26,5 +26,6 @@
   "bugs": {
     "url": "https://github.com/ddmitov/camel-harness/issues"
   },
-  "homepage": "https://github.com/ddmitov/camel-harness#readme"
+  "homepage": "https://github.com/ddmitov/camel-harness#readme",
+  "tonicExampleFilename": "tonic/example.js"
 }
