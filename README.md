@@ -4,7 +4,7 @@ camel-harness
 [![GitHub License](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE.md) [![NPM Version](https://img.shields.io/npm/v/camel-harness.svg)](https://www.npmjs.com/package/camel-harness)
 [![Build Status](https://travis-ci.org/ddmitov/camel-harness.svg?branch=master)](https://travis-ci.org/ddmitov/camel-harness)
 [![Build Status](https://ci.appveyor.com/api/projects/status/github/ddmitov/camel-harness?branch=master&svg=true)](https://ci.appveyor.com/project/ddmitov/camel-harness)  
-```camel-harness``` is a small [Node.js](http://nodejs.org/) - [Electron](http://electron.atom.io/) - [NW.js](http://nwjs.io/) library for handling of asynchronous [Perl 5](https://www.perl.org/) scripts.
+```camel-harness``` is a small [Node.js](http://nodejs.org/) - [Electron](http://electron.atom.io/) - [NW.js](http://nwjs.io/) library for asynchronous handling of [Perl 5](https://www.perl.org/) scripts.
 
 ## Quick Start
 * Install using one of the following commands:  
@@ -67,12 +67,6 @@ perlScript.stderrFunction = function(stderr) {
   console.log('Perl script STDERR:\n' + stderr);
 }
 
-perlScript.errorFunction = function(error) {
-  console.log(error.stack);
-  console.log('Perl script error code: ' + error.code);
-  console.log('Perl script received signal: ' + error.signal);
-}
-
 perlScript.exitFunction = function(exitCode) {
   console.log('Perl script exited with exit code ' + exitCode);
 }
@@ -85,34 +79,31 @@ camelHarness.startScript(perlScript);
 
   * **perlInterpreter:**  
   This is the full pathname of a Perl interpreter or just the filename of a Perl interpreter on PATH.  
-  This parameter is mandatory.  
+  This object property is mandatory.  
 
 * **scriptFullPath:**  
   This is the full path of the Perl script that is going to be executed.  
-  This parameter is mandatory.  
+  This object property is mandatory.  
 
 * **stdoutFunction:**  
   This is the name of the function that will be executed every time when output is available on STDOUT.  
-  The only argument passed to the ```stdoutFunction``` function is the ```stdout``` string.  
-  This parameter is mandatory.  
+  The only parameter passed to the ```stdoutFunction``` function is the ```stdout``` string.  
+  This object property is mandatory.  
 
 * **stderrFunction:**  
   This is the name of the function that will be executed every time when output is available on STDERR.  
-  The only argument passed to this function is the ```stderr``` string.  
-
-* **errorFunction:**  
-  This is the name of the function that will be executed to read errors from a Perl script.  
-  The only argument passed to this function is the ```error``` object.  
+  The only parameter passed to this function is the ```stderr``` string.  
 
 * **exitFunction:**  
   This is the name of the function that will be executed when a Perl script is finished.  
-  The only argument passed to this function is the ```exitCode``` string.  
+  The only parameter passed to this function is the ```exitCode``` string.  
 
 * **method:**  
-  ```GET``` or ```POST```
+  ```GET``` or ```POST```  
+  ```method``` is mandatory object property if ```formData``` is set.  
 
 * **formData:**  
-  ```formData``` is mandatory parameter if ```method``` is set.  
+  ```formData``` is mandatory object property if ```method``` is set.  
   ```camel-harness``` does not depend on [jQuery](https://jquery.com/), but it can be used for easy acquisition of form data:  
 
 ```javascript
@@ -123,7 +114,7 @@ camelHarness.startScript(perlScript);
 ```camel-harness``` is able to use any Perl interpreter - either a Perl interpreter on PATH or a Perl interpreter identified by its full pathname. [Strawberry Perl](http://strawberryperl.com/) PortableZIP edition distributed together with an [Electron](http://electron.atom.io/) or [NW.js](http://nwjs.io/) binary could also be used on a Windows machine.  
 
 ## Security
-```camel-harness``` executes all Perl scripts with the ```fork``` core function banned using the command line switch ```-M-ops=fork```. ```fork``` is banned to avoid orphan processes, which may be created if this function is carelessly used.  
+```camel-harness``` executes Perl scripts with the command line switch ```-M-ops=fork``` banning the ```fork``` core function. ```fork``` is banned to avoid orphan processes, which may be created if this function is carelessly used.  
 
 ## [Thanks and Credits](./CREDITS.md)
 

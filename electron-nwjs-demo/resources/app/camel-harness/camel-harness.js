@@ -1,5 +1,5 @@
 
-// camel-harness version 0.4.5
+// camel-harness version 0.4.6
 // Node.js - Electron - NW.js controller for Perl 5 scripts
 // camel-harness is licensed under the terms of the MIT license.
 // Copyright (c) 2016 Dimitar D. Mitov
@@ -19,7 +19,7 @@
 // fs
 
 module.exports.startScript = function(scriptObject) {
-  // Interpreter, full path of the script and
+  // Perl interpreter, full path of the Perl script and
   // name of the STDOUT handling function
   // are mandatory function parameter object properties.
   if (scriptObject.interpreter !== undefined ||
@@ -56,8 +56,8 @@ module.exports.startScript = function(scriptObject) {
         }
 
         if (scriptObject.method === undefined &&
-          (scriptObject.formData !== undefined &&
-          scriptObject.formData.length > 0)) {
+          scriptObject.formData !== undefined &&
+          scriptObject.formData.length > 0) {
           console.log('Form data is supplied, ' +
                       'but request method is not set.');
         }
@@ -73,6 +73,7 @@ module.exports.startScript = function(scriptObject) {
         // Send POST data to the Perl script:
         if (scriptObject.method !== undefined &&
           scriptObject.method === "POST" &&
+          scriptObject.formData !== undefined &&
           scriptObject.formData.length > 0) {
           scriptHandler.stdin.write(scriptObject.formData);
         }
@@ -86,13 +87,6 @@ module.exports.startScript = function(scriptObject) {
         scriptHandler.stderr.on('data', function(data) {
           if (typeof scriptObject.stderrFunction === 'function') {
             scriptObject.stderrFunction(data.toString('utf8'));
-          }
-        });
-
-        // Handle script errors:
-        scriptHandler.on('error', function(errorCode) {
-          if (typeof scriptObject.errorFunction === 'function') {
-            scriptObject.errorFunction(errorCode);
           }
         });
 

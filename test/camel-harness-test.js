@@ -23,8 +23,16 @@ perlTestScript.interpreter = "perl";
 perlTestScript.scriptFullPath = perlTestScriptFullPath;
 
 perlTestScript.stdoutFunction = function(stdout) {
-  console.log('camel-harness test: OK - using ' + stdout);
+  console.log('camel-harness STDOUT test: OK - using ' + stdout);
 };
+
+perlTestScript.stderrFunction = function(stderr) {
+  console.log('camel-harness STDERR test: OK - using ' + stderr);
+};
+
+perlTestScript.exitFunction = function(exitCode) {
+  console.log('camel-harness test script exited with exit code ' + exitCode);
+}
 
 // Start the Perl test script:
 camelHarness.startScript(perlTestScript);
