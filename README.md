@@ -7,7 +7,7 @@ camel-harness
 [![Travis CI Build Status](https://travis-ci.org/ddmitov/camel-harness.svg?branch=master)](https://travis-ci.org/ddmitov/camel-harness)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ddmitov/camel-harness?branch=master&svg=true)](https://ci.appveyor.com/project/ddmitov/camel-harness)  
 
-```camel-harness``` is a small [Node.js](http://nodejs.org/) - [Electron](http://electron.atom.io/) - [NW.js](http://nwjs.io/) library for asynchronous handling of [Perl 5](https://www.perl.org/) scripts.
+camel-harness is a small [Node.js](http://nodejs.org/) - [Electron](http://electron.atom.io/) - [NW.js](http://nwjs.io/) library for asynchronous handling of [Perl 5](https://www.perl.org/) scripts.
 
 ## Quick Start
 * Install using one of the following commands:  
@@ -34,23 +34,23 @@ camelHarness.startScript(perlScript);
 ## Electron Demo
 * Download the [camel-harness package](https://github.com/ddmitov/camel-harness).  
 * Download the [Electron binary package for your operating system](https://github.com/electron/electron/releases).  
-* Extract the downloaded ```camel-harness``` package.  
-* Extract the downloaded [Electron](http://electron.atom.io/) binary package inside the previously extracted ```camel-harness-master/electron-nwjs-demo``` folder. Confirm merging of the ```resources``` subfolder of [Electron](http://electron.atom.io/) with the ```resources``` subfolder of the demo.  
-* Start the [Electron](http://electron.atom.io/) binary.  
+* Extract the downloaded camel-harness package.  
+* Extract the downloaded Electron binary package inside the previously extracted ```camel-harness-master/electron-nwjs-demo``` folder. Confirm merging of the ```resources``` subfolder of Electron with the ```resources``` subfolder of the demo.  
+* Start the Electron binary.  
 
 ## NW.js Demo
 * Download the [camel-harness package](https://github.com/ddmitov/camel-harness).  
 * Download the [NW.js binary package for your operating system](http://nwjs.io/downloads/).  
-* Extract the downloaded [NW.js](http://nwjs.io/) binary package. It will create its own folder.  
-* Extract the downloaded ```camel-harness``` package and copy everything inside its ```camel-harness-master/electron-nwjs-demo``` subfolder in the folder of the [NW.js](http://nwjs.io/) binary.  
-* Start the [NW.js](http://nwjs.io/) binary.  
+* Extract the downloaded NW.js binary package. It will create its own folder.  
+* Extract the downloaded camel-harness package and copy everything inside its ```camel-harness-master/electron-nwjs-demo``` folder in the folder of the NW.js binary.  
+* Start the NW.js binary.  
 
 ## Core Dependencies
 * ```child_process```
 * ```fs```
 
 ## External Dependency
-The only external dependency of ```camel-harness``` is a Perl interpreter on PATH or any other Perl interpreter identified by its full pathname. ```camel-harness``` package test will fail if no Perl interpreter is available on PATH.
+The only external dependency of camel-harness is a Perl interpreter on PATH or any other Perl interpreter identified by its full pathname. camel-harness npm package test will fail if no ```perl``` binary is available on PATH.
 
 ## API
 
@@ -107,22 +107,22 @@ camelHarness.startScript(perlScript);
 
 * **interpreterSwitches:**  
   These are supplied to the Perl interpreter on runtime.  
-  The command switch ```-M-ops=fork``` disables the ```fork``` core function and it should be used to avoid orphan processes, which may be created if ```fork``` is carelessly used.  
+  The ```-M-ops=fork``` switch disables the ```fork``` core function. It could be applied as a precaution against orphan processes, which may be created if ```fork``` is carelessly used.  
 
 * **method:**  
-  ```GET``` or ```POST```  
-  ```method``` is mandatory object property if ```formData``` is set.  
+Only ```GET``` or ```POST``` are allowed.  
+This object property has no effect if ```formData``` is not set.  
 
 * **formData:**  
-  ```formData``` is mandatory object property if ```method``` is set.  
-  ```camel-harness``` does not depend on [jQuery](https://jquery.com/), but it can be used for easy acquisition of form data:  
+This object property has no effect if ```method``` is not set.  
+camel-harness does not depend on [jQuery](https://jquery.com/), but it can be used for easy acquisition of form data:  
 
 ```javascript
   var formData = $("#form-id").serialize();
 ```
 
 ## Perl Interpreter
-```camel-harness``` is able to use any Perl interpreter - either a Perl interpreter on PATH or a Perl interpreter identified by its full pathname. [Strawberry Perl](http://strawberryperl.com/) PortableZIP edition distributed together with an [Electron](http://electron.atom.io/) or [NW.js](http://nwjs.io/) binary could also be used on a Windows machine.  
+Any Perl interpreter is usable for camel-harness - either a Perl interpreter on PATH or a Perl interpreter identified by its full pathname. [Strawberry Perl](http://strawberryperl.com/) PortableZIP edition distributed together with an [Electron](http://electron.atom.io/) or [NW.js](http://nwjs.io/) binary could also be used on a Windows machine.  
 
 ## [Thanks and Credits](./CREDITS.md)
 
