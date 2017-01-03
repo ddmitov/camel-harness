@@ -1,5 +1,5 @@
 
-// camel-harness version 0.4.6
+// camel-harness version 0.5.0
 // Node.js - Electron - NW.js controller for Perl 5 scripts
 // camel-harness is licensed under the terms of the MIT license.
 // Copyright (c) 2016 - 2017 Dimitar D. Mitov
@@ -64,11 +64,22 @@ module.exports.startScript = function(scriptObject) {
 
         // Run the supplied Perl script:
         const spawn = require('child_process').spawn;
-        const scriptHandler =
-          spawn(scriptObject.interpreter,
-            ['-M-ops=fork', scriptObject.scriptFullPath],
-            {env: scriptEnvironment}
-          );
+        var scriptHandler;
+
+        if (scriptObject.interpreterSwitches !== undefined &&
+        scriptObject.interpreterSwitches.length > 0) {
+          scriptHandler =
+            spawn(scriptObject.interpreter,
+              [scriptObject.interpreterSwitches, scriptObject.scriptFullPath],
+              {env: scriptEnvironment}
+            );
+        } else {
+          scriptHandler =
+            spawn(scriptObject.interpreter,
+              [scriptObject.scriptFullPath],
+              {env: scriptEnvironment}
+            );
+        }
 
         // Send POST data to the Perl script:
         if (scriptObject.method !== undefined &&

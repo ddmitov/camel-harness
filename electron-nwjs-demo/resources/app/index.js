@@ -40,6 +40,7 @@ var versionScriptFullPath =
 var versionScript = new Object();
 versionScript.interpreter = "perl";
 versionScript.scriptFullPath = versionScriptFullPath;
+versionScript.interpreterSwitches = "-M-ops=fork";
 
 versionScript.stdoutFunction = function(stdout) {
   document.getElementById("version-script").innerHTML = stdout;
@@ -53,6 +54,7 @@ var counterScriptFullPath =
 var counterScriptOne = new Object();
 counterScriptOne.interpreter = "perl";
 counterScriptOne.scriptFullPath = counterScriptFullPath;
+counterScriptOne.interpreterSwitches = "-M-ops=fork";
 
 counterScriptOne.stdoutFunction = function(stdout) {
   document.getElementById("long-running-script-one").innerHTML = stdout;
@@ -62,6 +64,7 @@ counterScriptOne.stdoutFunction = function(stdout) {
 var counterScriptTwo = new Object();
 counterScriptTwo.interpreter = "perl";
 counterScriptTwo.scriptFullPath = counterScriptFullPath;
+counterScriptTwo.interpreterSwitches = "-M-ops=fork";
 
 counterScriptTwo.stdoutFunction = function(stdout) {
   document.getElementById("long-running-script-two").innerHTML = stdout;

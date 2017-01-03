@@ -74,6 +74,8 @@ perlScript.exitFunction = function(exitCode) {
   console.log('Perl script exited with exit code ' + exitCode);
 }
 
+perlScript.interpreterSwitches = "-M-ops=fork";
+
 perlScript.method = "POST";
 
 var formData = $("#form-id").serialize();
@@ -103,6 +105,10 @@ camelHarness.startScript(perlScript);
   This is the name of the function that will be executed when a Perl script is finished.  
   The only parameter passed to this function is the ```exitCode``` string.  
 
+* **interpreterSwitches:**  
+  These are supplied to the Perl interpreter on runtime.  
+  The command switch ```-M-ops=fork``` disables the ```fork``` core function and it should be used to avoid orphan processes, which may be created if ```fork``` is carelessly used.  
+
 * **method:**  
   ```GET``` or ```POST```  
   ```method``` is mandatory object property if ```formData``` is set.  
@@ -117,9 +123,6 @@ camelHarness.startScript(perlScript);
 
 ## Perl Interpreter
 ```camel-harness``` is able to use any Perl interpreter - either a Perl interpreter on PATH or a Perl interpreter identified by its full pathname. [Strawberry Perl](http://strawberryperl.com/) PortableZIP edition distributed together with an [Electron](http://electron.atom.io/) or [NW.js](http://nwjs.io/) binary could also be used on a Windows machine.  
-
-## Security
-```camel-harness``` executes Perl scripts with the command line switch ```-M-ops=fork``` banning the ```fork``` core function. ```fork``` is banned to avoid orphan processes, which may be created if this function is carelessly used.  
 
 ## [Thanks and Credits](./CREDITS.md)
 
