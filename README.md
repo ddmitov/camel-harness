@@ -74,7 +74,7 @@ perlScript.exitFunction = function(exitCode) {
   console.log('Perl script exited with exit code ' + exitCode);
 }
 
-perlScript.interpreterSwitches = "-M-ops=fork";
+perlScript.interpreterSwitch = "-M-ops=fork";
 
 perlScript.method = "POST";
 
@@ -105,9 +105,9 @@ camelHarness.startScript(perlScript);
   This is the name of the function that will be executed when a Perl script is finished.  
   The only parameter passed to this function is the ```exitCode``` string.  
 
-* **interpreterSwitches:**  
-  These are supplied to the Perl interpreter on runtime.  
-  The ```-M-ops=fork``` switch disables the ```fork``` core function. It could be applied as a precaution against orphan processes, which may be created if ```fork``` is carelessly used.  
+* **interpreterSwitch:**  
+  It is supplied to the Perl interpreter on runtime. No spaces are allowed!  
+  The ```-M-ops=fork``` switch disables the ```fork``` core function, thus minimizing the chances of leaving orphaned Perl processes after a [Node.js](http://nodejs.org/) - [Electron](http://electron.atom.io/) - [NW.js](http://nwjs.io/) process is terminated.  
 
 * **method:**  
 Only ```GET``` or ```POST``` are allowed.  

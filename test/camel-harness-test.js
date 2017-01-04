@@ -24,11 +24,11 @@ perlTestScript.scriptFullPath = perlTestScriptFullPath;
 perlTestScript.interpreterSwitches = "-M-ops=fork";
 
 perlTestScript.stdoutFunction = function(stdout) {
-  console.log('camel-harness STDOUT test: OK - using ' + stdout);
+  console.log('camel-harness STDOUT test: ' + stdout);
 };
 
 perlTestScript.stderrFunction = function(stderr) {
-  console.log('camel-harness STDERR test: OK - using ' + stderr);
+  console.log('camel-harness STDERR test: ' + stderr);
 };
 
 perlTestScript.exitFunction = function(exitCode) {

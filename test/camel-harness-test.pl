@@ -4,6 +4,6 @@ use strict;
 use warnings;
 use English;
 
-print "Perl $PERL_VERSION";
+print "OK - using Perl $PERL_VERSION";
 
-print STDERR "Perl $PERL_VERSION";
+print STDERR "OK - using Perl $PERL_VERSION";
