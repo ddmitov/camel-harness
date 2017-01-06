@@ -29,7 +29,7 @@ module.exports.startScript = function(scriptObject) {
   if (scriptObject.interpreter !== undefined ||
     scriptObject.scriptFullPath !== undefined ||
     typeof scriptObject.stdoutFunction === 'function') {
-    // Check if the supplied Perl script exists:
+    // Check if the supplied script exists:
     filesystemObject.access(scriptObject.scriptFullPath, function(error) {
       if (error && error.code === 'ENOENT') {
         console.log(scriptObject.scriptFullPath + ' was not found.');
@@ -37,17 +37,17 @@ module.exports.startScript = function(scriptObject) {
         var scriptEnvironment = process.env;
 
         if (scriptObject.method !== undefined &&
-          (scriptObject.method === "GET" || scriptObject.method === "POST")) {
+          (scriptObject.method === 'GET' || scriptObject.method === 'POST')) {
           if (scriptObject.formData !== undefined &&
             scriptObject.formData.length > 0) {
             // Handle GET requests:
-            if (scriptObject.method === "GET") {
+            if (scriptObject.method === 'GET') {
               scriptEnvironment['REQUEST_METHOD'] = 'GET';
               scriptEnvironment['QUERY_STRING'] = scriptObject.formData;
             }
 
             // Handle POST requests:
-            if (scriptObject.method === "POST") {
+            if (scriptObject.method === 'POST') {
               scriptEnvironment['REQUEST_METHOD'] = 'POST';
               scriptEnvironment['CONTENT_LENGTH'] =
                 scriptObject.formData.length;
@@ -78,28 +78,34 @@ module.exports.startScript = function(scriptObject) {
           scriptObject.interpreterSwitches.replace(/\n/g,   '\\n');
           scriptObject.interpreterSwitches.replace(/\f/g,   '\\f');
           scriptObject.interpreterSwitches.replace(/\r/g,   '\\r');
-          // Whitespaces separate
-          // the different interpreter switches from one another:
+          // Whitespaces separate interpreter switches from one another:
           interpreterArguments =
-            scriptObject.interpreterSwitches.split(RegExp("\s*"));
+            scriptObject.interpreterSwitches.split(/\s{1,}/);
         }
         // The full path of the script is the minimal interpreter argument:
         interpreterArguments.push(scriptObject.scriptFullPath);
 
-        // Run the supplied Perl script:
+        // Run the supplied script:
         scriptObject.scriptHandler =
           spawn(scriptObject.interpreter,
             interpreterArguments,
             {env: scriptEnvironment}
           );
 
-        // Send POST data to the Perl script:
+        // Send POST data to the script:
         if (scriptObject.method !== undefined &&
-          scriptObject.method === "POST" &&
+          scriptObject.method === 'POST' &&
           scriptObject.formData !== undefined &&
           scriptObject.formData.length > 0) {
           scriptObject.scriptHandler.stdin.write(scriptObject.formData);
         }
+
+        // Log script handler errors:
+      scriptObject.scriptHandler.on('error', function(error) {
+        console.log('camel-harness error stack: ' + error.stack);
+        console.log('camel-harness error code: ' + error.code);
+        console.log('camel-harness received signal: ' + error.signal);
+      });
 
         // Handle STDOUT:
         scriptObject.scriptHandler.stdout.on('data', function(data) {
