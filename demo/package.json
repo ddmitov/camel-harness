@@ -1,6 +1,6 @@
 {
   "name": "camel-harness-demo-nw.js",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "camel-harness nw.js demo",
   "keywords": [
     "perl",
@@ -19,7 +19,7 @@
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/ddmitov/camel-harness/blob/master/LICENSE.md",
+      "url": "https://github.com/ddmitov/camel-harness/blob/master/LICENSE.md"
     }
   ],
   "repositories": [

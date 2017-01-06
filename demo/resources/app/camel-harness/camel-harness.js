@@ -1,5 +1,6 @@
+'use strict';
 
-// camel-harness version 0.5.1
+// camel-harness version 0.6.0
 // Node.js - Electron - NW.js controller for Perl 5 scripts
 // camel-harness is licensed under the terms of the MIT license.
 // Copyright (c) 2016 - 2017 Dimitar D. Mitov
@@ -18,6 +19,9 @@
 // child_process
 // fs
 
+const spawn = require('child_process').spawn;
+const filesystemObject = require('fs');
+
 module.exports.startScript = function(scriptObject) {
   // Perl interpreter, full path of the Perl script and
   // name of the STDOUT handling function
@@ -26,7 +30,6 @@ module.exports.startScript = function(scriptObject) {
     scriptObject.scriptFullPath !== undefined ||
     typeof scriptObject.stdoutFunction === 'function') {
     // Check if the supplied Perl script exists:
-    const filesystemObject = require('fs');
     filesystemObject.access(scriptObject.scriptFullPath, function(error) {
       if (error && error.code === 'ENOENT') {
         console.log(scriptObject.scriptFullPath + ' was not found.');
@@ -62,47 +65,56 @@ module.exports.startScript = function(scriptObject) {
                       'but request method is not set.');
         }
 
-        // Run the supplied Perl script:
-        const spawn = require('child_process').spawn;
-        var scriptHandler;
-
-        if (scriptObject.interpreterSwitch !== undefined &&
-        scriptObject.interpreterSwitch.length > 0) {
-          scriptHandler =
-            spawn(scriptObject.interpreter,
-              [scriptObject.interpreterSwitch, scriptObject.scriptFullPath],
-              {env: scriptEnvironment}
-            );
-        } else {
-          scriptHandler =
-            spawn(scriptObject.interpreter,
-              [scriptObject.scriptFullPath],
-              {env: scriptEnvironment}
-            );
+        // Handle any interpreter switches:
+        var interpreterArguments =[]; // they must be an array, not a string!
+        if (scriptObject.interpreterSwitches !== undefined &&
+        scriptObject.interpreterSwitches.length > 0) {
+          // Escape any special characters:
+          scriptObject.interpreterSwitches.replace(/\\/g,   '\\\\');
+          scriptObject.interpreterSwitches.replace(/'/g,    '\\\'');
+          scriptObject.interpreterSwitches.replace(/"/g,    '\\"');
+          scriptObject.interpreterSwitches.replace(/\x08/g, '\\b');
+          scriptObject.interpreterSwitches.replace(/\t/g,   '\\t');
+          scriptObject.interpreterSwitches.replace(/\n/g,   '\\n');
+          scriptObject.interpreterSwitches.replace(/\f/g,   '\\f');
+          scriptObject.interpreterSwitches.replace(/\r/g,   '\\r');
+          // Whitespaces separate
+          // the different interpreter switches from one another:
+          interpreterArguments =
+            scriptObject.interpreterSwitches.split(RegExp("\s*"));
         }
+        // The full path of the script is the minimal interpreter argument:
+        interpreterArguments.push(scriptObject.scriptFullPath);
+
+        // Run the supplied Perl script:
+        scriptObject.scriptHandler =
+          spawn(scriptObject.interpreter,
+            interpreterArguments,
+            {env: scriptEnvironment}
+          );
 
         // Send POST data to the Perl script:
         if (scriptObject.method !== undefined &&
           scriptObject.method === "POST" &&
           scriptObject.formData !== undefined &&
           scriptObject.formData.length > 0) {
-          scriptHandler.stdin.write(scriptObject.formData);
+          scriptObject.scriptHandler.stdin.write(scriptObject.formData);
         }
 
         // Handle STDOUT:
-        scriptHandler.stdout.on('data', function(data) {
+        scriptObject.scriptHandler.stdout.on('data', function(data) {
           scriptObject.stdoutFunction(data.toString('utf8'));
         });
 
         // Handle STDERR:
-        scriptHandler.stderr.on('data', function(data) {
+        scriptObject.scriptHandler.stderr.on('data', function(data) {
           if (typeof scriptObject.stderrFunction === 'function') {
             scriptObject.stderrFunction(data.toString('utf8'));
           }
         });
 
         // Handle script exit:
-        scriptHandler.on('exit', function(exitCode) {
+        scriptObject.scriptHandler.on('exit', function(exitCode) {
           if (typeof scriptObject.exitFunction === 'function') {
             scriptObject.exitFunction(exitCode);
           }

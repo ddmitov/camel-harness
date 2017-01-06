@@ -11,10 +11,8 @@ camel-harness
 camel-harness is a small [Node.js](http://nodejs.org/) - [Electron](http://electron.atom.io/) - [NW.js](http://nwjs.io/) library for asynchronous handling of [Perl 5](https://www.perl.org/) scripts.
 
 ## Quick Start
-* Install using one of the following commands:  
-
-```npm install camel-harness```  
-```npm install git+https://github.com/ddmitov/camel-harness.git```  
+* Install from npm: ```npm install camel-harness``` or  
+  install from GitHub: ```npm install git+https://github.com/ddmitov/camel-harness.git```  
 
 * Use from code:
 
@@ -75,7 +73,7 @@ perlScript.exitFunction = function(exitCode) {
   console.log('Perl script exited with exit code ' + exitCode);
 }
 
-perlScript.interpreterSwitch = "-M-ops=fork";
+perlScript.interpreterSwitches = "-M-ops=fork";
 
 perlScript.method = "POST";
 
@@ -106,9 +104,9 @@ camelHarness.startScript(perlScript);
   This is the name of the function that will be executed when a Perl script is finished.  
   The only parameter passed to this function is the ```exitCode``` string.  
 
-* **interpreterSwitch:**  
-  It is supplied to the Perl interpreter on runtime. No spaces are allowed!  
-  The ```-M-ops=fork``` switch disables the ```fork``` core function, thus minimizing the chances of leaving orphaned Perl processes after a [Node.js](http://nodejs.org/) - [Electron](http://electron.atom.io/) - [NW.js](http://nwjs.io/) process is terminated.  
+* **interpreterSwitches:**  
+  They are supplied to the Perl interpreter on runtime.  
+  The ```-M-ops=fork``` switch disables the Perl ```fork``` core function and could be used to minimize the chances of leaving orphaned Perl processes after a [Node.js](http://nodejs.org/) - [Electron](http://electron.atom.io/) - [NW.js](http://nwjs.io/) process is terminated.  
 
 * **method:**  
 Only ```GET``` or ```POST``` are allowed.  

@@ -55,6 +55,26 @@
         </a>
       </div>
     </p>
+
+    <p>
+      <form id="interactive-script-form">
+        <input type="text" id="interactive-script-input" name="input"
+          placeholder="Interactive Script Input">
+        <input type="button" value="Send Data"
+          onclick="sendDataToInteractiveScript(); return false;">
+        <input type="reset" value="Reset">
+      </form>
+    </p>
+
+    <p>
+      <div id="interactive-script-output"></div>
+    </p>
+
+    <script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", function(event) {
+        startInteractiveScript();
+      });
+    </script>
   </body>
 
 </html>

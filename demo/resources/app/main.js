@@ -8,6 +8,9 @@ const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
 
+// Module to communicate with the render process:
+const ipcMain = require('electron').ipcMain;
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
@@ -26,7 +29,23 @@ function createWindow () {
   mainWindow.loadURL('file://' + __dirname + '/index.html');
 
   // Open the DevTools:
-  //mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
+
+  var clearToClose = false;
+  ipcMain.on('asynchronous-message', function(event, arg) {
+    if (arg == "close") {
+      clearToClose = true;
+      mainWindow.close();
+    }
+  });
+
+  // Emitted when the window is closed:
+  mainWindow.on('close', function(event) {
+    if (clearToClose == false) {
+      event.preventDefault();
+      mainWindow.webContents.send('closeInteractiveScript');
+    }
+  });
 }
 
 // This method will be called when Electron has finished

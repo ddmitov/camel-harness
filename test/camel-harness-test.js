@@ -1,4 +1,6 @@
-// camel-harness test
+'use strict';
+
+// camel-harness npm test
 
 // Load the camel-harness package:
 var camelHarness = require("../camel-harness.js");

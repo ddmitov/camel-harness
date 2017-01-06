@@ -1,7 +1,12 @@
+'use strict';
+
 // camel-harness demo for Electron and NW.js
 
 // Load the camel-harness package:
 var camelHarness = require('./camel-harness/camel-harness.js');
+
+// NW.js compatible code:
+var nwCloseWindow = false;
 
 // Determine the operating system and initialize 'path' object:
 var os = require('os');
@@ -21,7 +26,7 @@ var binaryDirectory = path.dirname(binaryPath);
 // Get the full path of the application root directory:
 var applicationDirectory = path.join(binaryDirectory, "resources", "app");
 
-// Determine Perl interpreter:
+// Perl interpreter:
 var perlInterpreter = "perl";
 if (platform === "win32") {
   // Check for a portable Perl interpreter:
@@ -69,3 +74,66 @@ counterScriptTwo.interpreterSwitches = "-M-ops=fork";
 counterScriptTwo.stdoutFunction = function(stdout) {
   document.getElementById("long-running-script-two").innerHTML = stdout;
 };
+
+// interactive script:
+const interactiveScriptInstance = require('./camel-harness/camel-harness.js');
+var interactiveScript = new Object();
+
+function startInteractiveScript() {
+  var interactiveScriptFullPath =
+      path.join(applicationDirectory, "perl", "interactive.pl");
+
+  interactiveScript.interpreter = "perl";
+  interactiveScript.scriptFullPath = interactiveScriptFullPath;
+
+  interactiveScript.stdoutFunction = function(stdout) {
+    if (stdout.match(/_closed_/)) {
+      // Electron compatible code:
+      if (navigator.userAgent.match(/Electron/)) {
+        const {ipcRenderer} = require('electron');
+        ipcRenderer.send('asynchronous-message', 'close');
+      }
+      // NW.js compatible code:
+      if (typeof(nw) !== 'undefined') {
+        nwCloseWindow = true;
+        var nwWindow = nw.Window.get();
+        nwWindow.close();
+      }
+    } else {
+      document.getElementById("interactive-script-output").innerHTML = stdout;
+    }
+  };
+
+  interactiveScriptInstance.startScript(interactiveScript);
+}
+
+function sendDataToInteractiveScript() {
+  var data = document.getElementById("interactive-script-input").value;
+  interactiveScript.scriptHandler.stdin.write(data + "\n");
+}
+
+function closeInteractiveScript() {
+  interactiveScript.scriptHandler.stdin.write("_close_\n");
+}
+
+// Electron compatible code:
+if (navigator.userAgent.match(/Electron/)) {
+  // Wait for close event message from the main process and react accordingly:
+  require('electron').ipcRenderer.on('closeInteractiveScript', function() {
+    closeInteractiveScript();
+  });
+}
+
+// NW.js compatible code:
+if (typeof(nw) !== 'undefined') {
+  var nwWindow = nw.Window.get();
+
+  nwWindow.on('close', function() {
+    if (nwCloseWindow === false) {
+      nwWindow.close(false);
+      closeInteractiveScript();
+    } else {
+      nwWindow.close(true);
+    }
+  });
+}
