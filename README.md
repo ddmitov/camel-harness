@@ -11,23 +11,23 @@ camel-harness
 camel-harness is a small [Node.js](http://nodejs.org/) - [Electron](http://electron.atom.io/) - [NW.js](http://nwjs.io/) library for asynchronous handling of [Perl 5](https://www.perl.org/) scripts.
 
 ## Quick Start
-* Install from npm: ```npm install camel-harness``` or  
-  install from GitHub: ```npm install git+https://github.com/ddmitov/camel-harness.git```  
+* Install from npm: ```npm install camel-harness```  
+  or install from GitHub: ```npm install git+https://github.com/ddmitov/camel-harness.git```  
 
 * Use from code:
 
 ```javascript
-var camelHarness = require('camel-harness');
+const camelHarness = require('camel-harness');
 
-var perlScript = new Object();
-perlScript.interpreter = "perl";
-perlScript.scriptFullPath = "/test/test.pl";
+var perlScriptObject = new Object();
+perlScriptObject.interpreter = 'perl';
+perlScriptObject.scriptFullPath = '/test/test.pl';
 
-perlScript.stdoutFunction = function(stdout) {
+perlScriptObject.stdoutFunction = function(stdout) {
   console.log(stdout);
 };
 
-camelHarness.startScript(perlScript);
+camelHarness.startScript(perlScriptObject);
 ```
 
 ## Electron Demo
@@ -54,33 +54,33 @@ The only external dependency of camel-harness is a Perl interpreter on PATH or a
 ## API
 
 ```javascript
-var camelHarness = require('camel-harness');
+const camelHarness = require('camel-harness');
 
-var perlScript = new Object();
-perlScript.interpreter = "perl"; // mandatory object property
-perlScript.scriptFullPath = "/test/test.pl"; // mandatory object property
+var perlScriptObject = new Object();
+perlScriptObject.interpreter = 'perl'; // mandatory object property
+perlScriptObject.scriptFullPath = '/test/test.pl'; // mandatory object property
 
 // mandatory object property:
-perlScript.stdoutFunction = function(stdout) {
-  document.getElementById("DOM-element-id").innerHTML = stdout;
+perlScriptObject.stdoutFunction = function(stdout) {
+  document.getElementById('DOM-element-id').innerHTML = stdout;
 };
 
-perlScript.stderrFunction = function(stderr) {
+perlScriptObject.stderrFunction = function(stderr) {
   console.log('Perl script STDERR:\n' + stderr);
 }
 
-perlScript.exitFunction = function(exitCode) {
+perlScriptObject.exitFunction = function(exitCode) {
   console.log('Perl script exited with exit code ' + exitCode);
 }
 
-perlScript.interpreterSwitches = "-M-ops=fork";
+perlScriptObject.interpreterSwitches = '-M-ops=fork';
 
-perlScript.method = "POST";
+perlScriptObject.method = 'POST';
 
-var formData = $("#form-id").serialize();
-perlScript.formData = formData;
+var formData = $('#form-id').serialize();
+perlScriptObject.formData = formData;
 
-camelHarness.startScript(perlScript);
+camelHarness.startScript(perlScriptObject);
 ```
 
   * **perlInterpreter:**  
@@ -109,16 +109,25 @@ camelHarness.startScript(perlScript);
   The ```-M-ops=fork``` switch disables the Perl ```fork``` core function and could be used to minimize the chances of leaving orphaned Perl processes after a [Node.js](http://nodejs.org/) - [Electron](http://electron.atom.io/) - [NW.js](http://nwjs.io/) process is terminated.  
 
 * **method:**  
-Only ```GET``` or ```POST``` are allowed.  
-This object property has no effect if ```formData``` is not set.  
+  Only ```GET``` or ```POST``` are allowed.  
+  This object property has no effect if ```formData``` is not set.  
 
 * **formData:**  
-This object property has no effect if ```method``` is not set.  
-camel-harness does not depend on [jQuery](https://jquery.com/), but it can be used for easy acquisition of form data:  
+  This object property has no effect if ```method``` is not set.  
+  camel-harness does not depend on [jQuery](https://jquery.com/), but it can be used for easy acquisition of form data:  
 
 ```javascript
-  var formData = $("#form-id").serialize();
+  var formData = $('#form-id').serialize();
 ```
+## Interactive Scripts
+camel-harness can also start and communicate with interactive scripts having their own event loops and capable of repeatedly receiving STDIN input. Use the following code to send data to the standard input of an interactive script waiting for data on STDIN:
+
+```javascript
+var data = document.getElementById('interactive-script-input').value;
+perlScriptObject.scriptHandler.stdin.write(data + '\n');
+```
+
+This package includes a small demo application for [Electron](http://electron.atom.io/) and [NW.js](http://nwjs.io/) featuring a simple Perl script waiting constantly for data on STDIN. Data can be sent to this script at any time from the HTML interface of the demo. Perl on PATH with the ```AnyEvent``` Perl module have to be available for the demo.  
 
 ## Perl Interpreter
 Any Perl interpreter is usable for camel-harness - either a Perl interpreter on PATH or a Perl interpreter identified by its full pathname. [Strawberry Perl](http://strawberryperl.com/) PortableZIP edition distributed together with an [Electron](http://electron.atom.io/) or [NW.js](http://nwjs.io/) binary could also be used on a Windows machine.  

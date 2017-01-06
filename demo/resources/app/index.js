@@ -3,7 +3,7 @@
 // camel-harness demo for Electron and NW.js
 
 // Load the camel-harness package:
-var camelHarness = require('./camel-harness/camel-harness.js');
+const camelHarness = require('./camel-harness/camel-harness.js');
 
 // NW.js compatible code:
 var nwCloseWindow = false;
@@ -13,7 +13,7 @@ var os = require('os');
 var platform = os.platform();
 
 var path;
-if (platform !== "win32") {
+if (platform !== 'win32') {
   path = require('path').posix;
 } else {
   path = require('path').win32;
@@ -24,14 +24,14 @@ var binaryPath = process.execPath;
 var binaryDirectory = path.dirname(binaryPath);
 
 // Get the full path of the application root directory:
-var applicationDirectory = path.join(binaryDirectory, "resources", "app");
+var applicationDirectory = path.join(binaryDirectory, 'resources', 'app');
 
 // Perl interpreter:
-var perlInterpreter = "perl";
-if (platform === "win32") {
+var perlInterpreter = 'perl';
+if (platform === 'win32') {
   // Check for a portable Perl interpreter:
   var portablePerl =
-      path.join(binaryDirectory, "perl", "bin", "perl.exe");
+      path.join(binaryDirectory, 'perl', 'bin', 'perl.exe');
   var filesystem = require('fs');
   if (filesystem.existsSync(portablePerl)) {
     perlInterpreter = portablePerl;
@@ -40,53 +40,52 @@ if (platform === "win32") {
 
 // version.pl:
 var versionScriptFullPath =
-    path.join(applicationDirectory, "perl", "version.pl");
+    path.join(applicationDirectory, 'perl', 'version.pl');
 
-var versionScript = new Object();
-versionScript.interpreter = "perl";
-versionScript.scriptFullPath = versionScriptFullPath;
-versionScript.interpreterSwitches = "-M-ops=fork";
+var versionScriptObject = new Object();
+versionScriptObject.interpreter = 'perl';
+versionScriptObject.scriptFullPath = versionScriptFullPath;
+versionScriptObject.interpreterSwitches = '-M-ops=fork';
 
-versionScript.stdoutFunction = function(stdout) {
-  document.getElementById("version-script").innerHTML = stdout;
+versionScriptObject.stdoutFunction = function(stdout) {
+  document.getElementById('version-script').innerHTML = stdout;
 };
 
 // counter.pl full path:
 var counterScriptFullPath =
-    path.join(applicationDirectory, "perl", "counter.pl");
+    path.join(applicationDirectory, 'perl', 'counter.pl');
 
 // counter.pl - first instance:
-var counterScriptOne = new Object();
-counterScriptOne.interpreter = "perl";
-counterScriptOne.scriptFullPath = counterScriptFullPath;
-counterScriptOne.interpreterSwitches = "-M-ops=fork";
+var counterOneObject = new Object();
+counterOneObject.interpreter = 'perl';
+counterOneObject.scriptFullPath = counterScriptFullPath;
+counterOneObject.interpreterSwitches = '-M-ops=fork';
 
-counterScriptOne.stdoutFunction = function(stdout) {
-  document.getElementById("long-running-script-one").innerHTML = stdout;
+counterOneObject.stdoutFunction = function(stdout) {
+  document.getElementById('long-running-script-one').innerHTML = stdout;
 };
 
 // counter.pl - second instance:
-var counterScriptTwo = new Object();
-counterScriptTwo.interpreter = "perl";
-counterScriptTwo.scriptFullPath = counterScriptFullPath;
-counterScriptTwo.interpreterSwitches = "-M-ops=fork";
+var counterTwoObject = new Object();
+counterTwoObject.interpreter = 'perl';
+counterTwoObject.scriptFullPath = counterScriptFullPath;
+counterTwoObject.interpreterSwitches = '-M-ops=fork';
 
-counterScriptTwo.stdoutFunction = function(stdout) {
-  document.getElementById("long-running-script-two").innerHTML = stdout;
+counterTwoObject.stdoutFunction = function(stdout) {
+  document.getElementById('long-running-script-two').innerHTML = stdout;
 };
 
 // interactive script:
-const interactiveScriptInstance = require('./camel-harness/camel-harness.js');
-var interactiveScript = new Object();
+var interactiveScriptObject = new Object();
 
 function startInteractiveScript() {
   var interactiveScriptFullPath =
-      path.join(applicationDirectory, "perl", "interactive.pl");
+      path.join(applicationDirectory, 'perl', 'interactive.pl');
 
-  interactiveScript.interpreter = "perl";
-  interactiveScript.scriptFullPath = interactiveScriptFullPath;
+  interactiveScriptObject.interpreter = 'perl';
+  interactiveScriptObject.scriptFullPath = interactiveScriptFullPath;
 
-  interactiveScript.stdoutFunction = function(stdout) {
+  interactiveScriptObject.stdoutFunction = function(stdout) {
     if (stdout.match(/_closed_/)) {
       // Electron compatible code:
       if (navigator.userAgent.match(/Electron/)) {
@@ -100,20 +99,20 @@ function startInteractiveScript() {
         nwWindow.close();
       }
     } else {
-      document.getElementById("interactive-script-output").innerHTML = stdout;
+      document.getElementById('interactive-script-output').innerHTML = stdout;
     }
   };
 
-  interactiveScriptInstance.startScript(interactiveScript);
+  camelHarness.startScript(interactiveScriptObject);
 }
 
 function sendDataToInteractiveScript() {
-  var data = document.getElementById("interactive-script-input").value;
-  interactiveScript.scriptHandler.stdin.write(data + "\n");
+  var data = document.getElementById('interactive-script-input').value;
+  interactiveScriptObject.scriptHandler.stdin.write(data + '\n');
 }
 
 function closeInteractiveScript() {
-  interactiveScript.scriptHandler.stdin.write("_close_\n");
+  interactiveScriptObject.scriptHandler.stdin.write('_close_\n');
 }
 
 // Electron compatible code:

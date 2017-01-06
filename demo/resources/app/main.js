@@ -17,7 +17,7 @@ let mainWindow;
 
 function createWindow () {
   // Set the icon path:
-  var iconFullPath = __dirname + ".png";
+  var iconFullPath = __dirname + '.png';
 
   // Create the browser window:
   mainWindow = new BrowserWindow({icon: iconFullPath});
@@ -31,15 +31,16 @@ function createWindow () {
   // Open the DevTools:
   // mainWindow.webContents.openDevTools();
 
+  // Close the window when 'close' message arrives:
   var clearToClose = false;
   ipcMain.on('asynchronous-message', function(event, arg) {
-    if (arg == "close") {
+    if (arg == 'close') {
       clearToClose = true;
       mainWindow.close();
     }
   });
 
-  // Emitted when the window is closed:
+  // Emitted when window closing is attempted:
   mainWindow.on('close', function(event) {
     if (clearToClose == false) {
       event.preventDefault();
