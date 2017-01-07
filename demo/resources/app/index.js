@@ -84,6 +84,7 @@ function startInteractiveScript() {
 
   interactiveScriptObject.interpreter = 'perl';
   interactiveScriptObject.scriptFullPath = interactiveScriptFullPath;
+  interactiveScriptObject.interpreterSwitches = '-M-ops=fork';
 
   interactiveScriptObject.stdoutFunction = function(stdout) {
     if (stdout.match(/_closed_/)) {
