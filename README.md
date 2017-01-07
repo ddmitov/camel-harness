@@ -12,7 +12,7 @@ camel-harness is a small [Node.js](http://nodejs.org/) - [Electron](http://elect
 
 ## Quick Start
 ``npm install camel-harness``  
-  
+
 ```javascript
 const camelHarness = require('camel-harness');
 
@@ -54,8 +54,10 @@ The only external dependency of camel-harness is a Perl interpreter on PATH or a
 const camelHarness = require('camel-harness');
 
 var perlScriptObject = new Object();
-perlScriptObject.interpreter = 'perl'; // mandatory object property
-perlScriptObject.scriptFullPath = '/test/test.pl'; // mandatory object property
+ // mandatory object property
+perlScriptObject.interpreter = 'perl';
+ // mandatory object property
+perlScriptObject.scriptFullPath = '/test/test.pl';
 
 // mandatory object property:
 perlScriptObject.stdoutFunction = function(stdout) {
