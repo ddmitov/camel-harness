@@ -118,6 +118,7 @@ camelHarness.startScript(perlScriptObject);
   ```javascript
   var formData = $('#form-id').serialize();
   ```
+
 ## Interactive Scripts
 camel-harness can also start and communicate with interactive scripts having their own event loops and capable of repeatedly receiving STDIN input. Use the following code to send data to the standard input of an interactive script waiting for data on STDIN:
 
@@ -126,7 +127,7 @@ var data = document.getElementById('interactive-script-input').value;
 perlScriptObject.scriptHandler.stdin.write(data + '\n');
 ```
 
-This package includes a small demo application for [Electron](http://electron.atom.io/) and [NW.js](http://nwjs.io/) featuring a simple Perl script waiting constantly for data on STDIN. Data can be sent to this script at any time from the HTML interface of the demo. Perl with the ``AnyEvent`` Perl module has to be available for the demo interactive script.  
+This package includes a demo application for [Electron](http://electron.atom.io/) and [NW.js](http://nwjs.io/) featuring a Perl script that can be constantly fed with data from an HTML interface. Perl with the ``AnyEvent`` Perl module has to be available on PATH or in a folder named ``perl`` in the directory of the [Electron](http://electron.atom.io/) or [NW.js](http://nwjs.io/) binary.  
 
 ## Perl Interpreter
 Any Perl interpreter is usable for camel-harness - either a Perl interpreter on PATH or a Perl interpreter identified by its full pathname. [Strawberry Perl](http://strawberryperl.com/) PortableZIP edition distributed together with an [Electron](http://electron.atom.io/) or [NW.js](http://nwjs.io/) binary could also be used on a Windows machine.  
