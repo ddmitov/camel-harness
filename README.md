@@ -127,7 +127,7 @@ var data = document.getElementById('interactive-script-input').value;
 perlScriptObject.scriptHandler.stdin.write(data + '\n');
 ```
 
-This package includes a demo application for [Electron](http://electron.atom.io/) and [NW.js](http://nwjs.io/) featuring a Perl script that can be constantly fed with data from an HTML interface. Perl with the ``AnyEvent`` Perl module has to be available on PATH or in a folder named ``perl`` in the directory of the [Electron](http://electron.atom.io/) or [NW.js](http://nwjs.io/) binary.  
+This package includes a demo application for [Electron](http://electron.atom.io/) and [NW.js](http://nwjs.io/) featuring a Perl script that can be constantly fed with data from an HTML interface. Perl with the ``AnyEvent`` Perl module has to be available on PATH.  
 
 ## Perl Interpreter
 Any Perl interpreter is usable for camel-harness - either a Perl interpreter on PATH or a Perl interpreter identified by its full pathname. [Strawberry Perl](http://strawberryperl.com/) PortableZIP edition distributed together with an [Electron](http://electron.atom.io/) or [NW.js](http://nwjs.io/) binary could also be used on a Windows machine.  

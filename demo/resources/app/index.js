@@ -26,18 +26,6 @@ var binaryDirectory = path.dirname(binaryPath);
 // Get the full path of the application root directory:
 var applicationDirectory = path.join(binaryDirectory, 'resources', 'app');
 
-// Perl interpreter:
-var perlInterpreter = 'perl';
-if (platform === 'win32') {
-  // Check for a portable Perl interpreter:
-  var portablePerl =
-      path.join(binaryDirectory, 'perl', 'bin', 'perl.exe');
-  var filesystem = require('fs');
-  if (filesystem.existsSync(portablePerl)) {
-    perlInterpreter = portablePerl;
-  }
-}
-
 // version.pl:
 var versionScriptFullPath =
     path.join(applicationDirectory, 'perl', 'version.pl');
