@@ -92,7 +92,7 @@ camelHarness.startScript(perlScriptObject);
 
 * **interpreterSwitches:**  
   They are supplied to the Perl interpreter on runtime.  
-  The ``-M-ops=fork`` switch disables the Perl ``fork`` core function and it could be used to minimize the chances of leaving orphaned Perl processes after a [Node.js](http://nodejs.org/) - [Electron](http://electron.atom.io/) - [NW.js](http://nwjs.io/) process is terminated.  
+  The ``-M-ops=fork`` switch disables the Perl ``fork`` core function and could be used to minimize the chances of leaving orphaned Perl processes after a [Node.js](http://nodejs.org/) - [Electron](http://electron.atom.io/) - [NW.js](http://nwjs.io/) process is terminated.  
 
 * **method:**  
   Only ``GET`` or ``POST`` are allowed.  
@@ -115,9 +115,6 @@ perlScriptObject.scriptHandler.stdin.write(data + '\n');
 ```
 
 This package includes a demo application for [Electron](http://electron.atom.io/) and [NW.js](http://nwjs.io/) featuring a Perl script that can be constantly fed with data from an HTML interface. Perl with the ``AnyEvent`` Perl module has to be available on PATH.  
-
-## Perl Interpreter
-Any Perl interpreter is usable for camel-harness - either a Perl interpreter on PATH or a Perl interpreter identified by its full pathname. [Strawberry Perl](http://strawberryperl.com/) PortableZIP edition distributed together with an [Electron](http://electron.atom.io/) or [NW.js](http://nwjs.io/) binary could also be used on a Windows machine.  
 
 ## Electron Demo
 * Download and extract the [camel-harness package](https://github.com/ddmitov/camel-harness).  
