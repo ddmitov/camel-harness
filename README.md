@@ -28,20 +28,6 @@ perlScriptObject.stdoutFunction = function(stdout) {
 camelHarness.startScript(perlScriptObject);
 ```
 
-## Electron Demo
-* Download the [camel-harness package](https://github.com/ddmitov/camel-harness).  
-* Download the [Electron binary package for your operating system](https://github.com/electron/electron/releases).  
-* Extract the downloaded camel-harness package.  
-* Extract the downloaded Electron binary package inside the previously extracted ``camel-harness-master/demo`` folder. Confirm merging of the ``resources`` subfolder of Electron with the ``resources`` subfolder of the demo.  
-* Start the Electron binary.  
-
-## NW.js Demo
-* Download the [camel-harness package](https://github.com/ddmitov/camel-harness).  
-* Download the [NW.js binary package for your operating system](http://nwjs.io/downloads/).  
-* Extract the downloaded NW.js binary package. It will create its own folder.  
-* Extract the downloaded camel-harness package and copy everything inside its ``camel-harness-master/demo`` folder in the folder of the NW.js binary.  
-* Start the NW.js binary.  
-
 ## Core Dependencies
 * ``child_process``
 * ``fs``
@@ -132,6 +118,17 @@ This package includes a demo application for [Electron](http://electron.atom.io/
 
 ## Perl Interpreter
 Any Perl interpreter is usable for camel-harness - either a Perl interpreter on PATH or a Perl interpreter identified by its full pathname. [Strawberry Perl](http://strawberryperl.com/) PortableZIP edition distributed together with an [Electron](http://electron.atom.io/) or [NW.js](http://nwjs.io/) binary could also be used on a Windows machine.  
+
+## Electron Demo
+* Download and extract the [camel-harness package](https://github.com/ddmitov/camel-harness).  
+* Download the [Electron binary package for your operating system](https://github.com/electron/electron/releases) and extract it inside the previously extracted ``camel-harness-master/demo`` folder. Confirm merging of the ``resources`` subfolder of Electron with the ``resources`` subfolder of the demo.  
+* Start the Electron binary.  
+
+## NW.js Demo
+* Download and extract the [camel-harness package](https://github.com/ddmitov/camel-harness).  
+* Download and extract the [NW.js binary package for your operating system](http://nwjs.io/downloads/). It will create its own folder.  
+* Copy everything inside the ``camel-harness-master/demo`` folder in the folder of the NW.js binary.  
+* Start the NW.js binary.  
 
 ## [Thanks and Credits](./CREDITS.md)
 
