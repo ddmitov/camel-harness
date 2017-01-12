@@ -23,7 +23,7 @@ var perlTestScriptFullPath = path.join(__dirname, 'camel-harness-test.pl');
 var perlTestScript = new Object();
 perlTestScript.interpreter = 'perl';
 perlTestScript.scriptFullPath = perlTestScriptFullPath;
-perlTestScript.interpreterSwitches = '-M-ops=fork';
+perlTestScript.interpreterSwitches = '-W';
 
 perlTestScript.stdoutFunction = function(stdout) {
   console.log('camel-harness STDOUT test: ' + stdout);

@@ -1,6 +1,6 @@
 'use strict';
 
-// camel-harness version 0.6.2
+// camel-harness version 0.7.0
 // Node.js - Electron - NW.js controller for Perl 5 scripts
 // camel-harness is licensed under the terms of the MIT license.
 // Copyright (c) 2016 - 2017 Dimitar D. Mitov
