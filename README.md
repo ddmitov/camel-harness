@@ -59,7 +59,10 @@ perlScriptObject.exitFunction = function(exitCode) {
   console.log('Perl script exited with exit code ' + exitCode);
 }
 
-perlScriptObject.interpreterSwitches = '-W';
+// interpreter switches must be an array:
+var interpreterSwitches = [];
+interpreterSwitches.push('-W');
+perlScriptObject.interpreterSwitches = interpreterSwitches;
 
 perlScriptObject.method = 'POST';
 
@@ -121,5 +124,5 @@ The camel-harness demo packages for [Electron](https://www.npmjs.com/package/cam
 
 ## [Thanks and Credits](./CREDITS.md)
 
-## License
+## [License](./LICENSE.md)
 MIT © 2016 - 2017 Dimitar D. Mitov  

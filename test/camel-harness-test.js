@@ -21,9 +21,14 @@ var perlTestScriptFullPath = path.join(__dirname, 'camel-harness-test.pl');
 
 // Initialize the Perl test script object:
 var perlTestScript = new Object();
+
 perlTestScript.interpreter = 'perl';
+
+var interpreterSwitches = [];
+interpreterSwitches.push('-W');
+perlTestScript.interpreterSwitches = interpreterSwitches;
+
 perlTestScript.scriptFullPath = perlTestScriptFullPath;
-perlTestScript.interpreterSwitches = '-W';
 
 perlTestScript.stdoutFunction = function(stdout) {
   console.log('camel-harness STDOUT test: ' + stdout);

@@ -1,6 +1,6 @@
 'use strict';
 
-// camel-harness version 0.7.0
+// camel-harness version 0.7.2
 // Node.js - Electron - NW.js controller for Perl 5 scripts
 // camel-harness is licensed under the terms of the MIT license.
 // Copyright (c) 2016 - 2017 Dimitar D. Mitov
@@ -65,24 +65,8 @@ module.exports.startScript = function(scriptObject) {
                       'but request method is not set.');
         }
 
-        // Handle any interpreter switches:
-        var interpreterArguments =[]; // they must be an array, not a string!
-        if (scriptObject.interpreterSwitches !== undefined &&
-        scriptObject.interpreterSwitches.length > 0) {
-          // Escape any special characters:
-          scriptObject.interpreterSwitches.replace(/\\/g,   '\\\\');
-          scriptObject.interpreterSwitches.replace(/'/g,    '\\\'');
-          scriptObject.interpreterSwitches.replace(/"/g,    '\\"');
-          scriptObject.interpreterSwitches.replace(/\x08/g, '\\b');
-          scriptObject.interpreterSwitches.replace(/\t/g,   '\\t');
-          scriptObject.interpreterSwitches.replace(/\n/g,   '\\n');
-          scriptObject.interpreterSwitches.replace(/\f/g,   '\\f');
-          scriptObject.interpreterSwitches.replace(/\r/g,   '\\r');
-          // Whitespaces separate interpreter switches from one another:
-          interpreterArguments =
-            scriptObject.interpreterSwitches.split(/\s{1,}/);
-        }
         // The full path of the script is the minimal interpreter argument:
+        var interpreterArguments = scriptObject.interpreterSwitches;
         interpreterArguments.push(scriptObject.scriptFullPath);
 
         // Run the supplied script:
