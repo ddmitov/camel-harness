@@ -3,11 +3,6 @@ Thanks and Credits
 Amata mea Argeia - gratiam magnam tibi ago!  
 Patientia tua in studiis meis computatoriis auxilium meum maximum!  
 
-Thanks to Mingqi Shao for his very useful module ```parse-spawn-args```!  
-https://github.com/mingqi/parse-spawn-args  
-https://www.npmjs.com/package/parse-spawn-args  
-Interpreter arguments parsing of ```camel-harness``` depends on a code fragment from his module.  
-
 ## JavaScript & Node.js
 https://nodejs.org/api/child_process.html  
 
@@ -20,7 +15,6 @@ http://stackoverflow.com/questions/15515549/node-js-writing-a-function-to-return
 http://stackoverflow.com/questions/9781214/parse-output-of-spawned-node-js-child-process-line-by-line  
 http://stackoverflow.com/questions/3133243/how-do-i-get-the-path-to-the-current-script-with-node-js  
 http://stackoverflow.com/questions/4482686/check-synchronously-if-file-directory-exists-in-node-js  
-http://stackoverflow.com/questions/2858121/convert-comma-separated-string-to-array  
 
 http://www.tutorialspoint.com/jquery/ajax-serialize.htm
 http://www.tutorialspoint.com/nodejs/nodejs_path_module.htm  
