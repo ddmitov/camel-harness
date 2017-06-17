@@ -47,7 +47,7 @@ perlTestScript.errorFunction = function(error) {
 perlTestScript.exitFunction = function(exitCode) {
   console.log('camel-harness Perl test script exited with exit code ' +
     exitCode);
-}
+};
 
 // Start the Perl test script:
 camelHarness.startScript(perlTestScript);
