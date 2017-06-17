@@ -1,8 +1,8 @@
 {
   "name": "camel-harness",
-  "version": "0.7.2",
+  "version": "0.8.0",
   "description": "Node.js - Electron - NW.js controller for Perl 5 scripts",
-  "main": "camel-harness.js",
+  "main": "src/camel-harness.js",
   "directories": {
     "test": "test"
   },

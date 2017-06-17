@@ -3,7 +3,7 @@
 // camel-harness npm test
 
 // Load the camel-harness package:
-var camelHarness = require('../camel-harness.js');
+var camelHarness = require('../src/camel-harness.js');
 
 // Determine the operating system and initialize a suitable 'path' object:
 var os = require('os');
@@ -36,6 +36,12 @@ perlTestScript.stdoutFunction = function(stdout) {
 
 perlTestScript.stderrFunction = function(stderr) {
   console.log('camel-harness STDERR test: ' + stderr);
+};
+
+perlTestScript.errorFunction = function(error) {
+  if (error && error.code === 'ENOENT') {
+    console.log('Perl interpreter was not found.');
+  }
 };
 
 perlTestScript.exitFunction = function(exitCode) {

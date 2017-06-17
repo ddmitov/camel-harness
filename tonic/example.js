@@ -1,6 +1,6 @@
 const camelHarness = require('camel-harness');
 
-var perlScriptObject = new Object();
+var perlScriptObject = {};
 perlScriptObject.interpreter = 'perl';
 perlScriptObject.scriptFullPath = '/test/test.pl';
 
