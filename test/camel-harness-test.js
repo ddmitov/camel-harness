@@ -20,7 +20,7 @@ if (platform !== 'win32') {
 var perlTestScriptFullPath = path.join(__dirname, 'camel-harness-test.pl');
 
 // Initialize the Perl test script object:
-var perlTestScript = new Object();
+var perlTestScript = {};
 
 perlTestScript.interpreter = 'perl';
 
