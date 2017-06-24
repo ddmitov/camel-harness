@@ -25,3 +25,4 @@ http://latower.com/blog/2008/11/12/splitting-a-long-javascript-string-across-mul
 https://www.gregjs.com/javascript/2016/checking-whether-a-file-directory-exists-without-using-fs-exists/  
 https://discuss.runkit.com/t/customizing-your-npm-packages-page-on-tonic/23  
 http://justbuildsomething.com/node-js-best-practices/  
+https://nodei.co/  
