@@ -17,7 +17,7 @@
 
 module.exports.setEnvironment = function(script) {
   // Script environment inherits Node environment:
-  var scriptEnvironment = process.env;
+  let scriptEnvironment = process.env;
 
   // Handle GET requests:
   if (script.requestMethod === 'GET') {

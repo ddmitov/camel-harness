@@ -16,9 +16,9 @@ camel-harness
 ``npm install camel-harness``  
 
 ```javascript
-const camelHarness = require('camel-harness');
+const CAMEL_HARNESS = require('camel-harness');
 
-var perlScriptObject = {};
+let perlScriptObject = {};
 perlScriptObject.interpreter = 'perl';
 perlScriptObject.scriptFullPath = '/test/test.pl';
 
@@ -26,7 +26,7 @@ perlScriptObject.stdoutFunction = function(stdout) {
   console.log(stdout);
 };
 
-camelHarness.startScript(perlScriptObject);
+CAMEL_HARNESS.startScript(perlScriptObject);
 ```
 
 ## Core Dependencies
@@ -42,9 +42,9 @@ camel-harness npm package test will fail if no ``perl`` binary is available on P
 ## API
 
 ```javascript
-const camelHarness = require('camel-harness');
+const CAMEL_HARNESS = require('camel-harness');
 
-var perlScriptObject = {};
+let perlScriptObject = {};
 
  // mandatory object property
 perlScriptObject.interpreter = 'perl';
@@ -58,7 +58,8 @@ perlScriptObject.stdoutFunction = function(stdout) {
 };
 
 perlScriptObject.stderrFunction = function(stderr) {
-  console.log('Perl script STDERR:\n' + stderr);
+  console.log('Perl script STDERR:\n');
+  console.log(stderr);
 };
 
 perlScriptObject.errorFunction = function(error) {
@@ -68,22 +69,22 @@ perlScriptObject.errorFunction = function(error) {
 };
 
 perlScriptObject.exitFunction = function(exitCode) {
-  console.log('perl script exited with exit code ' + exitCode);
+  console.log(`Perl script exited with exit code ${exitCode}`);
 };
 
 // interpreter switches must be an array:
-var interpreterSwitches = [];
+let interpreterSwitches = [];
 interpreterSwitches.push('-W');
 perlScriptObject.interpreterSwitches = interpreterSwitches;
 
 perlScriptObject.requestMethod = 'POST';
 
 perlScriptObject.inputDataHarvester = function() {
-  var data = document.getElementById('input-box-id').value;
+  let data = document.getElementById('input-box-id').value;
   return data;
 }
 
-camelHarness.startScript(perlScriptObject);
+CAMEL_HARNESS.startScript(perlScriptObject);
 ```
 
 * **perlInterpreter:**  
@@ -129,7 +130,7 @@ camelHarness.startScript(perlScriptObject);
 
   ```javascript
   perlScriptObject.inputDataHarvester = function() {
-    var data = document.getElementById('input-box-id').value;
+    let data = document.getElementById('input-box-id').value;
     return data;
   }
   ```
@@ -138,7 +139,7 @@ camelHarness.startScript(perlScriptObject);
 
   ```javascript
   perlScriptObject.inputDataHarvester = function() {
-    var formData = $('#form-id').serialize();
+    let formData = $('#form-id').serialize();
     return formData;
   }
   ```
@@ -147,7 +148,7 @@ camelHarness.startScript(perlScriptObject);
 camel-harness can also start and communicate with interactive scripts having their own event loops and capable of repeatedly receiving STDIN input. Use the following code to send data to an interactive script waiting for input on STDIN:
 
 ```javascript
-var data = document.getElementById('interactive-script-input').value;
+let data = document.getElementById('interactive-script-input').value;
 perlScriptObject.scriptHandler.stdin.write(data);
 ```
 

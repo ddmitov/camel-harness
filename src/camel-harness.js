@@ -15,15 +15,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
 // THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-const spawnProcess = require('child_process').spawn;
+const PERL_PROCESS = require('child_process').spawn;
 
-const allArguments = require('./camel-harness-arguments.js');
-const scriptEnvironment = require('./camel-harness-environment.js');
-const scriptSettings = require('./camel-harness-settings.js');
+const ALL_ARGUMENTS = require('./camel-harness-arguments.js');
+const SCRIPT_ENVIRONMENT = require('./camel-harness-environment.js');
+const SCRIPT_SETTINGS = require('./camel-harness-settings.js');
 
 module.exports.startScript = function(script) {
   // Check script settings:
-  if (scriptSettings.checkSettings(script) === false) {
+  if (SCRIPT_SETTINGS.checkSettings(script) === false) {
     return;
   }
 
@@ -35,18 +35,18 @@ module.exports.startScript = function(script) {
   }
 
   // Set script environment:
-  var environment = scriptEnvironment.setEnvironment(script);
+  let environment = SCRIPT_ENVIRONMENT.setEnvironment(script);
 
   // Set all interpreter arguments:
-  var interpreterArguments = allArguments.setArguments(script);
+  let interpreterArguments = ALL_ARGUMENTS.setArguments(script);
 
   // Run the supplied script:
   script.scriptHandler =
-    spawnProcess(script.interpreter, interpreterArguments, {env: environment});
+    PERL_PROCESS(script.interpreter, interpreterArguments, {env: environment});
 
   // Send POST data to the script:
   if (script.requestMethod === 'POST') {
-    script.scriptHandler.stdin.write(script.inputData + '\n');
+    script.scriptHandler.stdin.write(`${script.inputData}\n`);
   }
 
   // Handle script errors:
@@ -54,9 +54,9 @@ module.exports.startScript = function(script) {
     if (typeof script.errorFunction === 'function') {
       script.errorFunction(error);
     } else {
-      console.log('camel-harness error stack: ' + error.stack);
-      console.log('camel-harness error code: ' + error.code);
-      console.log('camel-harness received signal: ' + error.signal);
+      console.log(`camel-harness error stack: ${error.stack}`);
+      console.log(`camel-harness error code: ${error.code}`);
+      console.log(`camel-harness received signal: ${error.signal}`);
     }
   });
 

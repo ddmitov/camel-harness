@@ -16,7 +16,7 @@
 // THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 module.exports.setArguments = function(script) {
-  var interpreterArguments;
+  let interpreterArguments;
 
   // Interpreter arguments, if any, go before the script full path:
   if (script.interpreterSwitches !== undefined &&

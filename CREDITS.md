@@ -8,6 +8,8 @@ https://nodejs.org/api/child_process.html
 
 https://docs.npmjs.com/getting-started/installing-npm-packages-locally  
 
+https://google.github.io/styleguide/jsguide.html  
+
 http://stackoverflow.com/questions/13230370/nodejs-child-process-write-to-stdin-from-an-already-initialised-process  
 http://stackoverflow.com/questions/14989081/node-js-to-get-determine-os-version  
 http://stackoverflow.com/questions/359788/how-to-execute-a-javascript-function-when-i-have-its-name-as-a-string  
@@ -26,3 +28,4 @@ https://www.gregjs.com/javascript/2016/checking-whether-a-file-directory-exists-
 https://discuss.runkit.com/t/customizing-your-npm-packages-page-on-tonic/23  
 http://justbuildsomething.com/node-js-best-practices/  
 https://nodei.co/  
+https://medium.freecodecamp.org/google-publishes-a-javascript-style-guide-here-are-some-key-lessons-1810b8ad050b  

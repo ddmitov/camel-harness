@@ -15,7 +15,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
 // THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-const filesystemObject = require('fs');
+const FILESYSTEM_OBJECT = require('fs');
 
 module.exports.checkSettings = function(script) {
   var scriptSettingsOk = true;
@@ -48,9 +48,7 @@ module.exports.checkSettings = function(script) {
   if (script.requestMethod !== undefined &&
       script.inputData === undefined &&
       script.inputDataHarvester === undefined) {
-    console.log('camel-harness: Request method is ' +
-                script.requestMethod + ', ' +
-                'but input data can not be accessed.');
+    console.log(`camel-harness: Input data is not available.`);
     scriptSettingsOk = false;
   }
 
@@ -58,8 +56,7 @@ module.exports.checkSettings = function(script) {
   if ((script.inputData !== undefined ||
       script.inputDataHarvester !== undefined) &&
       script.requestMethod === undefined) {
-    console.log('camel-harness: ' +
-                'Input data is available, but request method is not set.');
+    console.log('camel-harness: Request method is not set.');
     scriptSettingsOk = false;
   }
 
@@ -71,9 +68,9 @@ function checkScriptExistence(scriptFullPath) {
   var scriptExists = true;
 
   try {
-    filesystemObject.accessSync(scriptFullPath);
+    FILESYSTEM_OBJECT.accessSync(scriptFullPath);
   } catch (exception) {
-    console.log('camel-harness: ' + scriptFullPath + ' is not found.');
+    console.log(`camel-harness: ${scriptFullPath} is not found.`);
     scriptExists = false;
   }
 

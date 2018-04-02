@@ -3,13 +3,13 @@
 // camel-harness npm test
 
 // Load the camel-harness package:
-var camelHarness = require('../src/camel-harness.js');
+let camelHarness = require('../src/camel-harness.js');
 
 // Determine the operating system and initialize a suitable 'path' object:
-var os = require('os');
-var platform = os.platform();
+let os = require('os');
+let platform = os.platform();
 
-var path;
+let path;
 if (platform !== 'win32') {
   path = require('path').posix;
 } else {
@@ -17,14 +17,14 @@ if (platform !== 'win32') {
 }
 
 // Compose the full path of the Perl test script:
-var perlTestScriptFullPath = path.join(__dirname, 'camel-harness-test.pl');
+let perlTestScriptFullPath = path.join(__dirname, 'camel-harness-test.pl');
 
 // Initialize the Perl test script object:
-var perlTestScript = {};
+let perlTestScript = {};
 
 perlTestScript.interpreter = 'perl';
 
-var interpreterSwitches = [];
+let interpreterSwitches = [];
 interpreterSwitches.push('-W');
 perlTestScript.interpreterSwitches = interpreterSwitches;
 
