@@ -161,4 +161,4 @@ The camel-harness demo packages for [Electron](https://www.npmjs.com/package/cam
 ## [Thanks and Credits](./CREDITS.md)
 
 ## [License](./LICENSE.md)
-MIT © 2016 - 2017 Dimitar D. Mitov  
+MIT © 2016 - 2018 Dimitar D. Mitov  

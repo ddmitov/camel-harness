@@ -3,7 +3,7 @@
 // camel-harness npm test
 
 // Load the camel-harness package:
-let camelHarness = require('../src/camel-harness.js');
+const CAMEL_HARNESS = require('../src/camel-harness.js');
 
 // Determine the operating system and initialize a suitable 'path' object:
 let os = require('os');
@@ -31,11 +31,11 @@ perlTestScript.interpreterSwitches = interpreterSwitches;
 perlTestScript.scriptFullPath = perlTestScriptFullPath;
 
 perlTestScript.stdoutFunction = function(stdout) {
-  console.log('camel-harness STDOUT test: ' + stdout);
+  console.log(`camel-harness STDOUT test: ${stdout}`);
 };
 
 perlTestScript.stderrFunction = function(stderr) {
-  console.log('camel-harness STDERR test: ' + stderr);
+  console.log(`camel-harness STDERR test: ${stderr}`);
 };
 
 perlTestScript.errorFunction = function(error) {
@@ -45,9 +45,8 @@ perlTestScript.errorFunction = function(error) {
 };
 
 perlTestScript.exitFunction = function(exitCode) {
-  console.log('camel-harness Perl test script exited with exit code ' +
-    exitCode);
+  console.log(`camel-harness test script exit code is ${exitCode}`);
 };
 
 // Start the Perl test script:
-camelHarness.startScript(perlTestScript);
+CAMEL_HARNESS.startScript(perlTestScript);

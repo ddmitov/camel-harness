@@ -3,7 +3,7 @@
 // camel-harness
 // Node.js - Electron - NW.js controller for Perl scripts
 // camel-harness is licensed under the terms of the MIT license.
-// Copyright (c) 2016 - 2017 Dimitar D. Mitov
+// Copyright (c) 2016 - 2018 Dimitar D. Mitov
 
 // THE SOFTWARE IS PROVIDED "AS IS",
 // WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,

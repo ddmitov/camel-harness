@@ -1,3 +1,5 @@
+'use strict';
+
 const CAMEL_HARNESS = require('camel-harness');
 
 let perlScriptObject = {};
