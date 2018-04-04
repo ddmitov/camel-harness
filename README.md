@@ -1,6 +1,5 @@
 camel-harness
 --------------------------------------------------------------------------------
-[![NPM](https://nodei.co/npm/camel-harness.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/camel-harness/)  
 [![GitHub Version](https://img.shields.io/github/release/ddmitov/camel-harness.svg)](https://github.com/ddmitov/camel-harness/releases)
 [![NPM Version](https://img.shields.io/npm/v/camel-harness.svg)](https://www.npmjs.com/package/camel-harness)
 [![Travis CI Build Status](https://travis-ci.org/ddmitov/camel-harness.svg?branch=master)](https://travis-ci.org/ddmitov/camel-harness)
