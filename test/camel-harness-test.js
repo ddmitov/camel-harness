@@ -1,31 +1,31 @@
-'use strict';
+"use strict";
 
 // camel-harness npm test
 
 // Load the camel-harness package:
-const CAMEL_HARNESS = require('../src/camel-harness.js');
+const CAMEL_HARNESS = require("../src/camel-harness.js");
 
-// Determine the operating system and initialize a suitable 'path' object:
-let os = require('os');
+// Determine the operating system and initialize a suitable "path" object:
+let os = require("os");
 let platform = os.platform();
 
 let path;
-if (platform !== 'win32') {
-  path = require('path').posix;
+if (platform !== "win32") {
+  path = require("path").posix;
 } else {
-  path = require('path').win32;
+  path = require("path").win32;
 }
 
 // Compose the full path of the Perl test script:
-let perlTestScriptFullPath = path.join(__dirname, 'camel-harness-test.pl');
+let perlTestScriptFullPath = path.join(__dirname, "camel-harness-test.pl");
 
 // Initialize the Perl test script object:
 let perlTestScript = {};
 
-perlTestScript.interpreter = 'perl';
+perlTestScript.interpreter = "perl";
 
 let interpreterSwitches = [];
-interpreterSwitches.push('-W');
+interpreterSwitches.push("-W");
 perlTestScript.interpreterSwitches = interpreterSwitches;
 
 perlTestScript.scriptFullPath = perlTestScriptFullPath;
@@ -39,8 +39,8 @@ perlTestScript.stderrFunction = function(stderr) {
 };
 
 perlTestScript.errorFunction = function(error) {
-  if (error && error.code === 'ENOENT') {
-    console.log('Perl interpreter was not found.');
+  if (error && error.code === "ENOENT") {
+    console.log("Perl interpreter was not found.");
   }
 };
 

@@ -28,3 +28,4 @@ https://www.gregjs.com/javascript/2016/checking-whether-a-file-directory-exists-
 https://discuss.runkit.com/t/customizing-your-npm-packages-page-on-tonic/23  
 http://justbuildsomething.com/node-js-best-practices/  
 https://medium.freecodecamp.org/google-publishes-a-javascript-style-guide-here-are-some-key-lessons-1810b8ad050b  
+https://eslint.org/docs/rules/no-undefined  

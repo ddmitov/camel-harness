@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 // camel-harness
 // Node.js - Electron - NW.js controller for Perl scripts
@@ -20,14 +20,14 @@ module.exports.setEnvironment = function(script) {
   let scriptEnvironment = process.env;
 
   // Handle GET requests:
-  if (script.requestMethod === 'GET') {
-    scriptEnvironment.REQUEST_METHOD = 'GET';
+  if (script.requestMethod === "GET") {
+    scriptEnvironment.REQUEST_METHOD = "GET";
     scriptEnvironment.QUERY_STRING = script.inputData;
   }
 
   // Handle POST requests:
-  if (script.requestMethod === 'POST') {
-    scriptEnvironment.REQUEST_METHOD = 'POST';
+  if (script.requestMethod === "POST") {
+    scriptEnvironment.REQUEST_METHOD = "POST";
     scriptEnvironment.CONTENT_LENGTH = script.inputData.length;
   }
 

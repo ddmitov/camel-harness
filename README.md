@@ -5,7 +5,6 @@ camel-harness
 [![Travis CI Build Status](https://travis-ci.org/ddmitov/camel-harness.svg?branch=master)](https://travis-ci.org/ddmitov/camel-harness)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ddmitov/camel-harness?branch=master&svg=true)](https://ci.appveyor.com/project/ddmitov/camel-harness)  
 [![GitHub License](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE.md)
-[![bitHound Overall Score](https://www.bithound.io/github/ddmitov/camel-harness/badges/score.svg)](https://www.bithound.io/github/ddmitov/camel-harness)
 [![Coverity Scan Build Status](https://scan.coverity.com/projects/11336/badge.svg)](https://scan.coverity.com/projects/ddmitov-camel-harness)
 [![Snyk Status](https://snyk.io/test/github/ddmitov/camel-harness/badge.svg)](https://snyk.io/test/github/ddmitov/camel-harness)  
 
@@ -15,11 +14,11 @@ camel-harness
 ``npm install camel-harness``  
 
 ```javascript
-const CAMEL_HARNESS = require('camel-harness');
+const CAMEL_HARNESS = require("camel-harness");
 
 let perlScriptObject = {};
-perlScriptObject.interpreter = 'perl';
-perlScriptObject.scriptFullPath = '/test/test.pl';
+perlScriptObject.interpreter = "perl";
+perlScriptObject.scriptFullPath = "/test/test.pl";
 
 perlScriptObject.stdoutFunction = function(stdout) {
   console.log(stdout);
@@ -41,29 +40,29 @@ camel-harness npm package test will fail if no ``perl`` binary is available on P
 ## API
 
 ```javascript
-const CAMEL_HARNESS = require('camel-harness');
+const CAMEL_HARNESS = require("camel-harness");
 
 let perlScriptObject = {};
 
  // mandatory object property
-perlScriptObject.interpreter = 'perl';
+perlScriptObject.interpreter = "perl";
 
  // mandatory object property
-perlScriptObject.scriptFullPath = '/test/test.pl';
+perlScriptObject.scriptFullPath = "/test/test.pl";
 
 // mandatory object property:
 perlScriptObject.stdoutFunction = function(stdout) {
-  document.getElementById('DOM-element-id').innerHTML = stdout;
+  document.getElementById("DOM-element-id").innerHTML = stdout;
 };
 
 perlScriptObject.stderrFunction = function(stderr) {
-  console.log('Perl script STDERR:\n');
+  console.log("Perl script STDERR:\n");
   console.log(stderr);
 };
 
 perlScriptObject.errorFunction = function(error) {
-  if (error && error.code === 'ENOENT') {
-    console.log('Perl interpreter was not found.');
+  if (error && error.code === "ENOENT") {
+    console.log("Perl interpreter was not found.");
   }
 };
 
@@ -73,13 +72,13 @@ perlScriptObject.exitFunction = function(exitCode) {
 
 // interpreter switches must be an array:
 let interpreterSwitches = [];
-interpreterSwitches.push('-W');
+interpreterSwitches.push("-W");
 perlScriptObject.interpreterSwitches = interpreterSwitches;
 
-perlScriptObject.requestMethod = 'POST';
+perlScriptObject.requestMethod = "POST";
 
 perlScriptObject.inputDataHarvester = function() {
-  let data = document.getElementById('input-box-id').value;
+  let data = document.getElementById("input-box-id").value;
   return data;
 }
 
@@ -129,7 +128,7 @@ CAMEL_HARNESS.startScript(perlScriptObject);
 
   ```javascript
   perlScriptObject.inputDataHarvester = function() {
-    let data = document.getElementById('input-box-id').value;
+    let data = document.getElementById("input-box-id").value;
     return data;
   }
   ```
@@ -138,7 +137,7 @@ CAMEL_HARNESS.startScript(perlScriptObject);
 
   ```javascript
   perlScriptObject.inputDataHarvester = function() {
-    let formData = $('#form-id').serialize();
+    let formData = $("#form-id").serialize();
     return formData;
   }
   ```
@@ -147,7 +146,7 @@ CAMEL_HARNESS.startScript(perlScriptObject);
 camel-harness can also start and communicate with interactive scripts having their own event loops and capable of repeatedly receiving STDIN input. Use the following code to send data to an interactive script waiting for input on STDIN:
 
 ```javascript
-let data = document.getElementById('interactive-script-input').value;
+let data = document.getElementById("interactive-script-input").value;
 perlScriptObject.scriptHandler.stdin.write(data);
 ```
 

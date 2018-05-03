@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 // camel-harness
 // Node.js - Electron - NW.js controller for Perl scripts
@@ -19,7 +19,7 @@ module.exports.setArguments = function(script) {
   let interpreterArguments;
 
   // Interpreter arguments, if any, go before the script full path:
-  if (script.interpreterSwitches !== undefined &&
+  if (typeof script.interpreterSwitches !== undefined &&
       Array.isArray(script.interpreterSwitches)) {
     interpreterArguments = script.interpreterSwitches;
   } else {
