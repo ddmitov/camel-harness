@@ -17,6 +17,21 @@
 
 const filesystemObject = require("fs");
 
+function checkScriptExistence(scriptFullPath) {
+  // This function returns only after file existence check is complete.
+  var scriptExists;
+
+  try {
+    filesystemObject.accessSync(scriptFullPath);
+    scriptExists = true;
+  } catch (exception) {
+    scriptExists = false;
+    // console.log(`camel-harness: ${scriptFullPath} is not found.`);
+  }
+
+  return scriptExists;
+}
+
 module.exports.checkSettings = function(script) {
   var scriptSettingsOk;
 
@@ -54,18 +69,3 @@ module.exports.checkSettings = function(script) {
 
   return scriptSettingsOk;
 };
-
-function checkScriptExistence(scriptFullPath) {
-  // This function returns only after file existence check is complete.
-  var scriptExists;
-
-  try {
-    filesystemObject.accessSync(scriptFullPath);
-    scriptExists = true
-  } catch (exception) {
-    scriptExists = false;
-    // console.log(`camel-harness: ${scriptFullPath} is not found.`);
-  }
-
-  return scriptExists;
-}
