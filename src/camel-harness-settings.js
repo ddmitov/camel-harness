@@ -35,16 +35,15 @@ function checkScriptExistence(scriptFullPath) {
 module.exports.checkSettings = function(script) {
   var scriptSettingsOk;
 
-  // Initial settings check:
-  if (script.interpreter && script.scriptFullPath &&
+  // Initial check of mandatory settings and script full path:
+  if (script.interpreter &&
+      script.scriptFullPath &&
+      checkScriptExistence(script.scriptFullPath) === true &&
       typeof script.stdoutFunction === "function") {
-    if (checkScriptExistence(script.scriptFullPath) === true) {
-      scriptSettingsOk = true;
-    }
+    scriptSettingsOk = true;
   } else {
-    scriptSettingsOk = false;
-    // console.log("camel-harness: ");
-    // console.log("No 'interpreter', 'scriptFullPath' or 'stdoutFunction'.");
+    // console.log("camel-harness: Incomplete settings or wrong file path!");
+    return false;
   }
 
   // If requestMethod is set, inputData or inputDataHarvester must be set:
@@ -52,8 +51,8 @@ module.exports.checkSettings = function(script) {
     if (script.inputData || script.inputDataHarvester) {
       scriptSettingsOk = true;
     } else {
-      scriptSettingsOk = false;
       // console.log(`camel-harness: Input data is not available.`);
+      return false;
     }
   }
 
@@ -62,8 +61,8 @@ module.exports.checkSettings = function(script) {
     if (script.requestMethod) {
       scriptSettingsOk = true;
     } else {
-      scriptSettingsOk = false;
       // console.log("camel-harness: Request method is not set.");
+      return false;
     }
   }
 
