@@ -15,34 +15,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
 // THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-const PERL_PROCESS = require("child_process").spawn;
+const perlProcess = require("child_process").spawn;
 
-const ALL_ARGUMENTS = require("./camel-harness-arguments.js");
-const SCRIPT_ENVIRONMENT = require("./camel-harness-environment.js");
-const SCRIPT_SETTINGS = require("./camel-harness-settings.js");
+const allArguments = require("./camel-harness-arguments.js");
+const scriptEnvironment = require("./camel-harness-environment.js");
+const scriptSettings = require("./camel-harness-settings.js");
 
 module.exports.startScript = function(script) {
   // Check script settings:
-  if (SCRIPT_SETTINGS.checkSettings(script) === false) {
+  if (scriptSettings.checkSettings(script) === false) {
     return;
   }
 
-  // If inputData is not defined and inputDataHarvester function is available,
+  // If inputDataHarvester function is available,
   // it is used as an alternative input data source:
-  if (typeof script.inputData === undefined &&
-      typeof script.inputDataHarvester === "function") {
+  if (typeof script.inputDataHarvester === "function") {
     script.inputData = script.inputDataHarvester();
   }
 
   // Set script environment:
-  let environment = SCRIPT_ENVIRONMENT.setEnvironment(script);
+  let environment = scriptEnvironment.setEnvironment(script);
 
   // Set all interpreter arguments:
-  let interpreterArguments = ALL_ARGUMENTS.setArguments(script);
+  let interpreterArguments = allArguments.setArguments(script);
 
   // Run the supplied script:
   script.scriptHandler =
-    PERL_PROCESS(script.interpreter, interpreterArguments, {env: environment});
+    perlProcess(script.interpreter, interpreterArguments, {env: environment});
 
   // Send POST data to the script:
   if (script.requestMethod === "POST") {

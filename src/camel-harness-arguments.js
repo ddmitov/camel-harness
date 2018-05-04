@@ -19,7 +19,7 @@ module.exports.setArguments = function(script) {
   let interpreterArguments;
 
   // Interpreter arguments, if any, go before the script full path:
-  if (typeof script.interpreterSwitches !== undefined &&
+  if (script.interpreterSwitches &&
       Array.isArray(script.interpreterSwitches)) {
     interpreterArguments = script.interpreterSwitches;
   } else {

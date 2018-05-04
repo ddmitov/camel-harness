@@ -15,49 +15,41 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
 // THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-const FILESYSTEM_OBJECT = require("fs");
+const filesystemObject = require("fs");
 
 module.exports.checkSettings = function(script) {
-  var scriptSettingsOk = true;
+  var scriptSettingsOk;
 
-  // Interpreter is mandatory script object property.
-  if (typeof script.interpreter === undefined) {
-    // console.log("camel-harness: Perl interpreter is not supplied.");
+  // Initial settings check:
+  if (script.interpreter && script.scriptFullPath &&
+      typeof script.stdoutFunction === "function") {
+    if (checkScriptExistence(script.scriptFullPath) === true) {
+      scriptSettingsOk = true;
+    }
+  } else {
     scriptSettingsOk = false;
+    // console.log("camel-harness: ");
+    // console.log("No 'interpreter', 'scriptFullPath' or 'stdoutFunction'.");
   }
 
-  // Script full path is mandatory script object property.
-  if (typeof script.scriptFullPath === undefined) {
-    // console.log("camel-harness: Script full path is not supplied.");
-    scriptSettingsOk = false;
+  // If requestMethod is set, inputData or inputDataHarvester must be set:
+  if (script.requestMethod) {
+    if (script.inputData || script.inputDataHarvester) {
+      scriptSettingsOk = true;
+    } else {
+      scriptSettingsOk = false;
+      // console.log(`camel-harness: Input data is not available.`);
+    }
   }
 
-  // Script STDOUT handling function is mandatory script object property.
-  if (typeof script.stdoutFunction !== "function") {
-    // console.log("camel-harness: STDOUT handling function is not defined.");
-    scriptSettingsOk = false;
-  }
-
-  // Start script existence check:
-  if (typeof script.scriptFullPath !== undefined &&
-      checkScriptExistence(script.scriptFullPath) === false) {
-    scriptSettingsOk = false;
-  }
-
-  // If requestMethod is set, inputData or inputDataHarvester must also be set:
-  if (typeof script.requestMethod !== undefined &&
-      typeof script.inputData === undefined &&
-      typeof script.inputDataHarvester === undefined) {
-    // console.log(`camel-harness: Input data is not available.`);
-    scriptSettingsOk = false;
-  }
-
-  // If inputData or inputDataHarvester is set, requestMethod must also be set:
-  if ((typeof script.inputData !== undefined ||
-      typeof script.inputDataHarvester !== undefined) &&
-      typeof script.requestMethod === undefined) {
-    // console.log("camel-harness: Request method is not set.");
-    scriptSettingsOk = false;
+  // If inputData or inputDataHarvester is set, requestMethod must be set:
+  if (script.inputData || script.inputDataHarvester) {
+    if (script.requestMethod) {
+      scriptSettingsOk = true;
+    } else {
+      scriptSettingsOk = false;
+      // console.log("camel-harness: Request method is not set.");
+    }
   }
 
   return scriptSettingsOk;
@@ -65,13 +57,14 @@ module.exports.checkSettings = function(script) {
 
 function checkScriptExistence(scriptFullPath) {
   // This function returns only after file existence check is complete.
-  var scriptExists = true;
+  var scriptExists;
 
   try {
-    FILESYSTEM_OBJECT.accessSync(scriptFullPath);
+    filesystemObject.accessSync(scriptFullPath);
+    scriptExists = true
   } catch (exception) {
-    // console.log(`camel-harness: ${scriptFullPath} is not found.`);
     scriptExists = false;
+    // console.log(`camel-harness: ${scriptFullPath} is not found.`);
   }
 
   return scriptExists;
