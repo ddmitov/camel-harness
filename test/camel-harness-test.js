@@ -3,7 +3,7 @@
 // camel-harness npm test
 
 // Load the camel-harness package:
-const CAMEL_HARNESS = require("../src/camel-harness.js");
+const camelHarness = require("../src/camel-harness.js");
 
 // Determine the operating system and initialize a suitable "path" object:
 let os = require("os");
@@ -24,6 +24,9 @@ let perlTestScript = {};
 
 perlTestScript.interpreter = "perl";
 
+// perlTestScript.requestMethod = "GET";
+// perlTestScript.inputData = "test";
+
 let interpreterSwitches = [];
 interpreterSwitches.push("-W");
 perlTestScript.interpreterSwitches = interpreterSwitches;
@@ -39,6 +42,10 @@ perlTestScript.stderrFunction = function(stderr) {
 };
 
 perlTestScript.errorFunction = function(error) {
+  // console.log(`camel-harness error stack: ${error.stack}`);
+  // console.log(`camel-harness error code: ${error.code}`);
+  // console.log(`camel-harness received signal: ${error.signal}`);
+
   if (error && error.code === "ENOENT") {
     console.log("Perl interpreter was not found.");
   }
@@ -49,4 +56,4 @@ perlTestScript.exitFunction = function(exitCode) {
 };
 
 // Start the Perl test script:
-CAMEL_HARNESS.startScript(perlTestScript);
+camelHarness.startScript(perlTestScript);

@@ -17,51 +17,38 @@
 
 const filesystemObject = require("fs");
 
+// This function returns only after script existence check is complete.
 function checkScriptExistence(scriptFullPath) {
-  // This function returns only after file existence check is complete.
-  var scriptExists;
-
   try {
     filesystemObject.accessSync(scriptFullPath);
-    scriptExists = true;
+    return true;
   } catch (exception) {
-    scriptExists = false;
     // console.log(`camel-harness: ${scriptFullPath} is not found.`);
+    return false;
   }
-
-  return scriptExists;
 }
 
 module.exports.checkSettings = function(script) {
-  var scriptSettingsOk;
+  let scriptSettingsOk = false;
 
-  // Initial check of mandatory settings and script full path:
+  // Check mandatory settings and script full path:
   if (script.interpreter &&
       script.scriptFullPath &&
       checkScriptExistence(script.scriptFullPath) === true &&
       typeof script.stdoutFunction === "function") {
     scriptSettingsOk = true;
-  } else {
-    // console.log("camel-harness: Incomplete settings or wrong file path!");
-    return false;
   }
 
   // If requestMethod is set, inputData or inputDataHarvester must be set:
   if (script.requestMethod) {
-    if (script.inputData || script.inputDataHarvester) {
-      scriptSettingsOk = true;
-    } else {
-      // console.log(`camel-harness: Input data is not available.`);
+    if (!script.inputData || !script.inputDataHarvester) {
       return false;
     }
   }
 
   // If inputData or inputDataHarvester is set, requestMethod must be set:
   if (script.inputData || script.inputDataHarvester) {
-    if (script.requestMethod) {
-      scriptSettingsOk = true;
-    } else {
-      // console.log("camel-harness: Request method is not set.");
+    if (!script.requestMethod) {
       return false;
     }
   }

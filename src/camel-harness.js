@@ -24,6 +24,7 @@ const scriptSettings = require("./camel-harness-settings.js");
 module.exports.startScript = function(script) {
   // Check script settings:
   if (scriptSettings.checkSettings(script) === false) {
+    // console.log("camel-harness: Incomplete settings or wrong file path!");
     return;
   }
 
@@ -52,10 +53,6 @@ module.exports.startScript = function(script) {
   script.scriptHandler.on("error", function(error) {
     if (typeof script.errorFunction === "function") {
       script.errorFunction(error);
-    } else {
-      // console.log(`camel-harness error stack: ${error.stack}`);
-      // console.log(`camel-harness error code: ${error.code}`);
-      // console.log(`camel-harness received signal: ${error.signal}`);
     }
   });
 
