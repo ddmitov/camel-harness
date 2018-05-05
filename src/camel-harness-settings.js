@@ -39,18 +39,10 @@ module.exports.checkSettings = function(script) {
     scriptSettingsOk = true;
   }
 
-  // If requestMethod is set, inputData or inputDataHarvester must be set:
-  if (script.requestMethod) {
-    if (!script.inputData || !script.inputDataHarvester) {
-      return false;
-    }
-  }
-
-  // If inputData or inputDataHarvester is set, requestMethod must be set:
-  if (script.inputData || script.inputDataHarvester) {
-    if (!script.requestMethod) {
-      return false;
-    }
+  // If requestMethod is set, inputData must also be set and vice versa:
+  if ((script.requestMethod && !script.inputData) ||
+      (script.inputData && !script.requestMethod)) {
+    return false;
   }
 
   return scriptSettingsOk;

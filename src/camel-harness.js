@@ -28,12 +28,6 @@ module.exports.startScript = function(script) {
     return;
   }
 
-  // If inputDataHarvester function is available,
-  // it is used as an alternative input data source:
-  if (typeof script.inputDataHarvester === "function") {
-    script.inputData = script.inputDataHarvester();
-  }
-
   // Set script environment:
   let environment = scriptEnvironment.setEnvironment(script);
 

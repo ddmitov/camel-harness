@@ -78,7 +78,7 @@ perlScriptObject.interpreterSwitches = interpreterSwitches;
 
 perlScriptObject.requestMethod = "POST";
 
-perlScriptObject.inputDataHarvester = function() {
+perlScriptObject.inputData = function() {
   let data = document.getElementById("input-box-id").value;
   return data;
 }
@@ -121,14 +121,12 @@ camelHarness.startScript(perlScriptObject);
 
 * **inputData:**  
   This object property requires ``requestMethod`` to be set.  
-
-* **inputDataHarvester:**  
-  This is a function that can harvest input data from an HTML form or any other data source and supply it as its return value. If ``inputData`` is defined, ``inputDataHarvester`` will not be used, but if ``inputData`` is not defined and ``inputDataHarvester`` is available, it will be used as an input data source.  
+  ``inputData`` can be either a variable or a function harvesting data from HTML forms or other data sources and supplying it as a return value.  
 
   Single input box simple example with no dependencies:  
 
   ```javascript
-  perlScriptObject.inputDataHarvester = function() {
+  perlScriptObject.inputData = function() {
     let data = document.getElementById("input-box-id").value;
     return data;
   }
@@ -137,7 +135,7 @@ camelHarness.startScript(perlScriptObject);
   Whole form simple example based on [jQuery](https://jquery.com/):  
 
   ```javascript
-  perlScriptObject.inputDataHarvester = function() {
+  perlScriptObject.inputData = function() {
     let formData = $("#form-id").serialize();
     return formData;
   }
