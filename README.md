@@ -129,11 +129,10 @@ camelHarness.startScript(perlScript);
 
 * **requestMethod:**  
   ``String`` holding either ``GET`` or ``POST`` as a value.  
-  ``requestMethod`` requires ``inputData`` to be set.  
+  ``requestMethod`` has to be set if the Perl script reads its input data in a CGI-like fashion.
 
 * **inputData:**  
   ``String`` or ``Function`` supplying user data as its return value.  
-  ``inputData`` requires ``requestMethod`` to be set.  
 
   Single HTML input box example with no dependencies:  
 

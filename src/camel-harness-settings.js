@@ -15,20 +15,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
 // THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// Check script settings:
+// Check mandatory script settings:
 module.exports.checkSettings = function (script) {
   let scriptSettingsOk = false;
 
-  // Check mandatory settings:
   if (script.interpreter && script.scriptFullPath &&
       typeof script.stdoutFunction === "function") {
     scriptSettingsOk = true;
-  }
-
-  // If requestMethod is set, inputData must also be set and vice versa:
-  if ((script.requestMethod && !script.inputData) ||
-      (script.inputData && !script.requestMethod)) {
-    return false;
   }
 
   return scriptSettingsOk;
