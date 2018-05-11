@@ -54,7 +54,7 @@ perlScript.scriptFullPath = "/test/test.pl";
 
 // mandatory object property:
 perlScript.stdoutFunction = function (stdout) {
-  document.getElementById("DOM-element-id").innerHTML = stdout;
+  document.getElementById("DOM-element-id").textContent = stdout;
 };
 
 perlScript.stderrFunction = function (stderr) {
@@ -102,30 +102,30 @@ camelHarness.startScript(perlScript);
 
 * **stdoutFunction:**  
   will be executed every time data is available on STDOUT  
-  The only parameter passed to the ``stdoutFunction`` is the STDOUT string.  
+  The only parameter passed to the ``stdoutFunction`` is the STDOUT ``String``.  
   *This object property is mandatory.*  
 
 * **stderrFunction:**  
   will be executed every time data is available on STDERR  
-  The only parameter passed to the ``stderrFunction`` is the STDERR string.  
+  The only parameter passed to the ``stderrFunction`` is the STDERR ``String``.  
 
 * **errorFunction:**  
   will be executed on Perl script error  
-  The only parameter passed to the ``errorFunction`` is the error object.  
+  The only parameter passed to the ``errorFunction`` is the error ``Object``.  
   The ``errorFunction`` can be used to display a message when Perl interpreter is not found.  
 
 * **exitFunction:**  
   will be executed when Perl script has ended  
-  The only parameter passed to the ``exitFunction`` is the exit code string.  
+  The only parameter passed to the ``exitFunction`` is the exit code ``String``.  
 
 * **interpreterSwitches:**  
-  ``Array`` supplied to the Perl interpreter on runtime  
+  ``Array`` supplied to the Perl interpreter  
 
 * **scriptArguments:**  
-  ``Array`` supplied to the Perl script on runtime  
+  ``Array`` supplied to the Perl script  
 
 * **environment:**  
-  ``Object`` containing new or modified environment for the Perl script and its interpreter  
+  ``Object`` containing clean environment for the Perl script and its interpreter  
 
 * **requestMethod:**  
   ``String`` holding either ``GET`` or ``POST`` as a value.  
