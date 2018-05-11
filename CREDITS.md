@@ -22,8 +22,10 @@ http://www.tutorialspoint.com/jquery/ajax-serialize.htm
 http://www.tutorialspoint.com/nodejs/nodejs_path_module.htm  
 
 https://gist.github.com/leommoore/4484379 (Node - Processes)  
+
 https://www.hacksparrow.com/how-to-write-node-js-modules.html  
 http://latower.com/blog/2008/11/12/splitting-a-long-javascript-string-across-multiple-lines/  
 https://www.gregjs.com/javascript/2016/checking-whether-a-file-directory-exists-without-using-fs-exists/  
 https://discuss.runkit.com/t/customizing-your-npm-packages-page-on-tonic/23  
 http://justbuildsomething.com/node-js-best-practices/  
+https://davidwalsh.name/merge-arrays-javascript  

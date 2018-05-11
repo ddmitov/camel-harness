@@ -32,10 +32,7 @@ module.exports.setArguments = function (script) {
 
   // Script arguments, if any, go after the script full path:
   if (script.scriptArguments && Array.isArray(script.scriptArguments)) {
-    for (let index = 0; index < script.scriptArguments.length; index++) {
-      let argument = script.scriptArguments[index];
-      interpreterArguments.push(argument);
-    }
+    Array.prototype.push.apply(interpreterArguments, script.scriptArguments);
   }
 
   return interpreterArguments;
