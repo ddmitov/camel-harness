@@ -15,23 +15,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
 // THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-const filesystem = require("fs");
+const fileSystem = require("fs");
 const perlProcess = require("child_process").spawn;
 
-const allArguments = require("./camel-harness-arguments.js");
-const scriptEnvironment = require("./camel-harness-environment.js");
+const commandLine = require("./camel-harness-command-line.js");
+const environment = require("./camel-harness-environment.js");
 const scriptSettings = require("./camel-harness-settings.js");
 
-// This function returns only after script path check is complete.
+// Check Perl script path:
 function checkScriptPath (scriptFullPath) {
   try {
-    filesystem.accessSync(scriptFullPath);
+    fileSystem.accessSync(scriptFullPath);
     return true;
   } catch (exception) {
     return false;
   }
 }
 
+// Start Perl script - the main function of 'camel-harness':
 module.exports.startScript = function (script) {
   // Check script settings:
   if (scriptSettings.checkSettings(script) === false) {
@@ -43,15 +44,15 @@ module.exports.startScript = function (script) {
     return;
   }
 
-  // Set script environment:
-  let environment = scriptEnvironment.setEnvironment(script);
-
   // Set all interpreter arguments:
-  let interpreterArguments = allArguments.setArguments(script);
+  let interpreterArguments = commandLine.setArguments(script);
+
+  // Set script environment:
+  let scriptEnvironment = environment.setEnvironment(script);
 
   // Run the supplied script:
   script.scriptHandler =
-    perlProcess(script.interpreter, interpreterArguments, {env: environment});
+    perlProcess(script.interpreter, interpreterArguments, {env: scriptEnvironment});
 
   // Send POST data to the script:
   if (script.requestMethod === "POST") {

@@ -15,10 +15,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
 // THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// Check script settings:
 module.exports.checkSettings = function (script) {
   let scriptSettingsOk = false;
 
-  // Check mandatory settings and script full path:
+  // Check mandatory settings:
   if (script.interpreter && script.scriptFullPath &&
       typeof script.stdoutFunction === "function") {
     scriptSettingsOk = true;
