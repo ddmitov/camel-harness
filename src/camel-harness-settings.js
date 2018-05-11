@@ -15,26 +15,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
 // THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-const filesystemObject = require("fs");
-
-// This function returns only after script existence check is complete.
-function checkScriptExistence(scriptFullPath) {
-  try {
-    filesystemObject.accessSync(scriptFullPath);
-    return true;
-  } catch (exception) {
-    // console.log(`camel-harness: ${scriptFullPath} is not found.`);
-    return false;
-  }
-}
-
-module.exports.checkSettings = function(script) {
+module.exports.checkSettings = function (script) {
   let scriptSettingsOk = false;
 
   // Check mandatory settings and script full path:
-  if (script.interpreter &&
-      script.scriptFullPath &&
-      checkScriptExistence(script.scriptFullPath) === true &&
+  if (script.interpreter && script.scriptFullPath &&
       typeof script.stdoutFunction === "function") {
     scriptSettingsOk = true;
   }

@@ -33,15 +33,15 @@ perlTestScript.interpreterSwitches = interpreterSwitches;
 
 perlTestScript.scriptFullPath = perlTestScriptFullPath;
 
-perlTestScript.stdoutFunction = function(stdout) {
+perlTestScript.stdoutFunction = function (stdout) {
   console.log(`camel-harness STDOUT test: ${stdout}`);
 };
 
-perlTestScript.stderrFunction = function(stderr) {
+perlTestScript.stderrFunction = function (stderr) {
   console.log(`camel-harness STDERR test: ${stderr}`);
 };
 
-perlTestScript.errorFunction = function(error) {
+perlTestScript.errorFunction = function (error) {
   // console.log(`camel-harness error stack: ${error.stack}`);
   // console.log(`camel-harness error code: ${error.code}`);
   // console.log(`camel-harness received signal: ${error.signal}`);
@@ -51,7 +51,7 @@ perlTestScript.errorFunction = function(error) {
   }
 };
 
-perlTestScript.exitFunction = function(exitCode) {
+perlTestScript.exitFunction = function (exitCode) {
   console.log(`camel-harness test script exit code is ${exitCode}`);
 };
 

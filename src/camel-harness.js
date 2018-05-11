@@ -15,16 +15,31 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
 // THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+const filesystem = require("fs");
 const perlProcess = require("child_process").spawn;
 
 const allArguments = require("./camel-harness-arguments.js");
 const scriptEnvironment = require("./camel-harness-environment.js");
 const scriptSettings = require("./camel-harness-settings.js");
 
-module.exports.startScript = function(script) {
+// This function returns only after script path check is complete.
+function checkScriptPath (scriptFullPath) {
+  try {
+    filesystem.accessSync(scriptFullPath);
+    return true;
+  } catch (exception) {
+    return false;
+  }
+}
+
+module.exports.startScript = function (script) {
   // Check script settings:
   if (scriptSettings.checkSettings(script) === false) {
-    // console.log("camel-harness: Incomplete settings or wrong file path!");
+    return;
+  }
+
+  // Check script path:
+  if (checkScriptPath(script.scriptFullPath) === false) {
     return;
   }
 
@@ -44,26 +59,26 @@ module.exports.startScript = function(script) {
   }
 
   // Handle script errors:
-  script.scriptHandler.on("error", function(error) {
+  script.scriptHandler.on("error", function (error) {
     if (typeof script.errorFunction === "function") {
       script.errorFunction(error);
     }
   });
 
   // Handle STDOUT:
-  script.scriptHandler.stdout.on("data", function(data) {
+  script.scriptHandler.stdout.on("data", function (data) {
     script.stdoutFunction(data.toString("utf8"));
   });
 
   // Handle STDERR:
-  script.scriptHandler.stderr.on("data", function(data) {
+  script.scriptHandler.stderr.on("data", function (data) {
     if (typeof script.stderrFunction === "function") {
       script.stderrFunction(data.toString("utf8"));
     }
   });
 
   // Handle script exit:
-  script.scriptHandler.on("exit", function(exitCode) {
+  script.scriptHandler.on("exit", function (exitCode) {
     if (typeof script.exitFunction === "function") {
       script.exitFunction(exitCode);
     }

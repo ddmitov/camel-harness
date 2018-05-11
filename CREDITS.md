@@ -1,4 +1,4 @@
-Thanks and Credits
+Credits
 --------------------------------------------------------------------------------
 Amata mea Argeia - gratiam magnam tibi ago!  
 Patientia tua in studiis meis computatoriis auxilium meum maximum!  

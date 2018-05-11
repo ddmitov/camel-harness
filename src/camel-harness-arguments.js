@@ -15,12 +15,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
 // THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-module.exports.setArguments = function(script) {
+// Set the whole command line with the
+// interpreter, interpreter switches, script full path and script arguments:
+module.exports.setArguments = function (script) {
   let interpreterArguments;
 
   // Interpreter arguments, if any, go before the script full path:
-  if (script.interpreterSwitches &&
-      Array.isArray(script.interpreterSwitches)) {
+  if (script.interpreterSwitches && Array.isArray(script.interpreterSwitches)) {
     interpreterArguments = script.interpreterSwitches;
   } else {
     interpreterArguments = [];
@@ -28,5 +29,13 @@ module.exports.setArguments = function(script) {
 
   // The full path of the script is the minimal interpreter argument:
   interpreterArguments.push(script.scriptFullPath);
+
+  // Script arguments, if any, go after the script full path:
+  if (script.scriptArguments && Array.isArray(script.scriptArguments)) {
+    for (index = 0; index < script.scriptArguments.length; index++) {
+      interpreterArguments.push(script.scriptArguments[index]);
+    }
+  }
+
   return interpreterArguments;
 };

@@ -1,11 +1,11 @@
-const CAMEL_HARNESS = require("camel-harness");
+const camelHarness = require("camel-harness");
 
 let perlScriptObject = {};
 perlScriptObject.interpreter = "perl";
 perlScriptObject.scriptFullPath = "/test/test.pl";
 
-perlScriptObject.stdoutFunction = function(stdout) {
+perlScriptObject.stdoutFunction = function (stdout) {
   console.log(stdout);
 };
 
-CAMEL_HARNESS.startScript(perlScriptObject);
+camelHarness.startScript(perlScriptObject);

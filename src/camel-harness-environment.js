@@ -15,9 +15,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
 // THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-module.exports.setEnvironment = function(script) {
-  // Script environment inherits Node environment:
-  let scriptEnvironment = process.env;
+module.exports.setEnvironment = function (script) {
+  let scriptEnvironment;
+
+  // Choose between inherited environment and new environment:
+  if (typeof script.environment === "object") {
+    scriptEnvironment = script.environment;
+  } else {
+    scriptEnvironment = process.env;
+  }
 
   // Handle GET requests:
   if (script.requestMethod === "GET") {

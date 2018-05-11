@@ -17,15 +17,15 @@ camel-harness
 ```javascript
 const camelHarness = require("camel-harness");
 
-let perlScriptObject = {};
-perlScriptObject.interpreter = "perl";
-perlScriptObject.scriptFullPath = "/test/test.pl";
+let perlScript = {};
+perlScript.interpreter = "perl";
+perlScript.scriptFullPath = "/test/test.pl";
 
-perlScriptObject.stdoutFunction = function(stdout) {
+perlScript.stdoutFunction = function (stdout) {
   console.log(stdout);
 };
 
-camelHarness.startScript(perlScriptObject);
+camelHarness.startScript(perlScript);
 ```
 
 ## Core Dependencies
@@ -43,99 +43,111 @@ camel-harness npm package test will fail if no ``perl`` binary is available on P
 ```javascript
 const camelHarness = require("camel-harness");
 
-let perlScriptObject = {};
+// Perl script settings object:
+let perlScript = {};
 
  // mandatory object property
-perlScriptObject.interpreter = "perl";
+perlScript.interpreter = "perl";
 
  // mandatory object property
-perlScriptObject.scriptFullPath = "/test/test.pl";
+perlScript.scriptFullPath = "/test/test.pl";
 
 // mandatory object property:
-perlScriptObject.stdoutFunction = function(stdout) {
+perlScript.stdoutFunction = function (stdout) {
   document.getElementById("DOM-element-id").innerHTML = stdout;
 };
 
-perlScriptObject.stderrFunction = function(stderr) {
+perlScript.stderrFunction = function (stderr) {
   console.log("Perl script STDERR:\n");
   console.log(stderr);
 };
 
-perlScriptObject.errorFunction = function(error) {
+perlScript.errorFunction = function (error) {
   if (error && error.code === "ENOENT") {
     console.log("Perl interpreter was not found.");
   }
 };
 
-perlScriptObject.exitFunction = function(exitCode) {
+perlScript.exitFunction = function (exitCode) {
   console.log(`Perl script exited with exit code ${exitCode}`);
 };
 
-// interpreter switches must be an array:
-let interpreterSwitches = [];
-interpreterSwitches.push("-W");
-perlScriptObject.interpreterSwitches = interpreterSwitches;
+perlScript.interpreterSwitches = [];
+perlScript.interpreterSwitches.push("-W");
 
-perlScriptObject.requestMethod = "POST";
+perlScript.scriptArguments = [];
+perlScript.scriptArguments.push("test");
 
-perlScriptObject.inputData = function() {
+perlScript.environment = {};
+perlScript.environment.PATH = process.env.PATH;
+perlScript.environment.TEST = "test";
+
+perlScript.requestMethod = "POST";
+
+perlScript.inputData = function () {
   let data = document.getElementById("input-box-id").value;
   return data;
 }
 
-camelHarness.startScript(perlScriptObject);
+camelHarness.startScript(perlScript);
 ```
 
 * **perlInterpreter:**  
-  This is the full pathname of a Perl interpreter or just the filename of a Perl interpreter on PATH.  
+  ``String`` containing the full pathname of a Perl interpreter or the filename of a Perl interpreter on PATH  
   *This object property is mandatory.*  
 
 * **scriptFullPath:**  
-  This is the full path of the Perl script that is going to be executed.  
+  ``String`` containing the full path of the Perl script that is going to be executed  
   *This object property is mandatory.*  
 
 * **stdoutFunction:**  
-  This is the function that will be executed every time when output is available on STDOUT.  
+  will be executed every time data is available on STDOUT  
   The only parameter passed to the ``stdoutFunction`` is the STDOUT string.  
   *This object property is mandatory.*  
 
 * **stderrFunction:**  
-  This is the function that will be executed every time when output is available on STDERR.  
-  The only parameter passed to this function is the STDERR string.  
+  will be executed every time data is available on STDERR  
+  The only parameter passed to the ``stderrFunction`` is the STDERR string.  
 
 * **errorFunction:**  
-  This is the function that will be executed on script error.  
-  The only parameter passed to this function is the error object.  
-  The ``errorFunction`` could be used for displaying a message when Perl interpreter is not found.  
+  will be executed on Perl script error  
+  The only parameter passed to the ``errorFunction`` is the error object.  
+  The ``errorFunction`` can be used to display a message when Perl interpreter is not found.  
 
 * **exitFunction:**  
-  This is the function that will be executed when a Perl script is finished.  
-  The only parameter passed to this function is the exit code string.  
+  will be executed when Perl script has ended  
+  The only parameter passed to the ``exitFunction`` is the exit code string.  
 
 * **interpreterSwitches:**  
-  They are supplied to the Perl interpreter on runtime.  
+  ``Array`` supplied to the Perl interpreter on runtime  
+
+* **scriptArguments:**  
+  ``Array`` supplied to the Perl script on runtime  
+
+* **environment:**  
+  ``Object`` containing new or modified environment for the Perl script and its interpreter  
 
 * **requestMethod:**  
-  Only ``GET`` or ``POST`` are recognized.  
-  This object property requires ``inputData`` to be set.  
+  ``String`` holding either ``GET`` or ``POST`` as a value.  
+  ``requestMethod`` requires ``inputData`` to be set.  
 
 * **inputData:**  
-  This object property requires ``requestMethod`` to be set.  
-  ``inputData`` can be either a variable or a function harvesting data from HTML forms or other data sources and supplying it as a return value.  
+  ``String`` or ``Function`` supplying user data as its return value.  
+  ``inputData`` requires ``requestMethod`` to be set.  
 
-  Single input box simple example with no dependencies:  
+  Single HTML input box example with no dependencies:  
 
   ```javascript
-  perlScriptObject.inputData = function() {
+  perlScript.inputData = function () {
     let data = document.getElementById("input-box-id").value;
     return data;
   }
   ```
 
-  Whole form simple example based on [jQuery](https://jquery.com/):  
+  Whole HTML form example based on [jQuery](https://jquery.com/):  
 
   ```javascript
-  perlScriptObject.inputData = function() {
+  perlScript.inputData = function () {
     let formData = $("#form-id").serialize();
     return formData;
   }
@@ -146,16 +158,17 @@ camel-harness can also start and communicate with interactive scripts having the
 
 ```javascript
 let data = document.getElementById("interactive-script-input").value;
-perlScriptObject.scriptHandler.stdin.write(data);
+perlScript.scriptHandler.stdin.write(data);
 ```
 
-The camel-harness demo packages for [Electron](https://www.npmjs.com/package/camel-harness-demo-electron) and [NW.js](https://www.npmjs.com/package/camel-harness-demo-nwjs) include a Perl script that can be constantly fed with data from an HTML interface. Perl with the ``AnyEvent`` Perl module has to be available on PATH.  
+The camel-harness demo packages for [Electron](https://www.npmjs.com/package/camel-harness-demo-electron) and [NW.js](https://www.npmjs.com/package/camel-harness-demo-nwjs) include a Perl script that can be constantly fed with data from an HTML interface. Perl with the ``AnyEvent`` CPAN module has to be available on PATH.  
 
 ## [Electron Demo](https://www.npmjs.com/package/camel-harness-demo-electron)
 
 ## [NW.js Demo](https://www.npmjs.com/package/camel-harness-demo-nwjs)
 
-## [Thanks and Credits](./CREDITS.md)
+## [Credits](./CREDITS.md)
 
 ## [License](./LICENSE.md)
-MIT © 2016 - 2018 Dimitar D. Mitov  
+MIT 2016 - 2018  
+Dimitar D. Mitov  
