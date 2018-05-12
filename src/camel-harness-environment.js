@@ -17,25 +17,21 @@
 
 // Set script environment:
 module.exports.setEnvironment = function (script) {
-  let scriptEnvironment;
-
   // Choose between inherited environment and new environment:
-  if (typeof script.environment === "object") {
-    scriptEnvironment = script.environment;
-  } else {
-    scriptEnvironment = process.env;
+  if (typeof script.environment !== "object") {
+    script.environment = process.env;
   }
 
   // Handle GET requests:
   if (script.requestMethod === "GET") {
-    scriptEnvironment.REQUEST_METHOD = "GET";
-    scriptEnvironment.QUERY_STRING = script.inputData;
+    script.environment.REQUEST_METHOD = "GET";
+    script.environment.QUERY_STRING = script.inputData;
   }
 
   // Handle POST requests:
   if (script.requestMethod === "POST") {
-    scriptEnvironment.REQUEST_METHOD = "POST";
-    scriptEnvironment.CONTENT_LENGTH = script.inputData.length;
+    script.environment.REQUEST_METHOD = "POST";
+    script.environment.CONTENT_LENGTH = script.inputData.length;
   }
 
   return scriptEnvironment;
