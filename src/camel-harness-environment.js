@@ -15,13 +15,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
 // THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// Set script environment:
-module.exports.setEnvironment = function (script) {
-  // Choose between inherited environment and new environment:
-  if (typeof script.environment !== "object") {
-    script.environment = process.env;
-  }
-
+function setInputVariables (script) {
   // Handle GET requests:
   if (script.requestMethod === "GET") {
     script.environment.REQUEST_METHOD = "GET";
@@ -33,6 +27,18 @@ module.exports.setEnvironment = function (script) {
     script.environment.REQUEST_METHOD = "POST";
     script.environment.CONTENT_LENGTH = script.inputData.length;
   }
+
+  return script.environment;
+}
+
+// Set script environment:
+module.exports.setEnvironment = function (script) {
+  // Choose between inherited environment and new environment:
+  if (typeof script.environment !== "object") {
+    script.environment = process.env;
+  }
+
+  script.environment = setInputVariables(script);
 
   return script.environment;
 };
