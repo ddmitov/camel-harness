@@ -34,5 +34,5 @@ module.exports.setEnvironment = function (script) {
     script.environment.CONTENT_LENGTH = script.inputData.length;
   }
 
-  return scriptEnvironment;
+  return script.environment;
 };
