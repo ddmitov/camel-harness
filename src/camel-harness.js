@@ -20,12 +20,17 @@ const perlProcess = require("child_process").spawn;
 const commandLine = require("./camel-harness-command-line.js");
 const environment = require("./camel-harness-environment.js");
 
-// Start Perl script - the main function of 'camel-harness':
-module.exports.startScript = function (script) {
-  // Check mandatory script settings:
+// Check mandatory script settings:
+function checkSettings (script) {
   if (!script.scriptFullPath || typeof script.stdoutFunction !== "function") {
     throw Error("camel-harness: Missing 'scriptFullPath' or 'stdoutFunction'");
   }
+}
+
+// Start Perl script - the main function of 'camel-harness':
+module.exports.startScript = function (script) {
+  // Check mandatory script settings:
+  checkSettings(script);
 
   // Run script:
   script.scriptHandler =
