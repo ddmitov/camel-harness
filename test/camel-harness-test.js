@@ -22,37 +22,35 @@ let perlTestScriptFullPath = path.join(__dirname, "camel-harness-test.pl");
 // Initialize the Perl test script object:
 let perlTestScript = {};
 
-perlTestScript.interpreter = "perl";
-
-// perlTestScript.requestMethod = "GET";
-// perlTestScript.inputData = "test";
-
-let interpreterSwitches = [];
-interpreterSwitches.push("-W");
-perlTestScript.interpreterSwitches = interpreterSwitches;
+perlTestScript.interpreterSwitches = [];
+perlTestScript.interpreterSwitches.push("-W");
 
 perlTestScript.scriptFullPath = perlTestScriptFullPath;
 
 perlTestScript.stdoutFunction = function (stdout) {
-  console.log(`camel-harness STDOUT test: ${stdout}`);
+  console.log(`camel-harness test STDOUT: ${stdout}`);
 };
 
 perlTestScript.stderrFunction = function (stderr) {
-  console.log(`camel-harness STDERR test: ${stderr}`);
+  console.log(`camel-harness test STDERR: ${stderr}`);
 };
 
 perlTestScript.errorFunction = function (error) {
-  // console.log(`camel-harness error stack: ${error.stack}`);
-  // console.log(`camel-harness error code: ${error.code}`);
-  // console.log(`camel-harness received signal: ${error.signal}`);
-
-  if (error && error.code === "ENOENT") {
+  if (error.code === "ENOENT") {
     console.log("Perl interpreter was not found.");
   }
+
+  console.log(`camel-harness error stack: ${error.stack}`);
+  console.log(`camel-harness error code: ${error.code}`);
+  console.log(`camel-harness received signal: ${error.signal}`);
 };
 
 perlTestScript.exitFunction = function (exitCode) {
-  console.log(`camel-harness test script exit code is ${exitCode}`);
+  if (exitCode === 2) {
+    console.log("Perl script was not found.");
+  }
+
+  console.log(`camel-harness test exit code is ${exitCode}`);
 };
 
 // Start the Perl test script:

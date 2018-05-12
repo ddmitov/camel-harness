@@ -15,47 +15,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
 // THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-const fileSystem = require("fs");
 const perlProcess = require("child_process").spawn;
 
 const commandLine = require("./camel-harness-command-line.js");
 const environment = require("./camel-harness-environment.js");
-const scriptSettings = require("./camel-harness-settings.js");
-
-// Check Perl script path:
-function checkScriptPath (scriptFullPath) {
-  try {
-    fileSystem.accessSync(scriptFullPath);
-    return true;
-  } catch (exception) {
-    return false;
-  }
-}
 
 // Start Perl script - the main function of 'camel-harness':
 module.exports.startScript = function (script) {
-  // Check script settings:
-  if (scriptSettings.checkSettings(script) === false) {
-    return;
+  // Check mandatory script settings:
+  if (!script.scriptFullPath || typeof script.stdoutFunction !== "function") {
+    throw Error("camel-harness: Missing 'scriptFullPath' or 'stdoutFunction'");
   }
 
-  // Check script path:
-  if (checkScriptPath(script.scriptFullPath) === false) {
-    return;
-  }
-
-  // Set all interpreter arguments:
-  let interpreterArguments = commandLine.setArguments(script);
-
-  // Set script environment:
-  let scriptEnvironment = environment.setEnvironment(script);
-
-  // Run the supplied script:
+  // Run script:
   script.scriptHandler =
-    perlProcess(script.interpreter, interpreterArguments, {env: scriptEnvironment});
+    perlProcess((script.interpreter || "perl"),
+                commandLine.setArguments(script),
+                {env: environment.setEnvironment(script)});
 
-  // Send POST data to the script:
-  if (script.requestMethod === "POST") {
+  // Send POST data to script:
+  if (script.inputData && script.requestMethod !== "GET") {
     script.scriptHandler.stdin.write(`${script.inputData}\n`);
   }
 
@@ -66,12 +45,12 @@ module.exports.startScript = function (script) {
     }
   });
 
-  // Handle STDOUT:
+  // Handle script STDOUT:
   script.scriptHandler.stdout.on("data", function (data) {
     script.stdoutFunction(data.toString("utf8"));
   });
 
-  // Handle STDERR:
+  // Handle script STDERR:
   script.scriptHandler.stderr.on("data", function (data) {
     if (typeof script.stderrFunction === "function") {
       script.stderrFunction(data.toString("utf8"));

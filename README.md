@@ -18,7 +18,6 @@ camel-harness
 const camelHarness = require("camel-harness");
 
 let perlScript = {};
-perlScript.interpreter = "perl";
 perlScript.scriptFullPath = "/test/test.pl";
 
 perlScript.stdoutFunction = function (stdout) {
@@ -28,13 +27,11 @@ perlScript.stdoutFunction = function (stdout) {
 camelHarness.startScript(perlScript);
 ```
 
-## Core Dependencies
-* ``child_process``
-* ``fs``
+## Core Dependency
+``child_process``
 
 ## External Dependency
-The only external dependency of camel-harness is a Perl interpreter on PATH or  
-any other Perl interpreter identified by its full pathname.  
+Perl interpreter on PATH or identified by its full pathname  
 
 camel-harness npm package test will fail if no ``perl`` binary is available on PATH.  
 
@@ -45,9 +42,6 @@ const camelHarness = require("camel-harness");
 
 // Perl script settings object:
 let perlScript = {};
-
- // mandatory object property
-perlScript.interpreter = "perl";
 
  // mandatory object property
 perlScript.scriptFullPath = "/test/test.pl";
@@ -63,14 +57,18 @@ perlScript.stderrFunction = function (stderr) {
 };
 
 perlScript.errorFunction = function (error) {
-  if (error && error.code === "ENOENT") {
+  if (error.code === "ENOENT") {
     console.log("Perl interpreter was not found.");
   }
 };
 
 perlScript.exitFunction = function (exitCode) {
-  console.log(`Perl script exited with exit code ${exitCode}`);
+  if (exitCode === 2) {
+    console.log("Perl script was not found.");
+  }
 };
+
+perlScript.interpreter = "perl";
 
 perlScript.interpreterSwitches = [];
 perlScript.interpreterSwitches.push("-W");
@@ -92,12 +90,8 @@ perlScript.inputData = function () {
 camelHarness.startScript(perlScript);
 ```
 
-* **perlInterpreter:**  
-  ``String`` containing the full pathname of a Perl interpreter or the filename of a Perl interpreter on PATH  
-  *This object property is mandatory.*  
-
 * **scriptFullPath:**  
-  ``String`` containing the full path of the Perl script that is going to be executed  
+  ``String`` containing Perl script full path  
   *This object property is mandatory.*  
 
 * **stdoutFunction:**  
@@ -112,24 +106,29 @@ camelHarness.startScript(perlScript);
 * **errorFunction:**  
   will be executed on Perl script error  
   The only parameter passed to the ``errorFunction`` is the error ``Object``.  
-  The ``errorFunction`` can be used to display a message when Perl interpreter is not found.  
+  The ``errorFunction`` can generate a message when Perl interpreter is not found.  
 
 * **exitFunction:**  
   will be executed when Perl script has ended  
   The only parameter passed to the ``exitFunction`` is the exit code ``String``.  
+  The ``exitFunction`` can generate a message when Perl script is not found.  
+
+* **perlInterpreter:**  
+  ``String`` containing Perl interpreter: either filename on PATH or full pathname  
+  If no ``perlInterpreter`` is defined, ``perl`` binary on PATH is used, if available.
 
 * **interpreterSwitches:**  
-  ``Array`` supplied to the Perl interpreter  
+  ``Array`` containing Perl interpreter switches  
 
 * **scriptArguments:**  
-  ``Array`` supplied to the Perl script  
+  ``Array`` containing Perl script arguments  
 
 * **environment:**  
-  ``Object`` containing clean environment for the Perl script and its interpreter  
+  ``Object`` containing clean Perl script environment  
 
 * **requestMethod:**  
   ``String`` holding either ``GET`` or ``POST`` as a value.  
-  ``requestMethod`` has to be set if the Perl script reads its input data in a CGI-like fashion.
+  ``requestMethod`` has to be set for Perl scripts reading input data in a CGI fashion.
 
 * **inputData:**  
   ``String`` or ``Function`` supplying user data as its return value.  
@@ -160,7 +159,7 @@ let data = document.getElementById("interactive-script-input").value;
 perlScript.scriptHandler.stdin.write(data);
 ```
 
-The camel-harness demo packages for [Electron](https://www.npmjs.com/package/camel-harness-demo-electron) and [NW.js](https://www.npmjs.com/package/camel-harness-demo-nwjs) include a Perl script that can be constantly fed with data from an HTML interface. Perl with the ``AnyEvent`` CPAN module has to be available on PATH.  
+camel-harness demo packages for [Electron](https://www.npmjs.com/package/camel-harness-demo-electron) and [NW.js](https://www.npmjs.com/package/camel-harness-demo-nwjs) include a Perl script that can be constantly fed with data from an HTML interface. Perl with the ``AnyEvent`` CPAN module has to be available on PATH.  
 
 ## [Electron Demo](https://www.npmjs.com/package/camel-harness-demo-electron)
 
