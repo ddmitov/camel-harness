@@ -15,30 +15,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
 // THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-function setInputVariables (script) {
+// Handle all environment variables needed for GET and POST request methods:
+function setInputVariables (settings) {
   // Handle GET requests:
-  if (script.requestMethod === "GET") {
-    script.environment.REQUEST_METHOD = "GET";
-    script.environment.QUERY_STRING = script.inputData;
+  if (settings.requestMethod === "GET") {
+    settings.environment.REQUEST_METHOD = "GET";
+    settings.environment.QUERY_STRING = settings.inputData;
   }
 
   // Handle POST requests:
-  if (script.requestMethod === "POST") {
-    script.environment.REQUEST_METHOD = "POST";
-    script.environment.CONTENT_LENGTH = script.inputData.length;
+  if (settings.requestMethod === "POST") {
+    settings.environment.REQUEST_METHOD = "POST";
+    settings.environment.CONTENT_LENGTH = settings.inputData.length;
   }
 
-  return script.environment;
+  return settings.environment;
 }
 
 // Set script environment:
-module.exports.setEnvironment = function (script) {
+module.exports.setEnvironment = function (settings) {
   // Choose between inherited environment and new environment:
-  if (typeof script.environment !== "object") {
-    script.environment = process.env;
+  if (typeof settings.environment !== "object") {
+    settings.environment = process.env;
   }
 
-  script.environment = setInputVariables(script);
+  // Set environment variables for GET and POST requests, if any:
+  settings.environment = setInputVariables(settings);
 
-  return script.environment;
+  return settings.environment;
 };

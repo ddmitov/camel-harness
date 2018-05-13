@@ -21,51 +21,51 @@ const commandLine = require("./camel-harness-command-line.js");
 const environment = require("./camel-harness-environment.js");
 
 // Check mandatory script settings:
-function checkSettings (script) {
-  if (!script.scriptFullPath || typeof script.stdoutFunction !== "function") {
+function checkSettings (settings) {
+  if (!settings.scriptFullPath || typeof settings.stdoutFunction !== "function") {
     throw Error("camel-harness: Missing 'scriptFullPath' or 'stdoutFunction'");
   }
 }
 
 // Start Perl script - the main function of 'camel-harness':
-module.exports.startScript = function (script) {
+module.exports.startScript = function (settings) {
   // Check mandatory script settings:
-  checkSettings(script);
+  checkSettings(settings);
 
   // Run script:
-  script.scriptHandler =
-    perlProcess((script.interpreter || "perl"),
-                commandLine.setArguments(script),
-                {env: environment.setEnvironment(script)});
+  settings.scriptHandler =
+    perlProcess((settings.interpreter || "perl"),
+                commandLine.setArguments(settings),
+                {env: environment.setEnvironment(settings)});
 
   // Send POST data to script:
-  if (script.inputData && script.requestMethod !== "GET") {
-    script.scriptHandler.stdin.write(`${script.inputData}\n`);
+  if (settings.inputData && settings.requestMethod !== "GET") {
+    settings.scriptHandler.stdin.write(`${settings.inputData}\n`);
   }
 
   // Handle script errors:
-  script.scriptHandler.on("error", function (error) {
-    if (typeof script.errorFunction === "function") {
-      script.errorFunction(error);
+  settings.scriptHandler.on("error", function (error) {
+    if (typeof settings.errorFunction === "function") {
+      settings.errorFunction(error);
     }
   });
 
   // Handle script STDOUT:
-  script.scriptHandler.stdout.on("data", function (data) {
-    script.stdoutFunction(data.toString("utf8"));
+  settings.scriptHandler.stdout.on("data", function (data) {
+    settings.stdoutFunction(data.toString("utf8"));
   });
 
   // Handle script STDERR:
-  script.scriptHandler.stderr.on("data", function (data) {
-    if (typeof script.stderrFunction === "function") {
-      script.stderrFunction(data.toString("utf8"));
+  settings.scriptHandler.stderr.on("data", function (data) {
+    if (typeof settings.stderrFunction === "function") {
+      settings.stderrFunction(data.toString("utf8"));
     }
   });
 
   // Handle script exit:
-  script.scriptHandler.on("exit", function (exitCode) {
-    if (typeof script.exitFunction === "function") {
-      script.exitFunction(exitCode);
+  settings.scriptHandler.on("exit", function (exitCode) {
+    if (typeof settings.exitFunction === "function") {
+      settings.exitFunction(exitCode);
     }
   });
 };

@@ -17,22 +17,22 @@
 
 // Set the whole command line with the
 // interpreter, interpreter switches, script full path and script arguments:
-module.exports.setArguments = function (script) {
-  let interpreterArguments;
+module.exports.setArguments = function (settings) {
+  let interpreterArguments = [];
 
   // Interpreter arguments, if any, go before the script full path:
-  if (script.interpreterSwitches && Array.isArray(script.interpreterSwitches)) {
-    interpreterArguments = script.interpreterSwitches;
-  } else {
-    interpreterArguments = [];
+  if (settings.interpreterSwitches &&
+      Array.isArray(settings.interpreterSwitches)) {
+    interpreterArguments = settings.interpreterSwitches;
   }
 
   // The full path of the script is the minimal interpreter argument:
-  interpreterArguments.push(script.scriptFullPath);
+  interpreterArguments.push(settings.scriptFullPath);
 
   // Script arguments, if any, go after the script full path:
-  if (script.scriptArguments && Array.isArray(script.scriptArguments)) {
-    Array.prototype.push.apply(interpreterArguments, script.scriptArguments);
+  if (settings.scriptArguments &&
+      Array.isArray(settings.scriptArguments)) {
+    Array.prototype.push.apply(interpreterArguments, settings.scriptArguments);
   }
 
   return interpreterArguments;
