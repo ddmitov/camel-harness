@@ -20,7 +20,7 @@ const perlProcess = require("child_process").spawn;
 const commandLine = require("./camel-harness-command-line.js");
 const environment = require("./camel-harness-environment.js");
 
-// Check mandatory script settings:
+// Check mandatory script settings - 'scriptFullPath' and 'stdoutFunction':
 function checkSettings (settings) {
   if (!settings.scriptFullPath || typeof settings.stdoutFunction !== "function") {
     throw Error("camel-harness: Missing 'scriptFullPath' or 'stdoutFunction'");
@@ -28,6 +28,7 @@ function checkSettings (settings) {
 }
 
 // Write data on script STDIN:
+// Data is written on script STDIN if 'GET' request method is not set.
 function stdinWrite (settings) {
   if (settings.inputData && settings.requestMethod !== "GET") {
     settings.scriptHandler.stdin.write(`${settings.inputData}\n`);
@@ -35,6 +36,7 @@ function stdinWrite (settings) {
 }
 
 // Start Perl script - the main function of 'camel-harness':
+// All Perl scripts are executed asynchronously.
 module.exports.startScript = function (settings) {
   // Check mandatory script settings:
   checkSettings(settings);
@@ -48,13 +50,6 @@ module.exports.startScript = function (settings) {
   // Write data on script STDIN, if any:
   stdinWrite (settings);
 
-  // Handle script errors:
-  settings.scriptHandler.on("error", function (error) {
-    if (typeof settings.errorFunction === "function") {
-      settings.errorFunction(error);
-    }
-  });
-
   // Handle script STDOUT:
   settings.scriptHandler.stdout.on("data", function (data) {
     settings.stdoutFunction(data.toString("utf8"));
@@ -64,6 +59,13 @@ module.exports.startScript = function (settings) {
   settings.scriptHandler.stderr.on("data", function (data) {
     if (typeof settings.stderrFunction === "function") {
       settings.stderrFunction(data.toString("utf8"));
+    }
+  });
+
+  // Handle script errors:
+  settings.scriptHandler.on("error", function (error) {
+    if (typeof settings.errorFunction === "function") {
+      settings.errorFunction(error);
     }
   });
 
