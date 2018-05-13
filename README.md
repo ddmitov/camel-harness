@@ -2,11 +2,9 @@ camel-harness
 --------------------------------------------------------------------------------
 [![GitHub Version](https://img.shields.io/github/release/ddmitov/camel-harness.svg)](https://github.com/ddmitov/camel-harness/releases)
 [![NPM Version](https://img.shields.io/npm/v/camel-harness.svg)](https://www.npmjs.com/package/camel-harness)
-[![GitHub License](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE.md)
-
+[![GitHub License](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE.md)  
 [![Travis CI Build Status](https://travis-ci.org/ddmitov/camel-harness.svg?branch=master)](https://travis-ci.org/ddmitov/camel-harness)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ddmitov/camel-harness?branch=master&svg=true)](https://ci.appveyor.com/project/ddmitov/camel-harness)
-
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ddmitov/camel-harness?branch=master&svg=true)](https://ci.appveyor.com/project/ddmitov/camel-harness)  
 [![Coverity Scan Build Status](https://scan.coverity.com/projects/11336/badge.svg)](https://scan.coverity.com/projects/ddmitov-camel-harness)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/4b8a244d415b4bafbdf9e50148bf7372)](https://www.codacy.com/app/ddmitov/camel-harness?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ddmitov/camel-harness&amp;utm_campaign=Badge_Grade)
 [![Maintainability](https://api.codeclimate.com/v1/badges/b9431bac8e7b41daab6f/maintainability)](https://codeclimate.com/github/ddmitov/camel-harness/maintainability)
