@@ -27,6 +27,13 @@ function checkSettings (settings) {
   }
 }
 
+// Write data on script STDIN:
+function stdinWrite (settings) {
+  if (settings.inputData && settings.requestMethod !== "GET") {
+    settings.scriptHandler.stdin.write(`${settings.inputData}\n`);
+  }
+}
+
 // Start Perl script - the main function of 'camel-harness':
 module.exports.startScript = function (settings) {
   // Check mandatory script settings:
@@ -38,10 +45,8 @@ module.exports.startScript = function (settings) {
                 commandLine.setArguments(settings),
                 {env: environment.setEnvironment(settings)});
 
-  // Send POST data to script:
-  if (settings.inputData && settings.requestMethod !== "GET") {
-    settings.scriptHandler.stdin.write(`${settings.inputData}\n`);
-  }
+  // Write data on script STDIN, if any:
+  stdinWrite (settings);
 
   // Handle script errors:
   settings.scriptHandler.on("error", function (error) {

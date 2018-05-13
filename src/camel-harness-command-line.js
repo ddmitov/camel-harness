@@ -15,7 +15,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
 // THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// Set the whole command line with the
+// Set the whole command line with
 // interpreter, interpreter switches, script full path and script arguments:
 module.exports.setArguments = function (settings) {
   let interpreterArguments = [];
