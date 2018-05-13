@@ -21,8 +21,7 @@ module.exports.setArguments = function (settings) {
   let interpreterArguments = [];
 
   // Interpreter arguments, if any, go before the script full path:
-  if (settings.interpreterSwitches &&
-      Array.isArray(settings.interpreterSwitches)) {
+  if (Array.isArray(settings.interpreterSwitches)) {
     interpreterArguments = settings.interpreterSwitches;
   }
 
@@ -30,8 +29,7 @@ module.exports.setArguments = function (settings) {
   interpreterArguments.push(settings.scriptFullPath);
 
   // Script arguments, if any, go after the script full path:
-  if (settings.scriptArguments &&
-      Array.isArray(settings.scriptArguments)) {
+  if (Array.isArray(settings.scriptArguments)) {
     Array.prototype.push.apply(interpreterArguments, settings.scriptArguments);
   }
 
