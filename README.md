@@ -19,21 +19,21 @@ camel-harness
 ```javascript
 const camelHarness = require("camel-harness");
 
-let perlScript = {};
-perlScript.scriptFullPath = "/test/test.pl";
+let perlTest = {};
+perlTest.script = "/test/test.pl";
 
-perlScript.stdoutFunction = function (stdout) {
+perlTest.stdoutFunction = function (stdout) {
   console.log(stdout);
 };
 
-camelHarness.startScript(perlScript);
+camelHarness.startScript(perlTest);
 ```
 
 ## Core Dependency
 ``child_process``
 
 ## External Dependency
-Perl interpreter on PATH or identified by its full pathname  
+Perl interpreter identified by filename on PATH or full pathname  
 
 camel-harness npm package test will fail if no ``perl`` binary is available on PATH.  
 
@@ -43,57 +43,60 @@ camel-harness npm package test will fail if no ``perl`` binary is available on P
 const camelHarness = require("camel-harness");
 
 // Perl script settings object:
-let perlScript = {};
+let perlTest = {};
 
  // mandatory object property
-perlScript.scriptFullPath = "/test/test.pl";
+perlTest.script = "/test/test.pl";
 
 // mandatory object property:
-perlScript.stdoutFunction = function (stdout) {
+perlTest.stdoutFunction = function (stdout) {
   document.getElementById("DOM-element-id").textContent = stdout;
 };
 
-perlScript.stderrFunction = function (stderr) {
+perlTest.stderrFunction = function (stderr) {
   console.log("Perl script STDERR:\n");
   console.log(stderr);
 };
 
-perlScript.errorFunction = function (error) {
+perlTest.errorFunction = function (error) {
   if (error.code === "ENOENT") {
     console.log("Perl interpreter was not found.");
   }
 };
 
-perlScript.exitFunction = function (exitCode) {
+perlTest.exitFunction = function (exitCode) {
   if (exitCode === 2) {
     console.log("Perl script was not found.");
   }
 };
 
-perlScript.interpreter = "perl";
+perlTest.interpreter = "perl";
 
-perlScript.interpreterSwitches = [];
-perlScript.interpreterSwitches.push("-W");
+perlTest.interpreterSwitches = [];
+perlTest.interpreterSwitches.push("-W");
 
-perlScript.scriptArguments = [];
-perlScript.scriptArguments.push("test");
+perlTest.scriptArguments = [];
+perlTest.scriptArguments.push("test");
 
-perlScript.environment = {};
-perlScript.environment.PATH = process.env.PATH;
-perlScript.environment.TEST = "test";
+perlTest.environment = {};
+perlTest.environment.PATH = process.env.PATH;
+perlTest.environment.TEST = "test";
 
-perlScript.requestMethod = "POST";
+perlTest.requestMethod = "POST";
 
-perlScript.inputData = function () {
+perlTest.inputData = function () {
   let data = document.getElementById("input-box-id").value;
   return data;
 }
 
-camelHarness.startScript(perlScript);
+camelHarness.startScript(perlTest);
 ```
 
-* **scriptFullPath:**  
-  ``String`` containing Perl script full path  
+* **script:**  
+  ``String`` containing Perl script full path or Perl code  
+  If Perl code is going to be executed directly, in one-liner mode,  
+  the ``-e`` interpreter switch must be set.  
+  Perl code must not be surrounded in single quotes and all double quotes must be escaped.  
   *This object property is mandatory.*  
 
 * **stdoutFunction:**  
@@ -138,7 +141,7 @@ camelHarness.startScript(perlScript);
   Single HTML input box example with no dependencies:  
 
   ```javascript
-  perlScript.inputData = function () {
+  perlTest.inputData = function () {
     let data = document.getElementById("input-box-id").value;
     return data;
   }
@@ -147,7 +150,7 @@ camelHarness.startScript(perlScript);
   Whole HTML form example based on [jQuery](https://jquery.com/):  
 
   ```javascript
-  perlScript.inputData = function () {
+  perlTest.inputData = function () {
     let formData = $("#form-id").serialize();
     return formData;
   }
@@ -158,7 +161,7 @@ camel-harness can also start and communicate with interactive scripts having the
 
 ```javascript
 let data = document.getElementById("interactive-script-input").value;
-perlScript.scriptHandler.stdin.write(data);
+perlTest.scriptHandler.stdin.write(data);
 ```
 
 camel-harness demo packages for [Electron](https://www.npmjs.com/package/camel-harness-demo-electron) and [NW.js](https://www.npmjs.com/package/camel-harness-demo-nwjs) include a Perl script that can be constantly fed with data from an HTML interface. Perl with the ``AnyEvent`` CPAN module has to be available on PATH.  

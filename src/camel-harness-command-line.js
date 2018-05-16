@@ -15,18 +15,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
 // THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// Set the whole command line with
-// interpreter, interpreter switches, script full path and script arguments:
+// Set all interpreter arguments:
+// interpreter switches, script and script arguments:
 module.exports.setArguments = function (settings) {
   let interpreterArguments = [];
 
-  // Interpreter arguments, if any, go before the script full path:
+  // Interpreter switches, if any, go before the script:
   if (Array.isArray(settings.interpreterSwitches)) {
     interpreterArguments = settings.interpreterSwitches;
   }
 
   // The full path of the script is the minimal interpreter argument:
-  interpreterArguments.push(settings.scriptFullPath);
+  interpreterArguments.push(settings.script);
 
   // Script arguments, if any, go after the script full path:
   if (Array.isArray(settings.scriptArguments)) {

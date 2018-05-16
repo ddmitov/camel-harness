@@ -1,6 +1,6 @@
 "use strict";
 
-// camel-harness npm test
+// camel-harness npm tests
 
 // Load the camel-harness package:
 const camelHarness = require("../src/camel-harness.js");
@@ -16,42 +16,52 @@ if (platform !== "win32") {
   path = require("path").win32;
 }
 
-// Compose the full path of the Perl test script:
-let perlTestScriptFullPath = path.join(__dirname, "camel-harness-test.pl");
+// Basic test:
+let basicTest = {};
 
-// Initialize the Perl test script object:
-let perlTestScript = {};
+basicTest.interpreterSwitches = [];
+basicTest.interpreterSwitches.push("-W");
 
-perlTestScript.interpreterSwitches = [];
-perlTestScript.interpreterSwitches.push("-W");
+basicTest.script = path.join(__dirname, "camel-harness-test.pl");
 
-perlTestScript.scriptFullPath = perlTestScriptFullPath;
-
-perlTestScript.stdoutFunction = function (stdout) {
-  console.log(`camel-harness test STDOUT: ${stdout}`);
+basicTest.stdoutFunction = function (stdout) {
+  console.log(`camel-harness basic test STDOUT: ${stdout}`);
 };
 
-perlTestScript.stderrFunction = function (stderr) {
-  console.log(`camel-harness test STDERR: ${stderr}`);
+basicTest.stderrFunction = function (stderr) {
+  console.log(`camel-harness basic test STDERR: ${stderr}`);
 };
 
-perlTestScript.errorFunction = function (error) {
+basicTest.errorFunction = function (error) {
   if (error.code === "ENOENT") {
     console.log("Perl interpreter was not found.");
   }
-
-  console.log(`camel-harness error stack: ${error.stack}`);
-  console.log(`camel-harness error code: ${error.code}`);
-  console.log(`camel-harness received signal: ${error.signal}`);
 };
 
-perlTestScript.exitFunction = function (exitCode) {
+basicTest.exitFunction = function (exitCode) {
   if (exitCode === 2) {
     console.log("Perl script was not found.");
   }
 
-  console.log(`camel-harness test exit code is ${exitCode}`);
+  console.log(`camel-harness basic test exit code is ${exitCode}`);
 };
 
-// Start the Perl test script:
-camelHarness.startScript(perlTestScript);
+camelHarness.startScript(basicTest);
+
+// One-liner test:
+let oneLiner = {};
+
+oneLiner.interpreterSwitches = [];
+oneLiner.interpreterSwitches.push("-e");
+
+oneLiner.script = "use English; print \"Perl $PERL_VERSION\";"
+
+oneLiner.stdoutFunction = function (stdout) {
+  console.log(`camel-harness one-liner test STDOUT: ${stdout}`);
+};
+
+oneLiner.exitFunction = function (exitCode) {
+  console.log(`camel-harness one-liner test exit code is ${exitCode}`);
+};
+
+camelHarness.startScript(oneLiner);

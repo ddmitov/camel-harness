@@ -1,10 +1,16 @@
 const camelHarness = require("camel-harness");
 
-let perlScriptObject = {};
-perlScriptObject.scriptFullPath = "/test/test.pl";
+let perlTest = {};
+perlTest.script = "/test/test.pl";
 
-perlScriptObject.stdoutFunction = function (stdout) {
+perlTest.stdoutFunction = function (stdout) {
   console.log(stdout);
 };
 
-camelHarness.startScript(perlScriptObject);
+perlTest.errorFunction = function (error) {
+  if (error.code === "ENOENT") {
+    console.log("Perl interpreter was not found.");
+  }
+};
+
+camelHarness.startScript(perlTest);

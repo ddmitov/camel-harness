@@ -20,10 +20,10 @@ const perlProcess = require("child_process").spawn;
 const commandLine = require("./camel-harness-command-line.js");
 const environment = require("./camel-harness-environment.js");
 
-// Check mandatory script settings - 'scriptFullPath' and 'stdoutFunction':
+// Check mandatory script settings - 'scripr' and 'stdoutFunction':
 function checkSettings (settings) {
-  if (!settings.scriptFullPath || typeof settings.stdoutFunction !== "function") {
-    throw Error("camel-harness: Missing 'scriptFullPath' or 'stdoutFunction'");
+  if (!settings.script || typeof settings.stdoutFunction !== "function") {
+    throw Error("camel-harness: Missing 'scripr' or 'stdoutFunction'");
   }
 }
 
