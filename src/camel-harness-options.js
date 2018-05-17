@@ -52,7 +52,7 @@ module.exports.setOptions = function (settings) {
   // Set default options if 'options' are empty:
   if (typeof settings.options !== "object") {
     settings.options = {
-      cwd: undefined,
+      cwd: null,
       env: process.env
     };
   }
@@ -60,4 +60,4 @@ module.exports.setOptions = function (settings) {
   settings.options.env = setEnvironment(settings);
 
   return settings.options;
-}
+};
