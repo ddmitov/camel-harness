@@ -18,12 +18,12 @@
 const perlProcess = require("child_process").spawn;
 
 const commandLine = require("./camel-harness-command-line.js");
-const environment = require("./camel-harness-environment.js");
+const options = require("./camel-harness-options.js");
 
 // Check mandatory script settings - 'scripr' and 'stdoutFunction':
 function checkSettings (settings) {
   if (!settings.script || typeof settings.stdoutFunction !== "function") {
-    throw Error("camel-harness: Missing 'scripr' or 'stdoutFunction'");
+    throw Error("camel-harness: Missing 'script' or 'stdoutFunction'");
   }
 }
 
@@ -45,7 +45,7 @@ module.exports.startScript = function (settings) {
   settings.scriptHandler =
     perlProcess((settings.interpreter || "perl"),
                 commandLine.setArguments(settings),
-                {env: environment.setEnvironment(settings)});
+                options.setOptions(settings));
 
   // Write data on script STDIN, if any:
   stdinWrite (settings);

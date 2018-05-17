@@ -78,9 +78,11 @@ perlTest.interpreterSwitches.push("-W");
 perlTest.scriptArguments = [];
 perlTest.scriptArguments.push("test");
 
-perlTest.environment = {};
-perlTest.environment.PATH = process.env.PATH;
-perlTest.environment.TEST = "test";
+perlTest.options = {};
+
+perlTest.options.env = {};
+perlTest.options.env.PATH = process.env.PATH;
+perlTest.options.env.TEST = "test";
 
 perlTest.requestMethod = "POST";
 
@@ -94,8 +96,7 @@ camelHarness.startScript(perlTest);
 
 * **script:**  
   ``String`` containing Perl script full path or Perl code  
-  If Perl code is going to be executed directly, in one-liner mode,  
-  the ``-e`` interpreter switch must be set.  
+  The ``-e`` interpreter switch must be set when Perl code is executed in one-liner mode.  
   Perl code must not be surrounded in single quotes and all double quotes must be escaped.  
   *This object property is mandatory.*  
 
@@ -128,12 +129,19 @@ camelHarness.startScript(perlTest);
 * **scriptArguments:**  
   ``Array`` containing Perl script arguments  
 
-* **environment:**  
+* **options:**  
+  ``Object`` containing Perl script options passed to the ``child_process`` module.  
+  Click [here](https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options) for a full list of all available ``child_process`` options.
+
+* **options.cwd:**  
+  ``String`` containing Perl script current working directory  
+
+* **options.env:**  
   ``Object`` containing clean Perl script environment  
 
 * **requestMethod:**  
   ``String`` holding either ``GET`` or ``POST`` as a value.  
-  ``requestMethod`` has to be set for Perl scripts reading input data in a CGI fashion.
+  ``requestMethod`` has to be set for Perl scripts reading input data in CGI mode.
 
 * **inputData:**  
   ``String`` or ``Function`` supplying user data as its return value.  

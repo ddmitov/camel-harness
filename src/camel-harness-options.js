@@ -16,31 +16,48 @@
 // THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 // Handle all environment variables needed for GET and POST request methods:
-function setInputVariables (settings) {
+function setInputEnvironmentVariables (settings) {
   // Handle GET requests:
   if (settings.requestMethod === "GET") {
-    settings.environment.REQUEST_METHOD = "GET";
-    settings.environment.QUERY_STRING = settings.inputData;
+    settings.options.env.REQUEST_METHOD = "GET";
+    settings.options.env.QUERY_STRING = settings.inputData;
   }
 
   // Handle POST requests:
   if (settings.requestMethod === "POST") {
-    settings.environment.REQUEST_METHOD = "POST";
-    settings.environment.CONTENT_LENGTH = settings.inputData.length;
+    settings.options.env.REQUEST_METHOD = "POST";
+    settings.options.env.CONTENT_LENGTH = settings.inputData.length;
   }
 
-  return settings.environment;
+  return settings.options.env;
 }
 
 // Set script environment:
-module.exports.setEnvironment = function (settings) {
+function setEnvironment (settings) {
   // Choose between inherited environment and new environment:
-  if (typeof settings.environment !== "object") {
-    settings.environment = process.env;
+  if (typeof settings.options.env !== "object") {
+    settings.options.env = process.env;
   }
 
-  // Set environment variables for GET and POST requests, if any:
-  settings.environment = setInputVariables(settings);
+  // Set environment variables for GET and POST requests
+  // if 'inputData' is available:
+  if (settings.inputData) {
+    settings.options.env = setInputEnvironmentVariables(settings);
+  }
 
-  return settings.environment;
+  return settings.options.env;
 };
+
+module.exports.setOptions = function (settings) {
+  // Set default options if 'options' are empty:
+  if (typeof settings.options !== "object") {
+    settings.options = {
+      cwd: undefined,
+      env: process.env
+    };
+  }
+
+  settings.options.env = setEnvironment(settings);
+
+  return settings.options;
+}
