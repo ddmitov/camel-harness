@@ -46,7 +46,7 @@ function setEnvironment (settings) {
   }
 
   return settings.options.env;
-};
+}
 
 module.exports.setOptions = function (settings) {
   // Set default options if 'options' are empty:
