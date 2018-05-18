@@ -16,9 +16,11 @@ if (platform !== "win32") {
   path = require("path").win32;
 }
 
-// Basic test:
+// Perl script settings objects:
 let basicTest = {};
+let oneLiner = {};
 
+// Basic test:
 basicTest.interpreterSwitches = [];
 basicTest.interpreterSwitches.push("-W");
 
@@ -44,13 +46,13 @@ basicTest.exitFunction = function (exitCode) {
   }
 
   console.log(`camel-harness basic test exit code is ${exitCode}`);
+  console.log(" ");
+  camelHarness.startScript(oneLiner);
 };
 
 camelHarness.startScript(basicTest);
 
 // One-liner test:
-let oneLiner = {};
-
 oneLiner.interpreterSwitches = [];
 oneLiner.interpreterSwitches.push("-e");
 
@@ -62,6 +64,5 @@ oneLiner.stdoutFunction = function (stdout) {
 
 oneLiner.exitFunction = function (exitCode) {
   console.log(`camel-harness one-liner test exit code is ${exitCode}`);
+  console.log(" ");
 };
-
-camelHarness.startScript(oneLiner);

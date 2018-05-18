@@ -95,7 +95,7 @@ camelHarness.startScript(perlTest);
 ```
 
 * **script:**  
-  ``String`` containing Perl script full path or Perl code  
+  ``String`` for Perl script full path or Perl code  
   The ``-e`` interpreter switch must be set when Perl code is executed in one-liner mode.  
   Perl code must not be surrounded in single quotes and all double quotes must be escaped.  
   *This object property is mandatory.*  
@@ -120,24 +120,33 @@ camelHarness.startScript(perlTest);
   The ``exitFunction`` can generate a message when Perl script is not found.  
 
 * **perlInterpreter:**  
-  ``String`` containing Perl interpreter: either filename on PATH or full pathname  
+  ``String`` for a Perl interpreter: either filename on PATH or full pathname  
   If no ``perlInterpreter`` is defined, ``perl`` binary on PATH is used, if available.
 
 * **interpreterSwitches:**  
-  ``Array`` containing Perl interpreter switches  
+  ``Array`` for Perl interpreter switches  
 
 * **scriptArguments:**  
-  ``Array`` containing Perl script arguments  
+  ``Array`` for Perl script arguments  
 
 * **options:**  
-  ``Object`` containing Perl script options passed to the ``child_process`` module.  
+  ``Object`` for Perl script options passed to the ``child_process`` module.  
   Click [here](https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options) for a full list of all available ``child_process`` options.
 
 * **options.cwd:**  
-  ``String`` containing Perl script current working directory  
+  ``String`` for a new Perl script current working directory  
 
 * **options.env:**  
-  ``Object`` containing clean Perl script environment  
+  ``Object`` for a new Perl script environment  
+
+  Example of a script environment with an inherited PATH and a new variable:  
+
+  ```javascript
+  perlTest.options = {};
+  perlTest.options.env = {};
+  perlTest.options.env.PATH = process.env.PATH;
+  perlTest.options.env.TEST = "test";
+  ```
 
 * **requestMethod:**  
   ``String`` holding either ``GET`` or ``POST`` as a value.  
