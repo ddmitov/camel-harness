@@ -37,10 +37,10 @@ function stdinWrite (settings) {
   }
 }
 
-// Handle script STDOUT:
+// Handle script STDOUT and STDERR:
 // If 'options.stdio = "ignore"' is set,
-// there is no script STDOUT.
-function handleStdout(settings) {
+// there are no script STDOUT or STDERR.
+function handleStdoutStderr(settings) {
   if (settings.scriptHandler.stdout !== null) {
     settings.scriptHandler.stdout.on("data", function (stdout) {
       if (typeof settings.stdoutFunction === "function") {
@@ -48,12 +48,7 @@ function handleStdout(settings) {
       }
     });
   }
-}
 
-// Handle script STDERR:
-// If 'options.stdio = "ignore"' is set,
-// there is no script STDERR.
-function handleStderr(settings) {
   if (settings.scriptHandler.stderr !== null) {
     settings.scriptHandler.stderr.on("data", function (stderr) {
       if (typeof settings.stderrFunction === "function") {
@@ -61,24 +56,6 @@ function handleStderr(settings) {
       }
     });
   }
-}
-
-// Handle script errors:
-function handleErrors(settings) {
-  settings.scriptHandler.on("error", function (error) {
-    if (typeof settings.errorFunction === "function") {
-      settings.errorFunction(error);
-    }
-  });
-}
-
-// Handle script exit:
-function handleExit(settings) {
-  settings.scriptHandler.on("exit", function (exitCode) {
-    if (typeof settings.exitFunction === "function") {
-      settings.exitFunction(exitCode);
-    }
-  });
 }
 
 // Start Perl script - the main function of 'camel-harness':
@@ -98,15 +75,21 @@ module.exports.startScript = function (settings) {
   // Write data on script STDIN, if any:
   stdinWrite(settings);
 
-  // Handle script STDOUT:
-  handleStdout(settings);
-
-  // Handle script STDERR:
-  handleStderr(settings);
+  // Handle script STDOUT and STDERR:
+  handleStdoutStderr(settings);
 
   // Handle script errors:
-  handleErrors(settings);
+  settings.scriptHandler.on("error", function (error) {
+    if (typeof settings.errorFunction === "function") {
+      settings.errorFunction(error);
+    }
+  });
+
 
   // Handle script exit:
-  handleExit(settings);
+  settings.scriptHandler.on("exit", function (exitCode) {
+    if (typeof settings.exitFunction === "function") {
+      settings.exitFunction(exitCode);
+    }
+  });
 };
