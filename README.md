@@ -94,65 +94,84 @@ perlTest.inputData = function () {
 camelHarness.startScript(perlTest);
 ```
 
-* **script:**  
+* **script**  
   ``String`` for Perl script full path or Perl code  
   The ``-e`` interpreter switch must be set when Perl code is executed in one-liner mode.  
   Perl code must not be surrounded in single quotes and all double quotes must be escaped.  
   *This object property is mandatory.*  
 
-* **stdoutFunction:**  
+* **stdoutFunction**  
   will be executed every time data is available on STDOUT  
   The only parameter passed to the ``stdoutFunction`` is the STDOUT ``String``.  
-  *This object property is mandatory.*  
 
-* **stderrFunction:**  
+* **stderrFunction**  
   will be executed every time data is available on STDERR  
   The only parameter passed to the ``stderrFunction`` is the STDERR ``String``.  
 
-* **errorFunction:**  
+* **errorFunction**  
   will be executed on Perl script error  
   The only parameter passed to the ``errorFunction`` is the error ``Object``.  
   The ``errorFunction`` can generate a message when Perl interpreter is not found.  
 
-* **exitFunction:**  
+* **exitFunction**  
   will be executed when Perl script has ended  
   The only parameter passed to the ``exitFunction`` is the exit code ``String``.  
   The ``exitFunction`` can generate a message when Perl script is not found.  
 
-* **perlInterpreter:**  
+* **perlInterpreter**  
   ``String`` for a Perl interpreter: either filename on PATH or full pathname  
   If no ``perlInterpreter`` is defined, ``perl`` binary on PATH is used, if available.
 
-* **interpreterSwitches:**  
+* **interpreterSwitches**  
   ``Array`` for Perl interpreter switches  
 
-* **scriptArguments:**  
+* **scriptArguments**  
   ``Array`` for Perl script arguments  
 
-* **options:**  
+* **options**  
   ``Object`` for Perl script options passed to the ``child_process`` module.  
   Click [here](https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options) for a full list of all available ``child_process`` options.
 
-* **options.cwd:**  
+* **options.cwd**  
   ``String`` for a new Perl script current working directory  
 
-* **options.env:**  
+* **options.env**  
   ``Object`` for a new Perl script environment  
 
   Example of a script environment with an inherited PATH and a new variable:  
 
   ```javascript
+  let perlTest = {};
   perlTest.options = {};
   perlTest.options.env = {};
   perlTest.options.env.PATH = process.env.PATH;
   perlTest.options.env.TEST = "test";
   ```
 
-* **requestMethod:**  
+* **options.detached**  
+  ``Boolean`` - if set to ``true`` this option is useful for  
+  starting detached Perl processes like servers.  
+
+  Example settings for a Perl server application:  
+
+  ```javascript
+  let perlServer = {};
+  perlServer.script = "/path/to/perl-server-application";
+
+  perlServer.options = {};
+  perlServer.options.detached = true;
+  perlServer.options.stdio = "ignore";
+
+  const camelHarness = require("camel-harness");
+  camelHarness.startScript(perlServer);
+  perlServer.scriptHandler.unref();
+  ```
+
+* **requestMethod**  
   ``String`` holding either ``GET`` or ``POST`` as a value.  
   ``requestMethod`` has to be set for Perl scripts reading input data in CGI mode.
 
-* **inputData:**  
+* **inputData**  
   ``String`` or ``Function`` supplying user data as its return value.  
 
   Single HTML input box example with no dependencies:  

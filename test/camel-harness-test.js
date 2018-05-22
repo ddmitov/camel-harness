@@ -47,6 +47,7 @@ basicTest.exitFunction = function (exitCode) {
 
   console.log(`camel-harness basic test exit code is ${exitCode}`);
   console.log(" ");
+
   camelHarness.startScript(oneLiner);
 };
 

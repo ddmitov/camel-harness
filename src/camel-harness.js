@@ -22,17 +22,63 @@ const options = require("./camel-harness-options.js");
 
 // Check mandatory script settings - 'scripr' and 'stdoutFunction':
 function checkSettings (settings) {
-  if (!settings.script || typeof settings.stdoutFunction !== "function") {
-    throw Error("camel-harness: Missing 'script' or 'stdoutFunction'");
+  if (!settings.script) {
+    throw Error("camel-harness: No 'script' is defined!");
   }
 }
 
 // Write data on script STDIN:
-// Data is written on script STDIN if 'GET' request method is not set.
+// If any data is available when the script is started and
+// 'GET' request method is not set,
+// data is written on script STDIN.
 function stdinWrite (settings) {
   if (settings.inputData && settings.requestMethod !== "GET") {
     settings.scriptHandler.stdin.write(`${settings.inputData}\n`);
   }
+}
+
+// Handle script STDOUT:
+// If 'options.stdio = "ignore"' is set,
+// there is no script STDOUT.
+function handleStdout(settings) {
+  if (settings.scriptHandler.stdout !== null) {
+    settings.scriptHandler.stdout.on("data", function (stdout) {
+      if (typeof settings.stdoutFunction === "function") {
+        settings.stdoutFunction(stdout.toString("utf8"));
+      }
+    });
+  }
+}
+
+// Handle script STDERR:
+// If 'options.stdio = "ignore"' is set,
+// there is no script STDERR.
+function handleStderr(settings) {
+  if (settings.scriptHandler.stderr !== null) {
+    settings.scriptHandler.stderr.on("data", function (stderr) {
+      if (typeof settings.stderrFunction === "function") {
+        settings.stderrFunction(stderr.toString("utf8"));
+      }
+    });
+  }
+}
+
+// Handle script errors:
+function handleErrors(settings) {
+  settings.scriptHandler.on("error", function (error) {
+    if (typeof settings.errorFunction === "function") {
+      settings.errorFunction(error);
+    }
+  });
+}
+
+// Handle script exit:
+function handleExit(settings) {
+  settings.scriptHandler.on("exit", function (exitCode) {
+    if (typeof settings.exitFunction === "function") {
+      settings.exitFunction(exitCode);
+    }
+  });
 }
 
 // Start Perl script - the main function of 'camel-harness':
@@ -42,37 +88,25 @@ module.exports.startScript = function (settings) {
   checkSettings(settings);
 
   // Run script:
+  // If no interpreter is set,
+  // 'perl' interpreter on PATH is used.
   settings.scriptHandler =
     perlProcess((settings.interpreter || "perl"),
                 commandLine.setArguments(settings),
                 options.setOptions(settings));
 
   // Write data on script STDIN, if any:
-  stdinWrite (settings);
+  stdinWrite(settings);
 
   // Handle script STDOUT:
-  settings.scriptHandler.stdout.on("data", function (data) {
-    settings.stdoutFunction(data.toString("utf8"));
-  });
+  handleStdout(settings);
 
   // Handle script STDERR:
-  settings.scriptHandler.stderr.on("data", function (data) {
-    if (typeof settings.stderrFunction === "function") {
-      settings.stderrFunction(data.toString("utf8"));
-    }
-  });
+  handleStderr(settings);
 
   // Handle script errors:
-  settings.scriptHandler.on("error", function (error) {
-    if (typeof settings.errorFunction === "function") {
-      settings.errorFunction(error);
-    }
-  });
+  handleErrors(settings);
 
   // Handle script exit:
-  settings.scriptHandler.on("exit", function (exitCode) {
-    if (typeof settings.exitFunction === "function") {
-      settings.exitFunction(exitCode);
-    }
-  });
+  handleExit(settings);
 };
