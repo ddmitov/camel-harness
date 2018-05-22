@@ -41,15 +41,13 @@ function stdinWrite (settings) {
 // If 'options.stdio = "ignore"' is set,
 // there are no script STDOUT or STDERR.
 function handleStdoutStderr(settings) {
-  if (settings.scriptHandler.stdout !== null) {
+  if (settings.options.stdio !== "ignore") {
     settings.scriptHandler.stdout.on("data", function (stdout) {
       if (typeof settings.stdoutFunction === "function") {
         settings.stdoutFunction(stdout.toString("utf8"));
       }
     });
-  }
 
-  if (settings.scriptHandler.stderr !== null) {
     settings.scriptHandler.stderr.on("data", function (stderr) {
       if (typeof settings.stderrFunction === "function") {
         settings.stderrFunction(stderr.toString("utf8"));
