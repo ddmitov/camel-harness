@@ -42,16 +42,12 @@ function stdinWrite (settings) {
 // there are no script STDOUT or STDERR.
 function handleStdoutStderr(settings) {
   if (settings.options.stdio !== "ignore") {
-    settings.scriptHandler.stdout.on("data", function (stdout) {
-      if (typeof settings.stdoutFunction === "function") {
-        settings.stdoutFunction(stdout.toString("utf8"));
-      }
+    settings.scriptHandler.stdout.on('data', (stdout) => {
+      settings.stdoutFunction(stdout.toString("utf8")) || function (){};
     });
 
-    settings.scriptHandler.stderr.on("data", function (stderr) {
-      if (typeof settings.stderrFunction === "function") {
-        settings.stderrFunction(stderr.toString("utf8"));
-      }
+    settings.scriptHandler.stderr.on("data", (stderr) => {
+      settings.stderrFunction(stderr.toString("utf8")) || function (){};
     });
   }
 }
@@ -78,16 +74,11 @@ module.exports.startScript = function (settings) {
 
   // Handle script errors:
   settings.scriptHandler.on("error", function (error) {
-    if (typeof settings.errorFunction === "function") {
-      settings.errorFunction(error);
-    }
+    settings.errorFunction(error) || function (){};
   });
-
 
   // Handle script exit:
   settings.scriptHandler.on("exit", function (exitCode) {
-    if (typeof settings.exitFunction === "function") {
-      settings.exitFunction(exitCode);
-    }
+    settings.exitFunction(exitCode) || function (){};
   });
 };
