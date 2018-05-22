@@ -42,12 +42,14 @@ function stdinWrite (settings) {
 // there are no script STDOUT or STDERR.
 function handleStdoutStderr(settings) {
   if (settings.options.stdio !== "ignore") {
-    settings.scriptHandler.stdout.on('data', (output) => {
-      settings.stdoutFunction(output.toString("utf8")) || function (){};
+    settings.scriptHandler.stdout.on("data", function (stdout) {
+      if (typeof settings.stdoutFunction === "function") {
+        settings.stdoutFunction(stdout.toString("utf8"));
+      }
     });
 
-    settings.scriptHandler.stderr.on("data", (errors) => {
-      settings.stderrFunction(errors.toString("utf8")) || function (){};
+    settings.scriptHandler.stderr.on("data", (stderr) => {
+      settings.stderrFunction(stderr.toString("utf8")) || function (){};
     });
   }
 }
