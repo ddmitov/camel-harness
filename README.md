@@ -90,7 +90,8 @@ camel-harness npm package test will fail if no ``perl`` binary is available on P
 * **errorFunction**  
   will be executed on Perl script error  
   The only parameter passed to the ``errorFunction`` is the error ``Object``.  
-  The ``errorFunction`` can generate a message when Perl interpreter is not found.  
+
+  The ``errorFunction`` can generate a message when Perl interpreter is not found:  
 
   ```javascript
   perlTest.errorFunction = function (error) {
@@ -103,7 +104,8 @@ camel-harness npm package test will fail if no ``perl`` binary is available on P
 * **exitFunction**  
   will be executed when Perl script has ended  
   The only parameter passed to the ``exitFunction`` is the exit code ``String``.  
-  The ``exitFunction`` can generate a message when Perl script is not found.  
+
+  The ``exitFunction`` can generate a message when Perl script is not found:  
 
   ```javascript
   perlTest.exitFunction = function (exitCode) {
