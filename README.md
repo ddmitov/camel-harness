@@ -38,95 +38,105 @@ Perl interpreter identified by filename on PATH or full pathname
 camel-harness npm package test will fail if no ``perl`` binary is available on PATH.  
 
 ## API
-
-```javascript
-const camelHarness = require("camel-harness");
-
-// Perl script settings object:
-let perlTest = {};
-
- // mandatory object property
-perlTest.script = "/test/test.pl";
-
-// mandatory object property:
-perlTest.stdoutFunction = function (stdout) {
-  document.getElementById("DOM-element-id").textContent = stdout;
-};
-
-perlTest.stderrFunction = function (stderr) {
-  console.log("Perl script STDERR:\n");
-  console.log(stderr);
-};
-
-perlTest.errorFunction = function (error) {
-  if (error.code === "ENOENT") {
-    console.log("Perl interpreter was not found.");
-  }
-};
-
-perlTest.exitFunction = function (exitCode) {
-  if (exitCode === 2) {
-    console.log("Perl script was not found.");
-  }
-};
-
-perlTest.interpreter = "perl";
-
-perlTest.interpreterSwitches = [];
-perlTest.interpreterSwitches.push("-W");
-
-perlTest.scriptArguments = [];
-perlTest.scriptArguments.push("test");
-
-perlTest.options = {};
-
-perlTest.options.env = {};
-perlTest.options.env.PATH = process.env.PATH;
-perlTest.options.env.TEST = "test";
-
-perlTest.requestMethod = "POST";
-
-perlTest.inputData = function () {
-  let data = document.getElementById("input-box-id").value;
-  return data;
-}
-
-camelHarness.startScript(perlTest);
-```
-
 * **script**  
-  ``String`` for Perl script full path or Perl code  
+  ``String`` for Perl script full path or Perl code executed as an one-liner  
+  *This object property is mandatory.*  
+
+  ```javascript
+  perlTest.script = "/full/path/to/test.pl";
+  ```
+
   The ``-e`` interpreter switch must be set when Perl code is executed in one-liner mode.  
   Perl code must not be surrounded in single quotes and all double quotes must be escaped.  
-  *This object property is mandatory.*  
+
+  One-liner example:  
+
+  ```javascript
+  let oneLiner = {};
+
+  oneLiner.interpreterSwitches = [];
+  oneLiner.interpreterSwitches.push("-e");
+
+  oneLiner.script = "use English; print \"Perl $PERL_VERSION\";"
+
+  oneLiner.stdoutFunction = function (stdout) {
+    console.log(`${stdout}`);
+  };
+
+  camelHarness.startScript(oneLiner);
+  ```
 
 * **stdoutFunction**  
   will be executed every time data is available on STDOUT  
   The only parameter passed to the ``stdoutFunction`` is the STDOUT ``String``.  
 
+  ```javascript
+  perlTest.stdoutFunction = function (stdout) {
+    document.getElementById("DOM-element-id").textContent = stdout;
+  };
+  ```
+
 * **stderrFunction**  
   will be executed every time data is available on STDERR  
   The only parameter passed to the ``stderrFunction`` is the STDERR ``String``.  
+
+  ```javascript
+  perlTest.stderrFunction = function (stderr) {
+    console.log("Perl script STDERR:\n");
+    console.log(stderr);
+  };
+  ```
 
 * **errorFunction**  
   will be executed on Perl script error  
   The only parameter passed to the ``errorFunction`` is the error ``Object``.  
   The ``errorFunction`` can generate a message when Perl interpreter is not found.  
 
+  ```javascript
+  perlTest.errorFunction = function (error) {
+    if (error.code === "ENOENT") {
+      console.log("Perl interpreter was not found.");
+    }
+  };
+  ```
+
 * **exitFunction**  
   will be executed when Perl script has ended  
   The only parameter passed to the ``exitFunction`` is the exit code ``String``.  
   The ``exitFunction`` can generate a message when Perl script is not found.  
 
+  ```javascript
+  perlTest.exitFunction = function (exitCode) {
+    if (exitCode === 2) {
+      console.log("Perl script was not found.");
+    }
+  };
+  ```
+
 * **perlInterpreter**  
   ``String`` for a Perl interpreter: either filename on PATH or full pathname  
-  If no ``perlInterpreter`` is defined, ``perl`` binary on PATH is used, if available.
+  If no ``perlInterpreter`` is defined, ``perl`` binary on PATH is used, if available.  
+
+  ```javascript
+  perlTest.interpreter = "/full/path/to/perl";
+  ```
 
 * **interpreterSwitches**  
   ``Array`` for Perl interpreter switches  
 
+  ```javascript
+  perlTest.interpreterSwitches = [];
+  perlTest.interpreterSwitches.push("-W");
+  ```
+
 * **scriptArguments**  
   ``Array`` for Perl script arguments  
+
+  ```javascript
+  perlTest.scriptArguments = [];
+  perlTest.scriptArguments.push("argument-one");
+  perlTest.scriptArguments.push("argument-two");
+  ```
 
 * **options**  
   ``Object`` for Perl script options passed to the ``child_process`` module.  
@@ -135,13 +145,17 @@ camelHarness.startScript(perlTest);
 * **options.cwd**  
   ``String`` for a new Perl script current working directory  
 
+  ```javascript
+  perlTest.options = {};
+  perlTest.options.cwd = "/full/path/to/current-working-directory";;
+  ```
+
 * **options.env**  
   ``Object`` for a new Perl script environment  
 
-  Example of a script environment with an inherited PATH and a new variable:  
+  Script environment with an inherited PATH and a new variable:  
 
   ```javascript
-  let perlTest = {};
   perlTest.options = {};
   perlTest.options.env = {};
   perlTest.options.env.PATH = process.env.PATH;
@@ -149,8 +163,12 @@ camelHarness.startScript(perlTest);
   ```
 
 * **options.detached**  
-  ``Boolean`` - if set to ``true`` this option is useful for  
-  starting detached Perl processes like servers.  
+  ``Boolean`` option for starting detached Perl processes like servers  
+
+  ``options.detached`` must be set to ``true`` and  
+  ``options.stdio`` must be set to ``"ignore"`` to  
+  start a detached process without receiving anything from it.  
+  A process detached with the above options can run even after its parent has ended.  
 
   Example settings for a Perl server application:  
 
@@ -164,12 +182,21 @@ camelHarness.startScript(perlTest);
 
   const camelHarness = require("camel-harness");
   camelHarness.startScript(perlServer);
+
   perlServer.scriptHandler.unref();
   ```
 
 * **requestMethod**  
   ``String`` holding either ``GET`` or ``POST`` as a value.  
-  ``requestMethod`` has to be set for Perl scripts reading input data in CGI mode.
+  ``requestMethod`` has to be set for Perl scripts reading input data in CGI mode.  
+
+  ```javascript
+  perlTest.requestMethod = "GET";
+  ```
+  or  
+  ```javascript
+  perlTest.requestMethod = "POST";
+  ```
 
 * **inputData**  
   ``String`` or ``Function`` supplying user data as its return value.  
