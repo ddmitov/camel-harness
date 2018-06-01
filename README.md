@@ -1,8 +1,5 @@
 camel-harness
 --------------------------------------------------------------------------------
-[![GitHub Version](https://img.shields.io/github/release/ddmitov/camel-harness.svg)](https://github.com/ddmitov/camel-harness/releases)
-[![NPM Version](https://img.shields.io/npm/v/camel-harness.svg)](https://www.npmjs.com/package/camel-harness)
-[![GitHub License](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE.md)  
 [![Travis CI Build Status](https://travis-ci.org/ddmitov/camel-harness.svg?branch=master)](https://travis-ci.org/ddmitov/camel-harness)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ddmitov/camel-harness?branch=master&svg=true)](https://ci.appveyor.com/project/ddmitov/camel-harness)
 [![Inline docs](http://inch-ci.org/github/ddmitov/camel-harness.svg?branch=master)](http://inch-ci.org/github/ddmitov/camel-harness)  
@@ -38,6 +35,8 @@ Perl interpreter identified by filename on PATH or full pathname
 camel-harness npm package test will fail if no ``perl`` binary is available on PATH.  
 
 ## API
+All settings of a Perl script executed by camel-harness are stored in a JavaScript object with an arbitrary name and the following object properties:  
+
 * **script**  
   ``String`` for Perl script full path or Perl code executed as an one-liner  
   *This object property is mandatory.*  
