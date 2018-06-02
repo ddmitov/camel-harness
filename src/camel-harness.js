@@ -77,11 +77,11 @@ module.exports.startScript = function (settings) {
   handleStdoutStderr(settings);
 
   // Handle script errors:
-  settings.scriptHandler.on("error", function (error) {
-    if (typeof settings.errorFunction === "function") {
+  if (typeof settings.errorFunction === "function") {
+    settings.scriptHandler.on("error", function (error) {
       settings.errorFunction(error);
-    }
-  });
+    });
+  }
 
   // Handle script exit:
   settings.scriptHandler.on("exit", function (exitCode) {
