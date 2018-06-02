@@ -1,7 +1,14 @@
 const camelHarness = require("camel-harness");
 
 let perlTest = {};
-perlTest.script = "use English; print $PERL_VERSION;";
+perlTest.interpreterSwitches = [];
+perlTest.interpreterSwitches.push("-e");
+
+perlTest.script = "use English; print \"Perl $PERL_VERSION\";";
+
+perlTest.stdoutFunction = function (stdout) {
+  console.log(stdout);
+};
 
 perlTest.errorFunction = function (error) {
   if (error.code === "ENOENT") {

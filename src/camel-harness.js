@@ -48,9 +48,11 @@ function handleStdoutStderr(settings) {
       }
     });
 
-    settings.scriptHandler.stderr.on("data", (stderr) => {
-      settings.stderrFunction(stderr.toString("utf8")) || function (){};
-    });
+    if (typeof settings.stderrFunction === "function") {
+      settings.scriptHandler.stderr.on("data", function (stderr) {
+        settings.stderrFunction(stderr.toString("utf8"));
+      });
+    }
   }
 }
 
@@ -76,11 +78,15 @@ module.exports.startScript = function (settings) {
 
   // Handle script errors:
   settings.scriptHandler.on("error", function (error) {
-    settings.errorFunction(error) || function (){};
+    if (typeof settings.errorFunction === "function") {
+      settings.errorFunction(error);
+    }
   });
 
   // Handle script exit:
   settings.scriptHandler.on("exit", function (exitCode) {
-    settings.exitFunction(exitCode) || function (){};
+    if (typeof settings.exitFunction === "function") {
+      settings.exitFunction(exitCode);
+    }
   });
 };
