@@ -140,7 +140,7 @@ All settings of a Perl script executed by camel-harness are stored in a JavaScri
   ```
 
 * **options**  
-  ``Object`` for Perl script options passed to the ``child_process`` module.  
+  ``Object`` for Perl script options passed to the ``child_process`` core module.  
   Click [here](https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options) for a full list of all available ``child_process`` options.
 
 * **options.cwd**  
