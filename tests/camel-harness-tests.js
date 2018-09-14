@@ -19,8 +19,7 @@ if (platform !== "win32") {
 // Settings objects of all Perl test scripts:
 let basicTest = {};
 let oneLinerTest = {};
-let getTest = {};
-let postTest = {};
+let inputTest = {};
 let envTest = {};
 let cliArgumentTest = {};
 
@@ -70,41 +69,22 @@ oneLinerTest.stdoutFunction = function (stdout) {
 oneLinerTest.exitFunction = function (exitCode) {
   console.log(`camel-harness one-liner test exit code is ${exitCode}`);
   console.log(" ");
-  camelHarness.startScript(getTest);
+  camelHarness.startScript(inputTest);
 };
 
-// GET test:
-getTest.script = path.join(__dirname, "get-post-test.pl");
+// Input test:
+inputTest.script = path.join(__dirname, "input-test.pl");
 
-getTest.requestMethod = "GET";
-getTest.inputData = "test";
+inputTest.inputData = "test";
 
-getTest.stdoutFunction = function (stdout) {
-  if (stdout === "test") {
-    console.log("camel-harness GET test is OK");
+inputTest.stdoutFunction = function (stdout) {
+  if (stdout === "test\n") {
+    console.log("camel-harness input test is OK");
   }
 };
 
-getTest.exitFunction = function (exitCode) {
-  console.log(`camel-harness GET test exit code is ${exitCode}`);
-  console.log(" ");
-  camelHarness.startScript(postTest);
-};
-
-// POST test:
-postTest.script = path.join(__dirname, "get-post-test.pl");
-
-postTest.requestMethod = "POST";
-postTest.inputData = "test";
-
-postTest.stdoutFunction = function (stdout) {
-  if (stdout === "test") {
-    console.log("camel-harness POST test is OK");
-  }
-};
-
-postTest.exitFunction = function (exitCode) {
-  console.log(`camel-harness POST test exit code is ${exitCode}`);
+inputTest.exitFunction = function (exitCode) {
+  console.log(`camel-harness input test exit code is ${exitCode}`);
   console.log(" ");
   camelHarness.startScript(envTest);
 };

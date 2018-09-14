@@ -187,36 +187,16 @@ All settings of a Perl script executed by camel-harness are stored in a JavaScri
   perlServer.scriptHandler.unref();
   ```
 
-* **requestMethod**  
-  ``String`` holding either ``GET`` or ``POST`` as a value.  
-  ``requestMethod`` has to be set for Perl scripts reading input data in CGI mode.  
-
-  ```javascript
-  perlTest.requestMethod = "GET";
-  ```
-  or  
-  ```javascript
-  perlTest.requestMethod = "POST";
-  ```
-
 * **inputData**  
   ``String`` or ``Function`` supplying user data as its return value.  
+  ``inputData`` is written on script STDIN.  
 
-  Single HTML input box example with no dependencies:  
+  ``inputData`` function with no dependencies:  
 
   ```javascript
   perlTest.inputData = function () {
     let data = document.getElementById("input-box-id").value;
     return data;
-  }
-  ```
-
-  Whole HTML form example based on [jQuery](https://jquery.com/):  
-
-  ```javascript
-  perlTest.inputData = function () {
-    let formData = $("#form-id").serialize();
-    return formData;
   }
   ```
 

@@ -32,7 +32,7 @@ function checkSettings (settings) {
 // 'GET' request method is not set,
 // data is written on script STDIN.
 function stdinWrite (settings) {
-  if (settings.inputData && settings.requestMethod !== "GET") {
+  if (settings.inputData) {
     settings.scriptHandler.stdin.write(`${settings.inputData}\n`);
   }
 }
