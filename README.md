@@ -1,5 +1,5 @@
-camel-harness
---------------------------------------------------------------------------------
+# camel-harness
+
 [![Travis CI Build Status](https://travis-ci.org/ddmitov/camel-harness.svg?branch=master)](https://travis-ci.org/ddmitov/camel-harness)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ddmitov/camel-harness?branch=master&svg=true)](https://ci.appveyor.com/project/ddmitov/camel-harness)
 [![Inline docs](http://inch-ci.org/github/ddmitov/camel-harness.svg?branch=master)](http://inch-ci.org/github/ddmitov/camel-harness)  
@@ -11,6 +11,7 @@ camel-harness
 [Node.js](http://nodejs.org/) - [Electron](http://electron.atom.io/) - [NW.js](http://nwjs.io/) package for asynchronous handling of [Perl](https://www.perl.org/) scripts
 
 ## Quick Start
+
 ``npm install camel-harness``  
 
 ```javascript
@@ -27,14 +28,17 @@ camelHarness.startScript(perlTest);
 ```
 
 ## Core Dependency
+
 ``child_process``
 
 ## External Dependency
+
 Perl interpreter identified by filename on PATH or full pathname  
 
 camel-harness npm package test will fail if no ``perl`` binary is available on PATH.  
 
 ## API
+
 All settings of a Perl script executed by camel-harness are stored in a JavaScript object with an arbitrary name and the following object properties:  
 
 * **script**  
@@ -201,6 +205,7 @@ All settings of a Perl script executed by camel-harness are stored in a JavaScri
   ```
 
 ## Interactive Scripts
+
 camel-harness can also start and communicate with interactive scripts having their own event loops and capable of repeatedly receiving STDIN input. Use the following code to send data to an interactive script waiting for input on STDIN:
 
 ```javascript
@@ -217,5 +222,6 @@ camel-harness demo packages for [Electron](https://www.npmjs.com/package/camel-h
 ## [Credits](./CREDITS.md)
 
 ## [License](./LICENSE.md)
+
 MIT 2016 - 2018  
 Dimitar D. Mitov  
