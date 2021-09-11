@@ -1,8 +1,7 @@
 # camel-harness
 
 [![Travis CI Build Status](https://travis-ci.org/ddmitov/camel-harness.svg?branch=master)](https://travis-ci.org/ddmitov/camel-harness)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ddmitov/camel-harness?branch=master&svg=true)](https://ci.appveyor.com/project/ddmitov/camel-harness)
-[![Inline docs](http://inch-ci.org/github/ddmitov/camel-harness.svg?branch=master)](http://inch-ci.org/github/ddmitov/camel-harness)  
+[![Inline docs](http://inch-ci.org/github/ddmitov/camel-harness.svg?branch=master)](http://inch-ci.org/github/ddmitov/camel-harness)
 [![Snyk Status](https://snyk.io/test/github/ddmitov/camel-harness/badge.svg)](https://snyk.io/test/github/ddmitov/camel-harness)
 [![Maintainability](https://api.codeclimate.com/v1/badges/b9431bac8e7b41daab6f/maintainability)](https://codeclimate.com/github/ddmitov/camel-harness/maintainability)
 
